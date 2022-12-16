@@ -62,6 +62,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
           AWS_REGION: us-east-2
           AWS_EKS_CLUSTER_NAME: thursday-staging
+ 
         run: |-
           aws eks update-kubeconfig --name ${AWS_EKS_CLUSTER_NAME} --region ${AWS_REGION}
           helm upgrade --install \
