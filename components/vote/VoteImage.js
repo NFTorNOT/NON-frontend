@@ -5,7 +5,7 @@ import PublicationApi, { ReactionType } from "../../graphql/PublicationApi";
 import { useUserContext } from "../../context/UserContext";
 import { useAuthContext } from "../../context/AuthContext";
 import Not from "./svg/not";
-import Hot from "./svg/hot";
+import FireSvg from "./svg/FireSvg";
 import TrendingThemeDefault from "./TrendingThemeDefault";
 import ClickOnHot from "./svg/clickOnHot";
 import { ReactionTypes } from "../../utils/Constants";
@@ -14,6 +14,10 @@ import { axiosInstance } from "../../AxiosInstance";
 import { useCollectedNFTModalContext } from "../../context/CollectedNFTModalContext";
 import CustomSignInModal from "../CustomSignInModal";
 import TrendingThemeModal from "../TrendingThemeModal";
+import CollectIconSvg from "./svg/CollectIconSvg";
+import { useBottomTab } from "../../context/BottomTabContext";
+import { TabItems, TabNames } from "../Main/TabItems";
+import Router from "next/router";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -45,6 +49,13 @@ export default function VoteImage() {
   let hasNextPageIdentifier = useRef(null);
 
   const { setIsUpvoted, isUpvoted } = useCollectedNFTModalContext();
+
+  const { onTabChange } = useBottomTab();
+  const isFirstTimeLoaded = useRef(false);
+
+  setTimeout(() => {
+    isFirstTimeLoaded.current = true;
+  }, 4000);
 
   async function fetchLensPost() {
     const lensPostData = await axiosInstance.get(`/nfts`, {
@@ -311,6 +322,11 @@ export default function VoteImage() {
     demoIdVar.style.animation = "newAnimation 1s";
   };
 
+  const onCollectButtonClick = () => {
+    onTabChange(TabItems[TabNames.NftOfTheDay]);
+    Router.push({ pathname: "/collect" });
+  };
+
   return (
     <div className="flex items-center justify-center flex-col">
       <TrendingThemeDefault
@@ -348,22 +364,31 @@ export default function VoteImage() {
               <div className={`absolute pressable  ${styles.voteCard}`}>
                 <VoteCard character={character}></VoteCard>
               </div>
-              // <NonCard
-              //   ref={(ref) => (childRefs.current[imageIndex] = ref)}
-              //   onSwipe={(dir) => submitVote(dir)}
-              //   className={`absolute pressable ${styles.voteCard}`}
-              //   preventSwipe={["up", "down"]}
-              //   key={character.publicationId}
-              // >
-              //   <VoteCard character={character}></VoteCard>
-              // </NonCard>
             ))}
+
+          {data.length == 0 && isFirstTimeLoaded.current ? (
+            <div className={`absolute pressable  ${styles.voteCard}`}>
+              <div className={styles.emptyCard}>
+                <div className={styles.emptyText}>
+                  Oops, all generations are exhausted. Meanwhile, Collect hot
+                  NFTs by your lens frens and show your support💰
+                </div>
+                <div
+                  className={styles.collectButtonContainer}
+                  onClick={onCollectButtonClick}
+                >
+                  <CollectIconSvg />
+                  <div className={styles.collectButtonText}>Collect Now</div>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
         {consumedData.current.length > 0 ? (
           <>
             <button
               className={`absolute md:relative left-0`}
-              disabled={isNotButtonClicked}
+              disabled={isNotButtonClicked || data.length == 0}
               onClick={() => {
                 if (!isUserLoggedIn) {
                   setShouldShowSignInModal(true);
@@ -394,7 +419,7 @@ export default function VoteImage() {
 
             <button
               className={`absolute md:relative right-0 order-last`}
-              disabled={isHotButtonClicked}
+              disabled={isHotButtonClicked || data.length == 0}
               onClick={() => {
                 if (!isUserLoggedIn) {
                   setShouldShowSignInModal(true);
@@ -412,7 +437,7 @@ export default function VoteImage() {
                   !isHotButtonClicked ? `block` : `hidden`
                 } m-[8px]`}
               >
-                <Hot />
+                <FireSvg />
               </div>
               <div
                 className={`${styles.buttonClassHot} ${
