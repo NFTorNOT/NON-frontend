@@ -347,7 +347,10 @@
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 88px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -356,12 +359,13 @@
   z-index: 10;
   bottom: 150%;
   left: 50%;
-  margin-left: -70px;
+  margin-left: -64px;
   background: black;
   opacity: 0.6;
 }
 
 .tooltip .tooltiptext::after {
+  // content: "";
   position: absolute;
   top: 100%;
   left: 50%;
@@ -397,8 +401,11 @@
 
 .tooltipRemix .tooltipRemixText {
   visibility: hidden;
-  width: 120px;
+  width: 63px;
   color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
@@ -406,12 +413,13 @@
   z-index: 10;
   bottom: 150%;
   left: 50%;
-  margin-left: -70px;
+  margin-left: -36px;
   background: black;
   opacity: 0.6;
 }
 
 .tooltipRemix .tooltipRemixText::after {
+  // content: "";
   position: absolute;
   top: 100%;
   left: 50%;
@@ -489,4 +497,72 @@
     transform: rotate(-40deg) translateY(-80px);
     opacity: 0;
   }
+}
+
+.emptyCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 32px;
+  gap: 38px;
+  width: 512px;
+  height: 512px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.4),
+    0px 16px 24px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(60px);
+  border-radius: 16px;
+}
+
+.emptyText {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 160%;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  font-feature-settings: "salt" on;
+  color: #ffffff;
+}
+
+.collectButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 24px;
+  gap: 8px;
+
+  width: 180px;
+  height: 40px;
+
+  /* Orange radial */
+
+  background: radial-gradient(
+    107.14% 107.14% at 50% 80.95%,
+    #fa5c00 0%,
+    #ffb800 100%
+  );
+  box-shadow: 0px 8px 32px rgba(250, 92, 0, 0.32),
+    inset 0px -4px 8px rgba(249, 155, 1, 0.6), inset 0px -8px 16px #c75c00;
+  border-radius: 40px;
+}
+
+.collectButtonText {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  /* identical to box height, or 26px */
+
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  font-feature-settings: "salt" on;
+
+  /* Whites/White - 100 */
+
+  color: #ffffff;
 }
