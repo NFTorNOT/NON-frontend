@@ -1,8 +1,17 @@
-import "@rainbow-me/rainbowkit/styles.css";
-import Main from "../components/Main";
+import React from "react";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
-function Home() {
-  return <Main />;
+const DynamicHeader = dynamic(() => import("../components/vote/VoteImage"), {
+  ssr: false,
+});
+
+function VoteCard(props) {
+  return (
+    <Suspense fallback={`Loading...`}>
+      <DynamicHeader />
+    </Suspense>
+  );
 }
 
-export default Home;
+export default VoteCard;

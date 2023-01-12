@@ -1,35 +1,90 @@
+@import "./svg/twitterIcon.module.scss";
+$twitter-fill-color: #1da1f2;
+
 .container {
-  display: flex;
-  flex-direction: row;
-  align-self: center;
-  padding: 8px;
   border-radius: 100px;
-  gap: 4px;
-  width: 70%;
+  gap: 8px;
+  // width: 70%;
+  font-size: 16px;
   @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+  }
+  @media screen and (max-width: 586px) {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    // width: 100%;
+    border-radius: 0px 0px 20px 20px;
+    font-size: 14px;
+  }
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  backdrop-filter: blur(12px);
+  animation: transformBottomBar;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  transform-origin: 0%;
+}
+
+@keyframes transformBottomBar {
+  0% {
+    margin-top: 100%;
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(0%, 50%);
+    margin-top: 0%;
   }
 }
 
 .tabContainer {
   display: flex;
+  font-weight: bold;
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 14px 0;
+  padding: 10.5px 20px;
+  text-align: center;
   color: white;
-  white-space: nowrap;
   cursor: pointer;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(8px);
+  border-radius: 100px;
   &:hover {
-    background: rgba(0, 0, 0, 0.4);
+    height: 40px;
+    // background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    // border-image-source: linear-gradient(
+    //   180deg,
+    //   rgba(255, 255, 255, 0.2) 0%,
+    //   rgba(0, 0, 0, 0.2) 100%
+    // );
     border-radius: 100px;
   }
 }
 
 .selectedTab {
+  height: 40px;
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
   background: rgba(0, 0, 0, 0.6);
   box-shadow: 0px 8px 32px rgba(250, 92, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 100px;
   cursor: default;
   @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
@@ -41,3 +96,84 @@
     background: rgba(0, 0, 0, 0.6);
   }
 }
+.twitterText {
+  opacity: 0;
+  height: 20px;
+  overflow: hidden;
+  z-index: 10;
+}
+.twitterShare:hover .twitterText {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.twitterShare:hover path {
+  fill: $twitter-fill-color;
+}
+.hiwSpace {
+  width: 0px;
+}
+.hiwText {
+  opacity: 0;
+}
+.howItWorks:hover .hiwText {
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.howItWorks:hover .hiwSpace {
+  width: 90px;
+  transition: width 1s;
+}
+
+.collectedNfts {
+  position: absolute;
+  left: 32%;
+  top: 88%;
+  transition: transform 0.6s easeInSine;
+  transition: all;
+}
+
+@keyframes moveitback {
+  0% {
+    transform: translateY(60px);
+  }
+  100% {
+    transform: translateY(0) scale3d(0.96, 0.96, 1);
+  }
+}
+
+.collectedNfts div:first-child {
+  transform: rotate(6deg) !important;
+  transition-delay: 0.25s;
+  transition-duration: 2s;
+  object-fit: contain;
+}
+
+.collectedNfts div:last-child {
+  transform: rotate(-6deg) !important;
+  transition-delay: 0.25s;
+  transition-duration: 2s;
+  object-fit: contain;
+}
+
+.bottomContainer {
+  position: absolute;
+  bottom: 0;
+  height: 109px;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 49.99%);
+}
+
+.madeWithPLG {
+  align-items: center;
+}
+
+.madeWithPLG:hover {
+  color: #fff;
+}
+
+// .background {
+//   background: rgba(0, 0, 0, 0.6);
+//   backdrop-filter: blur(12px);
+//   border-radius: 100px;
+// }

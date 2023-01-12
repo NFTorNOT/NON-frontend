@@ -1,13 +1,17 @@
 .container {
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
-  padding: 30px;
+  padding: 7px;
   background-color: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
   background-image: url("https://static.plgworks.com/assets/images/hon/bg-image.png");
   background-size: cover;
   background-repeat: no-repeat;
+  @media screen and (min-width: 568px) {
+    padding: 30px;
+  }
 }
 
 .innerContainer {
@@ -16,8 +20,13 @@
   backdrop-filter: blur(60px);
   padding: 20px 25px;
   border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  // display: flex;
+  // flex-direction: column;
   height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 44px 1fr 64px;
+  @media screen and (min-width: 586px) {
+    // justify-content: space-between;
+  }
 }

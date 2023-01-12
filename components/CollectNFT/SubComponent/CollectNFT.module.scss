@@ -1,0 +1,53 @@
+.emptyImageCell {
+  display: grid;
+  height: 445px;
+  // width: 445px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-items: center;
+  align-items: center;
+}
+.collectNft {
+  margin: 30px auto 0;
+  // width: calc(100% - 100px);
+  width: 1104px;
+}
+.nftDetails {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.8) 41.15%
+  );
+}
+.nftTitle {
+  font-weight: 700;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+}
+.collectButton {
+  width: 100%;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.alreadyCollectedButton {
+  width: 100%;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+}

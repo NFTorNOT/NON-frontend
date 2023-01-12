@@ -1,232 +1,464 @@
 import { useEffect, useRef, useState } from "react";
 import { useAccount } from "wagmi";
-import NFTApi from "../../api/NFTApi";
+import Image from "next/image";
 import LensHelper from "../../utils/LensHelper";
 import styles from "./Generate.module.scss";
-import axios from "axios";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import { useUserContext } from "../../context/UserContext";
-import useCurrentPublicationId from "../../utils/useCurrentPublicationId";
 import PublicationApi from "../../graphql/PublicationApi";
+import FilterToText from "./FilterToText";
+import ThemesData from "./ThemesData";
 import { useAuthContext } from "../../context/AuthContext";
+import SubmitForVoteModal from "./SubmitForVoteModal/SubmitForVoteModal";
+import UserInput from "./UserInput";
+import { axiosInstance } from "../../AxiosInstance";
+import EnableDispatcherModal from "../EnableDispatcherModal";
+import UserApi from "../../graphql/UserApi";
+import ImageLoader from "../NONImage/ImageLoader";
+import MagicIcon from "./MagicIcon";
+import { useRouter } from "next/router";
+import CustomSignInModal from "../CustomSignInModal";
+import { toast, Toaster } from "react-hot-toast";
 
 export default function GenerateNFT() {
   const [image, setImage] = useState("");
-  const [wordOfTheDay, setWordOfTheDay] = useState();
+  const router = useRouter();
   const { address } = useAccount();
   const { userProfile } = useUserContext();
   const { isUserLoggedIn } = useAuthContext();
-  const { getPostId } = useCurrentPublicationId();
   const { onTabChange } = useBottomTab();
   var sectionStyle = {
     backgroundImage: `url(${image})`,
   };
-  const [prompt, setPromt] = useState("Dramatic sky and buildings painting");
-  const [filter, setfilter] = useState("volvo");
-  const [imageTitle, setImageTitle] = useState("");
+  const [prompt, setPromt] = useState(router.query["prompt"] || "");
+  const [filter, setfilter] = useState(router.query["filter"] || "CINEMATIC");
+  const [theme, setTheme] = useState("");
+  const [selectedImageData, setSelectedImageData] = useState();
+  const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
 
-  const postIdRef = useRef(null);
+  const lensMetadataIpfsObjectId = useRef();
+  const imageIpfsObjectId = useRef();
 
-  const isSubmitDisabled =
-    !isUserLoggedIn || (isUserLoggedIn && imageTitle === "");
+  const [imagesData, setImagesData] = useState([]);
+  const [submitToVoteModal, setsubmitToVoteModal] = useState(false);
+  const [submitToVoteApiInProgress, setSubmitToVoteApiInProgress] =
+    useState(false);
 
-  const imageGenerationURL =
-    "https://nftornot.com/api/fetch-stable-diffusion-image/";
+  const submittedImagePublicationId = useRef();
 
   var filterOptions = [];
   const [imageGenerationInProgress, setImageGenerationInProgress] =
     useState(false);
-  const [putImageToVoteInProgress, setPutImageToVoteInProgress] =
+  const [shouldShowEnableDispatcherModal, setShouldShowEnableDispatcherModal] =
     useState(false);
-  const [wordFetchInProgress, setWordFetchInProgress] = useState(false);
+  const userProfileRef = useRef();
+  let regex = /[`!@#$%^&*()_+\=\[\]{};':"\\|<>\/?~]/;
 
-  const filterToText = {
-    None: "",
-    "Delicate detail":
-      "trending on artstation, sharp focus, studio photo, intricate details, highly detailed, by greg rutkowski",
-    "Radiant symmetry":
-      " centered, symmetry, painted, intricate, volumetric lighting, beautiful, rich deep colors masterpiece, sharp focus, ultra detailed, in the style of dan mumford and marc simonetti, astrophotography",
-    "Lush illumination":
-      " unreal engine, greg rutkowski, loish, rhads, beeple, makoto shinkai and lois van baarle, ilya kuvshinov, rossdraws, tom bagshaw, alphonse mucha, global illumination, detailed and intricate environment",
-    "Saturated space":
-      " outer space, vanishing point, super highway, high speed, digital render, digital painting, beeple, noah bradley, cyril roland, ross tran, trending on artstation",
-    "Neon mecha":
-      " neon ambiance, abstract black oil, gear mecha, detailed acrylic, grunge, intricate complexity, rendered in unreal engine, photorealistic",
-    "Ethereal low poly":
-      "low poly, isometric art, 3d art, high detail, artstation, concept art, behance, ray tracing, smooth, sharp focus, ethereal lighting",
-    "Warm box":
-      "golden ratio, fake detail, trending pixiv fanbox, acrylic palette knife, style of makoto shinkai studio ghibli genshin impact james gilleard greg rutkowski chiho aoshima",
-    Cinematic:
-      " perfect composition, beautiful detailed intricate insanely detailed octane render trending on artstation, 8 k artistic photography, photorealistic concept art, soft natural volumetric cinematic perfect light, chiaroscuro, award  winning photograph, masterpiece, oil on canvas, raphael, caravaggio, greg rutkowski, beeple, beksinski, giger",
-    Wasteland:
-      " isometric, digital art, smog, pollution, toxic waste, chimneys and railroads, 3 d render, octane render, volumetrics, by greg rutkowski",
-    "Flat pallette":
-      " acrylic painting, trending on pixiv fanbox, palette knife and brush strokes, style of makoto shinkai jamie wyeth james gilleard edward hopper greg rutkowski studio ghibli genshin impact",
-    Spielberg:
-      " cinematic, 4k, epic Steven Spielberg movie still, sharp focus, emitting diodes, smoke, artillery, sparks, racks, system unit, motherboard, by pascal blanche rutkowski repin artstation hyperrealism painting concept art of detailed character design matte painting, 4 k resolution blade runner",
-    Royalistic:
-      " epic royal background, big royal uncropped crown, royal jewelry, robotic, nature, full shot, symmetrical, Greg Rutkowski, Charlie Bowater, Beeple, Unreal 5, hyperrealistic, dynamic lighting, fantasy art",
-  };
+  const generatedImagesRef = useRef([]);
 
-  for (var key in filterToText) {
+  for (var key in FilterToText) {
     filterOptions.push(key);
   }
-  const submitForGeneration = () => {
-    if (!prompt) {
-      alert("prompt is required for image generaration");
-      return;
+
+  const trendingThemes = useRef([]);
+
+  const fetchTheme = async () => {
+    try {
+      const themeRes = await axiosInstance.get("/active-themes");
+      const activeThemes = themeRes?.data?.data?.active_theme_ids;
+      const allThemes = themeRes?.data?.data?.themes;
+      let themes = [];
+      for (let i = 0; i < activeThemes.length; i++) {
+        let theme = Object.values(allThemes)?.find(
+          (theme) => theme.id == activeThemes[i]
+        );
+        themes.push(theme);
+      }
+      trendingThemes.current = [...themes];
+
+      setTheme(router.query["theme"] || trendingThemes.current[0]?.name);
+    } catch (error) {
+      console.log({ error });
     }
-    setImageGenerationInProgress(true);
-    const data = {
-      prompt: prompt,
-      art_style: filterToText[filter],
-    };
-    console.log(data);
-    axios.post(imageGenerationURL, data).then((response) => {
-      console.log(response.data);
-      setImage(response.data.data.image.url);
-      setImageGenerationInProgress(false);
-    });
   };
 
-  async function onSubmitToVote() {
-    setPutImageToVoteInProgress(true);
+  useEffect(() => {
+    fetchTheme();
+  }, []);
+
+  const submitForGeneration = () => {
+    if (!prompt.trim()) {
+      toast.error("Prompt is required for image generaration.");
+      return;
+    }
+
+    if (regex.test(prompt.trim())) {
+      toast.error("Prompt can not contain special characters.");
+      return;
+    }
+
+    setImageGenerationInProgress(true);
+
+    axiosInstance
+      .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/image-suggestions`, {
+        params: {
+          prompt: prompt.trim(),
+          art_style: FilterToText[filter],
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        const generatedImagesResponseData = response.data.data;
+        if (!generatedImagesResponseData) {
+          // TODO:DS : Show Response Err
+          return;
+        }
+        const suggestionsIdsArr = generatedImagesResponseData.suggestion_ids;
+        const suggestionsMap = generatedImagesResponseData.suggestions;
+        let currentGeneratedImages = [];
+        for (let cnt = 0; cnt < suggestionsIdsArr.length; cnt++) {
+          const image = suggestionsMap[suggestionsIdsArr[cnt]];
+
+          if (!image) {
+            continue;
+          }
+
+          let data = {
+            imageUrl: image.image_url,
+            prompt: prompt.trim(),
+            theme: theme,
+            filter: filter,
+          };
+          currentGeneratedImages.push(data);
+        }
+
+        generatedImagesRef.current = [
+          ...currentGeneratedImages,
+          ...generatedImagesRef.current,
+        ];
+        setImagesData(currentGeneratedImages);
+      })
+      .finally(() => {
+        setImageGenerationInProgress(false);
+      });
+  };
+
+  async function onSubmitToVote(ele) {
+    if (!isUserLoggedIn) {
+      setShouldShowSignInModal(true);
+      return;
+    }
+    console.log({ ele });
+    setSelectedImageData(ele);
+    setsubmitToVoteModal(true);
+  }
+
+  const postOnLens = async () => {
     try {
-      const publicationId = postIdRef.current || (await getPostId());
-      const response = await NFTApi.submitToVote({
-        receiverAddress: address,
-        imageUrl: image,
-        imageTitle: imageTitle,
-      });
-      console.log("mint response", { response });
-      const { imageCid, transactionHash, tokenId, lensMetaDataCid } =
-        response.data.data;
-      console.log("spliting imageUrl", {
-        imageCid,
-        transactionHash,
-        tokenId,
-        lensMetaDataCid,
+      const { txId, txHash } = await LensHelper.postWithDispatcher({
+        postMetadataCid: lensMetadataIpfsObjectId.current.cid,
+        profileId: userProfile.lens_profile_id,
+        profileAddress: address,
       });
 
-      const { txId } = await LensHelper.postCommentWithDispatcher({
-        commentMetadataCid: lensMetaDataCid,
-        profileId: userProfile?.id,
-        publicationId,
-      });
+      let indexedResult = await LensHelper.pollUntilIndexed({ txId: txId });
 
-      if (txId) {
-        const indexedResult = await LensHelper.pollUntilIndexed({ txId: txId });
-      }
+      const publicationRes =
+        await PublicationApi.fetchPublicationWithTranscationHash(txHash);
 
-      onTabChange(TabItems[TabNames.VoteImage]);
+      submittedImagePublicationId.current =
+        publicationRes?.data?.publication?.id;
+
+      submitToVoteApi();
+
+      console.log({ indexedResult, publicationRes });
     } catch (error) {
       console.log(error);
+      setSubmitToVoteApiInProgress(false);
     }
-    setPutImageToVoteInProgress(false);
-  }
+  };
 
-  async function fetchWordOfTheDay() {
-    console.log("fetching word");
-    setWordFetchInProgress(true);
-    postIdRef.current = await getPostId();
-    console.log("post id", { pid: postIdRef.current });
-    const response = await PublicationApi.fetchPublication(postIdRef.current);
-    console.log({ response });
-    const postDescription = response.data?.publication?.metadata?.description;
-    setWordOfTheDay(postDescription);
-    setWordFetchInProgress(false);
-  }
+  const submitToVoteApi = () => {
+    axiosInstance
+      .post(`/submit-to-vote`, {
+        image_url: selectedImageData?.imageUrl,
+        title: selectedImageData?.title,
+        description:
+          selectedImageData?.prompt.trim() + "," + FilterToText[filter],
+        theme_name: selectedImageData?.theme,
+        image_ipfs_object_id: imageIpfsObjectId.current.id,
+        lens_metadata_ipfs_object_id: lensMetadataIpfsObjectId.current.id,
+        lens_publication_id: submittedImagePublicationId.current,
+        filter: filter,
+      })
+      .then((response) => {
+        onTabChange(TabItems[TabNames.VoteImage]);
+      });
+    setSubmitToVoteApiInProgress(false);
+  };
 
-  useEffect(() => {
-    fetchWordOfTheDay();
-  }, [userProfile?.id]);
+  const submitVoteClickHandler = async () => {
+    if (!isUserLoggedIn) {
+      alert("Please sign in to submit the image");
+      return;
+    }
+    const defaultProfileResponse = await UserApi.defaultProfile({
+      walletAddress: address,
+    });
+
+    const defaultProfile = defaultProfileResponse?.data?.defaultProfile;
+    userProfileRef.current = defaultProfile;
+
+    if (!defaultProfile?.dispatcher?.address) {
+      setShouldShowEnableDispatcherModal(true);
+      return;
+    }
+
+    setSubmitToVoteApiInProgress(true);
+
+    axiosInstance
+      .post(`/store-on-ipfs`, {
+        image_url: selectedImageData?.imageUrl,
+        title: selectedImageData?.title,
+        description: selectedImageData?.prompt.trim(),
+      })
+      .then((response) => {
+        const apiResponseData = response.data.data;
+        const ipfsObjectIds = apiResponseData.ipfs_object_ids;
+        const ipfsObjectsMap = apiResponseData.ipfs_objects;
+
+        for (let i = 0; i < ipfsObjectIds.length; i++) {
+          const ipfsObject = ipfsObjectsMap[ipfsObjectIds[i]];
+
+          if (ipfsObject.kind === "IMAGE") {
+            imageIpfsObjectId.current = ipfsObject;
+          }
+
+          if (ipfsObject.kind === "LENS_PUBLICATION_METADATA") {
+            lensMetadataIpfsObjectId.current = ipfsObject;
+          }
+        }
+        postOnLens();
+      })
+      .catch((error) => {
+        setSubmitToVoteApiInProgress(false);
+      });
+  };
 
   return (
     <>
-      <div className={`${styles.generateNFT} gap-x-5`}>
+      <div className={`${styles.generateNFT} container `}>
+        {shouldShowSignInModal ? (
+          <CustomSignInModal
+            isOpen={shouldShowSignInModal}
+            onRequestClose={() => setShouldShowSignInModal(false)}
+          />
+        ) : null}
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{ duration: 4000 }}
+        />
         <div className={styles.enter_prompt_container}>
-          <div>Enter Prompt</div>
-          <textarea
-            placeholder="Dramatic sky and buildings painting"
-            className={styles.prompt_area}
-            onChange={(e) => {
-              setPromt(e.target.value);
-            }}
-          ></textarea>
-          <div>Filter</div>
-          <div className={styles.generateText}>
-            Explore various stylistic filters you can apply
-          </div>
-          <select
-            className={styles.dropdown}
-            name="cars"
-            id="cars"
-            onChange={(e) => {
-              setfilter(e.target.value);
-            }}
-          >
-            {filterOptions.map((style) => {
-              return <option key={style} value={style}>{style}</option>;
-            })}
-          </select>
+          <>
+            <div>Themes</div>
+            <div className={styles.generateText}>
+              Select a theme that the prompt describes
+            </div>
+            <select
+              value={theme}
+              className={styles.dropdown}
+              name="Themes"
+              id="Themes"
+              onChange={(e) => {
+                setTheme(e.target.value);
+              }}
+            >
+              {trendingThemes.current.map((ele) => {
+                return (
+                  <option key={ele?.id} value={ele?.name}>
+                    #{ele?.name}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="mt-[24px] mb-[8px]">Enter Prompt</div>
+            <textarea
+              placeholder="Dramatic sky and buildings painting"
+              value={prompt}
+              className={styles.prompt_area}
+              maxLength={250}
+              onChange={(e) => {
+                setPromt(e.target.value);
+              }}
+            ></textarea>
+            <div className="mt-[12px] mb-[8px]">Filter</div>
+            <div className={styles.generateText}>
+              Explore various stylistic filters you can apply
+            </div>
+            <select
+              className={styles.dropdown}
+              value={filter}
+              name="filters"
+              id="filters"
+              onChange={(e) => {
+                setfilter(e.target.value);
+              }}
+            >
+              {filterOptions.map((style) => {
+                return (
+                  <option key={style} value={style}>
+                    {style}
+                  </option>
+                );
+              })}
+            </select>
+          </>
 
-          <button
-            className={`${styles.button}`}
+          <div
+            className={`${styles.button} mt-auto p-[8px]`}
             onClick={() => {
               submitForGeneration();
             }}
             title="Generate Image"
           >
-            {imageGenerationInProgress ? (
-              <ClipLoader color={"#fff"} loading={true} size={15} />
-            ) : (
-              <span>Generate Image</span>
-            )}
-          </button>
+            <div className="flex flex-row justify-between">
+              <span className={styles.generateText}>Generate Image</span>
+              <div>
+                <MagicIcon />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className={styles.secondTab}>
-          <div className={styles.yellow}>Word of the day</div>
-          <div className={styles.generatedTitle}>
-            {wordFetchInProgress ? (
-              <ClipLoader color={"#fff"} loading={true} size={15} />
-            ) : (
-              <div className={styles.wordOfDay}>"{wordOfTheDay}"</div>
-            )}
-          </div>
+        <div className={`${styles.secondTab}`}>
           <div className={styles.generatedImagePrompts}>
-            {!image ? (
+            <SubmitForVoteModal
+              visible={submitToVoteModal}
+              submitToVoteApiInProgress={submitToVoteApiInProgress}
+              setsubmitToVoteModal={setsubmitToVoteModal}
+              clickHandler={() => submitVoteClickHandler()}
+            />
+
+            {shouldShowEnableDispatcherModal ? (
+              <EnableDispatcherModal
+                userProfile={userProfileRef.current}
+                onClose={() => setShouldShowEnableDispatcherModal(false)}
+              />
+            ) : null}
+
+            {generatedImagesRef.current.length <= 0 ? (
               <div className={styles.emptyImageContainer}>
-                Generate image to preview here
+                <div className="text-skin-base font-semibold mb-[5px]">
+                  Your Generations
+                </div>
+                <div className="grid gap-5 overflow-y-auto h-full grid-cols-2">
+                  <div className={styles.emptyImageCell}>
+                    {imageGenerationInProgress ? (
+                      <ImageLoader color={"#fff"} height={15} width={15} />
+                    ) : (
+                      <Image
+                        src="https://static.plgworks.com/assets/images/non/generate-default.png"
+                        alt="Lens Icon"
+                        width="60"
+                        height="60"
+                      />
+                    )}
+                  </div>
+
+                  <div className={styles.emptyImageCell}>
+                    {imageGenerationInProgress ? (
+                      <ImageLoader color={"#fff"} height={15} width={15} />
+                    ) : (
+                      <Image
+                        src="https://static.plgworks.com/assets/images/non/generate-default.png"
+                        alt="Lens Icon"
+                        width="60"
+                        height="60"
+                      />
+                    )}
+                  </div>
+
+                  <div className={styles.emptyImageCell}>
+                    <Image
+                      src="https://static.plgworks.com/assets/images/non/generate-default.png"
+                      alt="Lens Icon"
+                      width="60"
+                      height="60"
+                    />
+                  </div>
+                  <div className={styles.emptyImageCell}>
+                    <Image
+                      src="https://static.plgworks.com/assets/images/non/generate-default.png"
+                      alt="Lens Icon"
+                      width="60"
+                      height="60"
+                    />
+                  </div>
+                </div>
               </div>
             ) : (
               <div style={sectionStyle}>
-                <div className={styles.bottom}>
-                  <input
-                    type="text"
-                    value={imageTitle}
-                    onChange={(event) => setImageTitle(event.target.value)}
-                    placeholder="Enter a title for your masterpiece..."
-                    className={styles.masterpeice}
-                  ></input>
+                <div className="text-skin-base font-semibold m-[10px]">
+                  Your Generations
+                </div>
+                <div
+                  id="generated-image-id"
+                  className="grid gap-5 overflow-y-auto h-full grid-cols-2"
+                >
+                  {imageGenerationInProgress ? (
+                    <div className={styles.emptyImageCell}>
+                      <ImageLoader color={"#fff"} height={15} width={15} />
+                    </div>
+                  ) : null}
+                  {imageGenerationInProgress ? (
+                    <div className={styles.emptyImageCell}>
+                      <ImageLoader color={"#fff"} height={15} width={15} />
+                    </div>
+                  ) : null}
+                  {generatedImagesRef.current.length > 0 &&
+                    generatedImagesRef.current.map((ele, index) => (
+                      <div className={styles.emptyImageCell}>
+                        <div
+                          style={{
+                            backgroundImage: `url(${ele.imageUrl})`,
+                          }}
+                          className="h-full w-full rounded-[10px] overflow-hidden relative"
+                        >
+                          <UserInput
+                            key={index}
+                            image={ele.imageUrl}
+                            onSubmitToVote={() => onSubmitToVote(ele)}
+                            style={styles.masterpeice}
+                            onSubmit={(value) => {
+                              ele.title = value;
+                            }}
+                          />
+                        </div>
+                      </div>
+                      // <div className={`${styles.bottom} relative`} key={index}>
+                      //   <div
+                      //     style={{
+                      //       backgroundImage: `url(${ele.imageUrl})`,
+                      //     }}
+                      //     className="h-[412px] rounded-[16px]"
+                      //   ></div>
 
-                  <button
-                    disabled={isSubmitDisabled}
-                    onClick={onSubmitToVote}
-                    className={`${styles.submitVote} ${
-                      isSubmitDisabled ? styles.disabled : {}
-                    }`}
-                    type="submit"
-                    title="Submit for voting"
-                  >
-                    {putImageToVoteInProgress ? (
-                      <ClipLoader color={"#fff"} loading={true} size={15} />
-                    ) : (
-                      "Submit for voting"
-                    )}
-                  </button>
+                      //   <div className="absolute w-full">
+                      //     <UserInput
+                      //       key={index}
+                      //       image={ele.imageUrl}
+                      //       onSubmitToVote={() => onSubmitToVote(ele)}
+                      //       style={styles.masterpeice}
+                      //       onSubmit={(value) => {
+                      //         ele.title = value;
+                      //       }}
+                      //     />
+                      //   </div>
+                      // </div>
+                    ))}
                 </div>
               </div>
             )}

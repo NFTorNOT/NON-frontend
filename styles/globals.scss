@@ -1,12 +1,13 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import "@rainbow-me/rainbowkit/styles.css";
 
 @import url("https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap");
 
 :root {
   --color-text-base: 255, 255, 255;
-  --color-text-muted: 199, 210, 254;
+  --color-text-green: 1, 80, 30;
   --color-text-inverted: 79, 70, 229;
   --color-fill: 67, 56, 202;
   --color-button-accent: 255, 255, 255;
@@ -24,8 +25,11 @@
 html,
 body {
   margin: 0;
+  line-height: 1.2;
+  color: var(--color-text-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "salt" on;
   -webkit-font-smoothing: antialiased;
+  font-size: 16px;
 }
