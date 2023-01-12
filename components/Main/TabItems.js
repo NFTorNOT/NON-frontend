@@ -7,6 +7,7 @@ export const TabNames = {
   GenerateImage: "GenerateImage",
   VoteImage: "VoteImage",
 };
+
 export const TabItems = {
   [TabNames.NftOfTheDay]: {
     id: "Collect",
