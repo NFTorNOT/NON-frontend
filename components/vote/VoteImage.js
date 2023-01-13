@@ -329,134 +329,134 @@ export default function VoteImage() {
   };
 
   return (
-    // <OnBoarding />
-    <div className="flex items-center justify-center flex-col">
-      <TrendingThemeDefault
-        selectedTheme={selectedTheme}
-        trendingThemes={allTrendingThemes.current}
-        showTrendingThemeModal={() => {
-          setShouldShowWhatIsTrendingThemeModal(true);
-        }}
-      />
+    <OnBoarding />
+    // <div className="flex items-center justify-center flex-col">
+    //   <TrendingThemeDefault
+    //     selectedTheme={selectedTheme}
+    //     trendingThemes={allTrendingThemes.current}
+    //     showTrendingThemeModal={() => {
+    //       setShouldShowWhatIsTrendingThemeModal(true);
+    //     }}
+    //   />
 
-      <div className="relative md:flex justify-center md:items-center mt-[40px]">
-        {/* <NFTContractInfoModal
-          visible={nftDetailsModal}
-          onClose={() => setNftDetailsModal(false)}
-          ipfsCid={ipfs}
-          txHash={consumedData.current[imageIndex]?.txHash}
-        /> */}
+    //   <div className="relative md:flex justify-center md:items-center mt-[40px]">
+    //     {/* <NFTContractInfoModal
+    //       visible={nftDetailsModal}
+    //       onClose={() => setNftDetailsModal(false)}
+    //       ipfsCid={ipfs}
+    //       txHash={consumedData.current[imageIndex]?.txHash}
+    //     /> */}
 
-        <CustomSignInModal
-          isOpen={shouldShowSignInModal}
-          onRequestClose={() => setShouldShowSignInModal(false)}
-        />
+    //     <CustomSignInModal
+    //       isOpen={shouldShowSignInModal}
+    //       onRequestClose={() => setShouldShowSignInModal(false)}
+    //     />
 
-        <TrendingThemeModal
-          isOpen={shouldShowWhatIsTremdingThemeModal}
-          onRequestClose={() => setShouldShowWhatIsTrendingThemeModal(false)}
-        />
+    //     <TrendingThemeModal
+    //       isOpen={shouldShowWhatIsTremdingThemeModal}
+    //       onRequestClose={() => setShouldShowWhatIsTrendingThemeModal(false)}
+    //     />
 
-        <div
-          id="vote-card"
-          className={`${styles.cardContainer} flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] cursor-grab ${styles.voteCards}`}
-        >
-          {data.length > 0 &&
-            data.map((character, index) => (
-              <div className={`absolute pressable  ${styles.voteCard}`}>
-                <VoteCard character={character}></VoteCard>
-              </div>
-            ))}
+    //     <div
+    //       id="vote-card"
+    //       className={`${styles.cardContainer} flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] cursor-grab ${styles.voteCards}`}
+    //     >
+    //       {data.length > 0 &&
+    //         data.map((character, index) => (
+    //           <div className={`absolute pressable  ${styles.voteCard}`}>
+    //             <VoteCard character={character}></VoteCard>
+    //           </div>
+    //         ))}
 
-          {data.length == 0 && isFirstTimeLoaded.current ? (
-            <div className={`absolute pressable  ${styles.voteCard}`}>
-              <div className={styles.emptyCard}>
-                <div className={styles.emptyText}>
-                  Oops, all generations are exhausted. Meanwhile, Collect hot
-                  NFTs by your lens frens and show your support💰
-                </div>
-                <div
-                  className={styles.collectButtonContainer}
-                  onClick={onCollectButtonClick}
-                >
-                  <CollectIconSvg />
-                  <div className={styles.collectButtonText}>Collect Now</div>
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </div>
-        {consumedData.current.length > 0 ? (
-          <>
-            <button
-              className={`absolute md:relative left-0`}
-              disabled={isNotButtonClicked || data.length == 0}
-              onClick={() => {
-                if (!isUserLoggedIn) {
-                  setShouldShowSignInModal(true);
-                  return;
-                }
-                swiped("left");
-                setIsNotButtonClicked(true);
-                setTimeout(() => {
-                  setIsNotButtonClicked(false);
-                }, 2000);
-              }}
-            >
-              <div
-                className={`${styles.buttonClassNot} ${
-                  !isNotButtonClicked ? `block` : `hidden`
-                } m-[8px]`}
-              >
-                <Not />
-              </div>
-              <div
-                className={`${styles.buttonClassNot} ${
-                  isNotButtonClicked ? `block` : `hidden`
-                }`}
-              >
-                <ClickOnHot />
-              </div>
-            </button>
+    //       {data.length == 0 && isFirstTimeLoaded.current ? (
+    //         <div className={`absolute pressable  ${styles.voteCard}`}>
+    //           <div className={styles.emptyCard}>
+    //             <div className={styles.emptyText}>
+    //               Oops, all generations are exhausted. Meanwhile, Collect hot
+    //               NFTs by your lens frens and show your support💰
+    //             </div>
+    //             <div
+    //               className={styles.collectButtonContainer}
+    //               onClick={onCollectButtonClick}
+    //             >
+    //               <CollectIconSvg />
+    //               <div className={styles.collectButtonText}>Collect Now</div>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       ) : null}
+    //     </div>
+    //     {consumedData.current.length > 0 ? (
+    //       <>
+    //         <button
+    //           className={`absolute md:relative left-0`}
+    //           disabled={isNotButtonClicked || data.length == 0}
+    //           onClick={() => {
+    //             if (!isUserLoggedIn) {
+    //               setShouldShowSignInModal(true);
+    //               return;
+    //             }
+    //             swiped("left");
+    //             setIsNotButtonClicked(true);
+    //             setTimeout(() => {
+    //               setIsNotButtonClicked(false);
+    //             }, 2000);
+    //           }}
+    //         >
+    //           <div
+    //             className={`${styles.buttonClassNot} ${
+    //               !isNotButtonClicked ? `block` : `hidden`
+    //             } m-[8px]`}
+    //           >
+    //             <Not />
+    //           </div>
+    //           <div
+    //             className={`${styles.buttonClassNot} ${
+    //               isNotButtonClicked ? `block` : `hidden`
+    //             }`}
+    //           >
+    //             <ClickOnHot />
+    //           </div>
+    //         </button>
 
-            <button
-              className={`absolute md:relative right-0 order-last`}
-              disabled={isHotButtonClicked || data.length == 0}
-              onClick={() => {
-                if (!isUserLoggedIn) {
-                  setShouldShowSignInModal(true);
-                  return;
-                }
-                swiped("right");
-                setIsHotButtonClicked(true);
-                setTimeout(() => {
-                  setIsHotButtonClicked(false);
-                }, 2000);
-              }}
-            >
-              <div
-                className={`${styles.buttonClassHot} ${
-                  !isHotButtonClicked ? `block` : `hidden`
-                } m-[8px]`}
-              >
-                <FireSvg />
-              </div>
-              <div
-                className={`${styles.buttonClassHot} ${
-                  isHotButtonClicked ? `block` : `hidden`
-                }`}
-              >
-                <Image
-                  src="https://static.plgworks.com/assets/images/non/vote/hotButtonClick.png"
-                  alt="Lens Icon"
-                  width="72"
-                  height="72"
-                />
-              </div>
-            </button>
-          </>
-        ) : null}
-      </div>
-    </div>
+    //         <button
+    //           className={`absolute md:relative right-0 order-last`}
+    //           disabled={isHotButtonClicked || data.length == 0}
+    //           onClick={() => {
+    //             if (!isUserLoggedIn) {
+    //               setShouldShowSignInModal(true);
+    //               return;
+    //             }
+    //             swiped("right");
+    //             setIsHotButtonClicked(true);
+    //             setTimeout(() => {
+    //               setIsHotButtonClicked(false);
+    //             }, 2000);
+    //           }}
+    //         >
+    //           <div
+    //             className={`${styles.buttonClassHot} ${
+    //               !isHotButtonClicked ? `block` : `hidden`
+    //             } m-[8px]`}
+    //           >
+    //             <FireSvg />
+    //           </div>
+    //           <div
+    //             className={`${styles.buttonClassHot} ${
+    //               isHotButtonClicked ? `block` : `hidden`
+    //             }`}
+    //           >
+    //             <Image
+    //               src="https://static.plgworks.com/assets/images/non/vote/hotButtonClick.png"
+    //               alt="Lens Icon"
+    //               width="72"
+    //               height="72"
+    //             />
+    //           </div>
+    //         </button>
+    //       </>
+    //     ) : null}
+    //   </div>
+    // </div>
   );
 }
