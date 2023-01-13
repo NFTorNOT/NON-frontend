@@ -31,8 +31,9 @@ ingress:
     alb.ingress.kubernetes.io/group.name: thursday
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/healthcheck-path: /health-checker
+    alb.ingress.kubernetes.io/ssl-redirect: '443'  
   hosts:
-    - host: nftornot.quick-poc.com
+    - host: staging.nftornot.com
       paths:
         - path: /
           pathType: Prefix
