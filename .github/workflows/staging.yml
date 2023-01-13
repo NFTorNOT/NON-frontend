@@ -58,10 +58,10 @@ jobs:
         id: deploy-eks
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.repository.name }} 
+          ECR_REPOSITORY: ${{ github.event.repository.name }}
           IMAGE_TAG: ${{ github.run_id }}-${{ github.run_attempt }}
-          AWS_REGION: us-east-1
-          AWS_EKS_CLUSTER_NAME: plg-staging
+          AWS_REGION: us-east-2
+          AWS_EKS_CLUSTER_NAME: thursday-staging
  
         run: |-
           aws eks update-kubeconfig --name ${AWS_EKS_CLUSTER_NAME} --region ${AWS_REGION}
