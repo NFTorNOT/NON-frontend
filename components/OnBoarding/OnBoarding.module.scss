@@ -55,7 +55,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.subHeading {
+.heading {
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -70,7 +70,7 @@
   color: #ffffff;
 }
 
-.description {
+.subHeading {
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -89,4 +89,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.nextCardBtnText{
+  font-family: 'Satoshi Variable';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 160%;
+    font-feature-settings: 'salt' on;
+    color: rgba(255, 255, 255, 0.2);
 }

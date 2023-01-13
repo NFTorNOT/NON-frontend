@@ -18,6 +18,7 @@ import CollectIconSvg from "./svg/CollectIconSvg";
 import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
+import OnBoarding from "../OnBoarding";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -328,6 +329,7 @@ export default function VoteImage() {
   };
 
   return (
+    // <OnBoarding />
     <div className="flex items-center justify-center flex-col">
       <TrendingThemeDefault
         selectedTheme={selectedTheme}
