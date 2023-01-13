@@ -114,7 +114,9 @@ function OnBoarding() {
                       {onBoardingDetailsArray[onboardingindex].subTitle}
                     </div>
                     <div className={styles.nextCardBtnText}>
-                      Click to move to the next card
+                      {onboardingindex === 4
+                        ? "Click to get started →"
+                        : "Click to move to the next card →"}
                     </div>
                   </>
                 )}
