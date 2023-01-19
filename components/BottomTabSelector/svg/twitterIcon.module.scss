@@ -1,8 +1,9 @@
 $twitter-fill-color: #1da1f2;
 
-.iconFillColor{
-    fill: white;
+.iconFillColor {
+    fill: rgba(255, 255, 255, 0.6);
 }
-.twitterIconWrap :hover .iconFillColor{
+
+.twitterIconWrap :hover .iconFillColor {
     fill: $twitter-fill-color;
 }
