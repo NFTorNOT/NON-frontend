@@ -128,13 +128,13 @@ export default function BottomTabSelector() {
           </TwitterShareButton>
 
           <div
-            className={`${styles.twitterShare} cursor-pointer ml-[15px] flex`}
+            className={`${styles.githubShare} cursor-pointer ml-[15px] flex`}
           >
             <span className="z-10 pl-[5px]">
               <GithubIcon />
             </span>
             <button
-              className={`${styles.twitterText} pl-[5px] text-[#ffffff] font-medium`}
+              className={`${styles.githubText} pl-[5px] text-[#ffffff] font-medium`}
               onClick={handleGithub}
             >
               Github

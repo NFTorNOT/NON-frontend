@@ -124,6 +124,18 @@ $github-fill-color: #FFFFFF;
   fill: $twitter-fill-color;
 }
 
+.githubText {
+  opacity: 0;
+  height: 20px;
+  z-index: 10;
+}
+.githubShare:hover .githubText {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.githubShare:hover path {
+  fill: $github-fill-color;
+}
 .githubShare:hover path {
   fill: $github-fill-color;
 }
