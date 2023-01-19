@@ -120,7 +120,7 @@ export default function BottomTabSelector() {
               <TwitterIcon />
             </span>
             <span
-              className={`${styles.twitterText} pl-[15px] text-[#ffffff] font-medium absolute w-[100px]`}
+              className={`${styles.twitterText} pl-[15px] text-[#ffffff] font-medium absolute ml-[20px]`}
             >
               Share on Twitter
             </span>
