@@ -16,7 +16,7 @@ yarn install
 ```
 
 ## Set environment Variables
-At root level make a file with name: 
+At root level create a file with name: 
 ```sh
 .env.local
 ```
