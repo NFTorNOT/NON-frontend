@@ -12,7 +12,7 @@ npm i
 ```
 or 
 ```sh
-yarn install
+yarn add
 ```
 
 ## Set environment Variables
