@@ -111,7 +111,7 @@ function HallOfFlame(props) {
   }, []);
 
   const onItemClick = (ele, index) => {
-    console.log("swiper ref", swiperRef.current.activeIndex);
+    // console.log("swiper ref", swiperRef.current.activeIndex);
     activeIndex.current = index;
     setShowModal(!showModal);
   };

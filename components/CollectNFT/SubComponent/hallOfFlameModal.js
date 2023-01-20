@@ -50,7 +50,7 @@ function HallOfFlameModal({
         >
           {hallOfFlameData.length > 0 &&
             hallOfFlameData.map((ele, index) => {
-              console.log("hallOfFlameData", { ele });
+              // console.log("hallOfFlameData", { ele });
               return (
                 <SwiperSlide key={index}>
                   <div className="w-full">

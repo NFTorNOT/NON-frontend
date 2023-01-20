@@ -22,7 +22,7 @@ class IPFSHelper {
       { wrapWithDirectory: false }
     );
 
-    console.log({ cid });
+    // console.log({ cid });
     return cid;
   }
 }
