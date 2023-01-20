@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useCollectedNFTModalContext } from "../../context/CollectedNFTModalContext";
 import { useAuthContext } from "../../context/AuthContext";
 import { useRouter } from "next/router";
+import GithubIcon from "./svg/GithubIcon";
 
 export default function BottomTabSelector() {
   const { currentTab, onTabChange } = useBottomTab();
@@ -32,6 +33,11 @@ export default function BottomTabSelector() {
     const plgURL =
       "https://www.notion.so/plgworks/NFT-or-Not-61e944ba261f49a2805c73468c92a43a";
     window.open(plgURL, "_blank");
+  };
+
+  const handleGithub = () => {
+    const gitHubUrl = "https://github.com/orgs/NFTorNOT/repositories";
+    window.open(gitHubUrl, "_blank");
   };
 
   async function fetchRecentUpVotedNFTS() {
@@ -104,6 +110,7 @@ export default function BottomTabSelector() {
             </button>
             <div className={styles.hiwSpace}></div>
           </div>
+
           <TwitterShareButton
             className={`${styles.twitterShare} cursor-pointer ml-[15px] flex`}
             url={"https://plgworks.com/"}
@@ -113,11 +120,26 @@ export default function BottomTabSelector() {
               <TwitterIcon />
             </span>
             <span
-              className={`${styles.twitterText} pl-[5px] text-[#ffffff] font-medium`}
+              className={`${styles.twitterText} pl-[15px] text-[#ffffff] font-medium absolute ml-[20px]`}
             >
               Share on Twitter
             </span>
+            <div className={styles.twitterTextSpace}></div>
           </TwitterShareButton>
+
+          <div
+            className={`${styles.githubShare} cursor-pointer ml-[15px] flex`}
+          >
+            <span className="z-10 pl-[5px]">
+              <GithubIcon />
+            </span>
+            <button
+              className={`${styles.githubText} pl-[5px] text-[#ffffff] font-medium`}
+              onClick={handleGithub}
+            >
+              Github
+            </button>
+          </div>
         </div>
         <div
           className={`${styles.container} w-[640px] h-[56px] m-auto grid grid-cols-3 content-center gap-[8px] p-[8px] md:rounded-[100px] col-span-3 relative z-10`}
