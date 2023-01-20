@@ -55,7 +55,7 @@ function CollectNFTModal({ shown, close, modalData }) {
       const generateModuleCurrencyApprovalData =
         generateModuleCurrencyApprovalResponse.data
           .generateModuleCurrencyApprovalData;
-      console.log({ generateModuleCurrencyApprovalResponse });
+      // console.log({ generateModuleCurrencyApprovalResponse });
 
       const tx1 = await signer.sendTransaction({
         to: generateModuleCurrencyApprovalData.to,

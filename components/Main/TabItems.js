@@ -11,7 +11,7 @@ export const TabNames = {
 export const TabItems = {
   [TabNames.NftOfTheDay]: {
     id: "Collect",
-    tabName: "Collect NFT’s",
+    tabName: "Collect NFTs",
     Component: () => <NFTOfTheDay />,
   },
   [TabNames.GenerateImage]: {

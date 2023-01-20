@@ -36,7 +36,7 @@ function OnBoarding() {
         {onBoardingDetailsArray &&
           onBoardingDetailsArray.length > 0 &&
           onBoardingDetailsArray.map((ele, index) => {
-            console.log({ index });
+            // console.log({ index });
             if (index == 1)
               return (
                 <div className={`absolute pressable  ${styles.voteCard}`}>

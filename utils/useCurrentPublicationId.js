@@ -18,11 +18,11 @@ export default function useCurrentPublicationId() {
       currentTimestampInSeconds * 1000
     ).startOf("hour");
 
-    console.log(
-      "startOfHourTimestamp -----------",
-      startOfHourTimestamp,
-      Math.floor(startOfHourTimestamp.valueOf() / 1000)
-    );
+    // console.log(
+    //   "startOfHourTimestamp -----------",
+    //   startOfHourTimestamp,
+    //   Math.floor(startOfHourTimestamp.valueOf() / 1000)
+    // );
     let publicationId = "0x5a26-0x38";
     try {
       publicationId = await contract.getPublicationIdForTimestamp(
@@ -32,7 +32,7 @@ export default function useCurrentPublicationId() {
       console.log("Error while getting publication Id");
     }
 
-    console.log("publication id: ", { publicationId });
+    // console.log("publication id: ", { publicationId });
 
     return publicationId;
   }

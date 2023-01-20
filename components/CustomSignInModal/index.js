@@ -35,11 +35,11 @@ const CustomSignInModal = ({ onRequestClose, isOpen }) => {
     }
   }, [isConnected]);
 
-  console.log({
-    c: isPreviouslyConnected.current === false && isConnected === true,
-    isConnected: isConnected,
-    shouldCallSignInMethod,
-  });
+  // console.log({
+  //   c: isPreviouslyConnected.current === false && isConnected === true,
+  //   isConnected: isConnected,
+  //   shouldCallSignInMethod,
+  // });
 
   return (
     <Modal onRequestClose={onRequestClose} isOpen={isOpen} style={customStyles}>

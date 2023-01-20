@@ -114,7 +114,7 @@ export default function Card({ cardDetails, showCollectModal }) {
     const collectButtonHeight = collectButtonRef?.current?.clientHeight;
 
     if (showPrompt) {
-      console.log("here in showPrompt");
+      // console.log("here in showPrompt");
       setWrapperTransY(0);
     } else if (wrapperTransY < wrapHeight - descriptionHeight) {
       setWrapperTransY(

@@ -161,7 +161,7 @@ class PublicationApi {
     if (cursor) {
       request.cursor = cursor;
     }
-    console.log("Fetching comment, ", { request, profileId });
+    // console.log("Fetching comment, ", { request, profileId });
     return apolloClient.query({
       query: Query.publications,
       variables: {
