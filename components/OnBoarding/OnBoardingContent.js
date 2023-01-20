@@ -8,9 +8,7 @@ import styles from "./OnBoarding.module.scss";
 function OnboardingContent(props) {
   const onBoardingDetailsArray = props.onBoardingDetailsArray;
   const index = props.index;
-  console.log("onBoardingDetailsArray", onBoardingDetailsArray);
-  console.log("index", index);
-  const [onboardingindex, setOnboardingindex] = React.useState(0);
+
   return (
     <>
       <div className={`${styles.card}`} {...props}>
@@ -26,7 +24,7 @@ function OnboardingContent(props) {
           {index === 4 && (
             <>
               <div className={styles.welcomeText}>Welcome to</div>
-              <div className="h-full">
+              <div>
                 <HotOrNot />
               </div>
               <div className={styles.heading}>

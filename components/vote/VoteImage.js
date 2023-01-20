@@ -20,11 +20,6 @@ import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
 import OnBoarding from "../OnBoarding";
 
-import CollectSvg from "../vote/svg/FirstTimeUser/CollectSvg";
-import HallOfFlamSvg from "../vote/svg/FirstTimeUser/HallOfFlamsvg";
-import GenerateSvg from "../vote/svg/FirstTimeUser/GenerateSvg";
-import HotOrNot from "./svg/HotOrNot";
-
 export default function VoteImage() {
   const { userProfile } = useUserContext();
 
@@ -333,10 +328,19 @@ export default function VoteImage() {
     Router.push({ pathname: "/collect" });
   };
 
-  const [onBoarding, setOnBording] = React.useState(true);
+  const [onBoarding, setOnBoarding] = React.useState(true);
+  // let onBoardingKey;
+  React.useEffect(() => {
+    if (!localStorage.getItem("onBoardingKey")) {
+      setOnBoarding(false);
+    }
+    // } else {
+    //   onBoardingKey = localStorage.getItem("onBoardingKey");
+    // }
+  }, []);
 
   return onBoarding ? (
-    <OnBoarding setOnBording={setOnBording} />
+    <OnBoarding setOnBoarding={setOnBoarding} />
   ) : (
     <div className="flex items-center justify-center flex-col">
       <TrendingThemeDefault

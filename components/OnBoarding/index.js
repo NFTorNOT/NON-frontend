@@ -12,9 +12,10 @@ import OnboardingContent from "./OnBoardingContent";
 import ClickOnHot from "../vote/svg/clickOnHot";
 import { id } from "ethers/lib/utils.js";
 
-function OnBoarding({ setOnBording }) {
+function OnBoarding({ setOnBoarding }) {
   const [isNotButtonClicked, setIsNotButtonClicked] = React.useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = React.useState(false);
+
   const onBoardingDetailsArray = [
     {
       title:
@@ -173,8 +174,10 @@ function OnBoarding({ setOnBording }) {
                 setTimeout(() => {
                   setIsHotButtonClicked(false);
                 }, 2000);
+                console.log("data length", data.length);
                 if (data.length === 1) {
-                  setOnBording(false);
+                  localStorage.setItem("onBoardingKey", false);
+                  setOnBoarding(false);
                 }
               }}
             >
