@@ -34,25 +34,33 @@ function OnboardingContent(props) {
                 Click <FireSmallSvg /> to move to the next card
               </div>
               <div className="absolute w-[104px] top-[420px]">
-                <Image
-                  src={onBoardingDetailsArray.gif}
-                  width={103}
-                  height={143}
-                  alt="my gif"
-                />
+                {onBoardingDetailsArray.type === "gif" ? (
+                  <Image
+                    src={onBoardingDetailsArray.gif}
+                    width={103}
+                    height={143}
+                    alt="my gif"
+                  />
+                ) : (
+                  onBoardingDetailsArray.gif
+                )}
               </div>
             </>
           )}
 
           {index < 4 && (
             <>
-              <div>
-                <Image
-                  src={onBoardingDetailsArray.gif}
-                  width={onBoardingDetailsArray.width}
-                  height={onBoardingDetailsArray.height}
-                  alt="my gif"
-                />
+              <div className="pt-[38px]">
+                {onBoardingDetailsArray.type === "gif" ? (
+                  <Image
+                    src={onBoardingDetailsArray.gif}
+                    width={onBoardingDetailsArray.width}
+                    height={onBoardingDetailsArray.height}
+                    alt="my gif"
+                  />
+                ) : (
+                  onBoardingDetailsArray.gif
+                )}
               </div>
               <div className={styles.heading}>
                 {onBoardingDetailsArray.title}

@@ -5,9 +5,9 @@ import hand from "./gif/hand.gif";
 import hotOrNot from "./gif/hotOrNot.gif";
 import FireSvg from "../vote/svg/FireSvg";
 import Not from "/components/vote/svg/not.js";
-import CollectSvg from "../vote/svg/FirstTimeUser/CollectSvg";
 import HallOfFlamSvg from "../vote/svg/FirstTimeUser/HallOfFlamsvg";
 import GenerateSvg from "../vote/svg/FirstTimeUser/GenerateSvg";
+import CollectSvg from "../vote/svg/FirstTimeUser/CollectSvg";
 import OnboardingContent from "./OnBoardingContent";
 import ClickOnHot from "../vote/svg/clickOnHot";
 import { id } from "ethers/lib/utils.js";
@@ -21,6 +21,7 @@ function OnBoarding({ setOnBoarding }) {
       title:
         "Join in on a thrilling showdown of A.I.-generated images where you and the community cast votes!",
       gif: hand,
+      type: "gif",
     },
     {
       title: "For each image, you Vote whether it is Hot, or Not!",
@@ -28,6 +29,7 @@ function OnBoarding({ setOnBoarding }) {
       gif: hotOrNot,
       width: 267,
       height: 160,
+      type: "gif",
     },
     {
       title: "Collect hot NFTs by your lens frens to show your support💰",
@@ -35,6 +37,7 @@ function OnBoarding({ setOnBoarding }) {
       gif: <CollectSvg />,
       width: 212,
       height: 190,
+      type: "svg",
     },
     {
       title:
@@ -43,6 +46,7 @@ function OnBoarding({ setOnBoarding }) {
       gif: <HallOfFlamSvg />,
       width: 489,
       height: 231,
+      type: "svg",
     },
     {
       title:
@@ -51,6 +55,7 @@ function OnBoarding({ setOnBoarding }) {
       gif: <GenerateSvg />,
       width: 160,
       height: 160,
+      type: "svg",
     },
   ];
   const [data, setData] = React.useState(onBoardingDetailsArray.reverse());
@@ -147,6 +152,10 @@ function OnBoarding({ setOnBoarding }) {
                 setTimeout(() => {
                   setIsNotButtonClicked(false);
                 }, 2000);
+                if (data.length === 1) {
+                  window.localStorage.setItem("onBoardingKey", "false");
+                  setOnBoarding(false);
+                }
               }}
             >
               <div
@@ -176,7 +185,7 @@ function OnBoarding({ setOnBoarding }) {
                 }, 2000);
                 console.log("data length", data.length);
                 if (data.length === 1) {
-                  localStorage.setItem("onBoardingKey", false);
+                  window.localStorage.setItem("onBoardingKey", "false");
                   setOnBoarding(false);
                 }
               }}
