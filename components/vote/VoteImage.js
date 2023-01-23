@@ -229,7 +229,7 @@ export default function VoteImage() {
     const lensPostId = consumedData.current[imageIndex]?.lensPostId;
     const publicationId = consumedData.current[imageIndex]?.publicationId;
 
-    console.log({ lensPostId, publicationId });
+    // console.log({ lensPostId, publicationId });
     axiosInstance
       .post(`/reaction`, {
         reaction: dir == "right" ? ReactionTypes.VOTED : ReactionTypes.IGNORED,

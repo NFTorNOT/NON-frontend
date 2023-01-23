@@ -108,7 +108,7 @@ export default function GenerateNFT() {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
 
         const generatedImagesResponseData = response.data.data;
         if (!generatedImagesResponseData) {
@@ -150,7 +150,7 @@ export default function GenerateNFT() {
       setShouldShowSignInModal(true);
       return;
     }
-    console.log({ ele });
+    // console.log({ ele });
     setSelectedImageData(ele);
     setsubmitToVoteModal(true);
   }

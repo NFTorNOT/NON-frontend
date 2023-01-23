@@ -110,7 +110,7 @@ function CollectNFT(props) {
     const target = event.target;
 
     if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-      console.log("reached end", hasNextPageIdentifier.current);
+      // console.log("reached end", hasNextPageIdentifier.current);
       if (hasNextPageIdentifier.current) {
         fetchCollectData();
       }
