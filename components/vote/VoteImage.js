@@ -329,13 +329,14 @@ export default function VoteImage() {
   };
 
   const [onBoarding, setOnBoarding] = React.useState(true);
-  // let onBoardingKey;
-  // React.useEffect(() => {
-  //   if (!localStorage.getItem("onBoardingKey")) {
-  //     setOnBoarding(false);
-  //   }
-
-  // }, []);
+  let onBoardingKey;
+  React.useEffect(() => {
+    console.log(typeof localStorage.getItem("onBoardingKey"));
+    if (localStorage.getItem("onBoardingKey") === "false") {
+      console.log("inside :", !localStorage.getItem("onBoardingKey"));
+      setOnBoarding(false);
+    }
+  }, []);
 
   return onBoarding ? (
     <OnBoarding setOnBoarding={setOnBoarding} />

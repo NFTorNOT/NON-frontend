@@ -153,7 +153,7 @@ function OnBoarding({ setOnBoarding }) {
                   setIsNotButtonClicked(false);
                 }, 2000);
                 if (data.length === 1) {
-                  window.localStorage.setItem("onBoardingKey", "false");
+                  window.localStorage.setItem("onBoardingKey", false);
                   setOnBoarding(false);
                 }
               }}
@@ -185,7 +185,8 @@ function OnBoarding({ setOnBoarding }) {
                 }, 2000);
                 console.log("data length", data.length);
                 if (data.length === 1) {
-                  window.localStorage.setItem("onBoardingKey", "false");
+                  window.localStorage.setItem("onBoardingKey", false);
+                  debugger;
                   setOnBoarding(false);
                 }
               }}
