@@ -186,7 +186,6 @@ function OnBoarding({ setOnBoarding }) {
                 console.log("data length", data.length);
                 if (data.length === 1) {
                   window.localStorage.setItem("onBoardingKey", false);
-                  debugger;
                   setOnBoarding(false);
                 }
               }}
