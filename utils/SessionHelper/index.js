@@ -57,7 +57,9 @@ class SessionHelper {
     }
   }
   clearSession() {
+    const onBoarding = localStorage.getItem("onBoardingKey");
     localStorage.clear();
+    localStorage.setItem("onBoardingKey", onBoarding);
   }
 }
 

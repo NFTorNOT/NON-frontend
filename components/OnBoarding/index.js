@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import styles from "./OnBoarding.module.scss";
 import hand from "./gif/hand.gif";
+import collect from "./collect.png";
 import hotOrNot from "./gif/hotOrNot.gif";
 import FireSvg from "../vote/svg/FireSvg";
 import Not from "/components/vote/svg/not.js";
@@ -34,10 +35,10 @@ function OnBoarding({ setOnBoarding }) {
     {
       title: "Collect hot NFTs by your lens frens to show your support💰",
       subTitle: "Collect proceeds go to the user who generated it.",
-      gif: <CollectSvg />,
+      gif: collect,
       width: 212,
       height: 190,
-      type: "svg",
+      type: "gif",
     },
     {
       title:

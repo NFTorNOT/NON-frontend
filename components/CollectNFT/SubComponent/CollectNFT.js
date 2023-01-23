@@ -75,6 +75,7 @@ function CollectNFT(props) {
             hasCollected:
               !!currentUserLensPostRelation?.collect_nft_transaction_hash,
             handle: ownerUser?.lens_profile_username,
+            totalVotes: lensPostDetail?.total_votes,
           };
 
           data.push(postData);
