@@ -92,14 +92,18 @@ function HallOfFlameModal({
                     </div>
 
                     <div className="flex items-center justify-center">
-                      <div className="modalPrev mr-[60px]">
+                      <div
+                        className={`modalPrev mr-[60px] flex justify-center items-center ${styles.swiperArrow}`}
+                      >
                         <LeftArrow />
                       </div>
                       <Card
                         cardDetails={ele}
                         showCollectModal={() => onCollectNow(ele)}
                       />
-                      <div className="modalNext ml-[60px]">
+                      <div
+                        className={`modalNext ml-[60px] flex justify-center items-center ${styles.swiperArrow}`}
+                      >
                         <RightArrow />
                       </div>
                     </div>
