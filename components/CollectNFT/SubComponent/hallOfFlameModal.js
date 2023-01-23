@@ -95,10 +95,10 @@ function HallOfFlameModal({
                     <div className="flex items-center justify-center">
                       <div
                         className={`modalPrev mr-[60px] flex justify-center items-center ${styles.swiperArrow}`}
-                        onMouseDown={() => {
+                        onMouseEnter={() => {
                           setHovered(false);
                         }}
-                        onMouseUp={() => {
+                        onMouseLeave={() => {
                           setHovered(true);
                         }}
                       >
@@ -110,10 +110,10 @@ function HallOfFlameModal({
                       />
                       <div
                         className={`modalNext ml-[60px] flex justify-center items-center ${styles.swiperArrow}`}
-                        onMouseDown={() => {
+                        onMouseEnter={() => {
                           setHovered(false);
                         }}
-                        onMouseUp={() => {
+                        onMouseLeave={() => {
                           setHovered(true);
                         }}
                       >
