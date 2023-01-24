@@ -13,7 +13,6 @@ import { AuthProvider } from "../context/AuthContext";
 import { BottomTabProvider } from "../context/BottomTabContext";
 import { UserProvider } from "../context/UserContext";
 import { CollectedNFTModalProvider } from "../context/CollectedNFTModalContext";
-import { OnboardingProvider } from "../context/OnboardingContext";
 import {
   injectedWallet,
   metaMaskWallet,
@@ -57,7 +56,6 @@ function App({ Component, pageProps }) {
       <RainbowKitProvider chains={chains}>
         <AuthProvider>
           <UserProvider>
-            {/* <OnboardingProvider> */}
             <BottomTabProvider>
               <CollectedNFTModalProvider>
                 <Layout>
@@ -65,7 +63,6 @@ function App({ Component, pageProps }) {
                 </Layout>
               </CollectedNFTModalProvider>
             </BottomTabProvider>
-            {/* </OnboardingProvider> */}
           </UserProvider>
         </AuthProvider>
       </RainbowKitProvider>
