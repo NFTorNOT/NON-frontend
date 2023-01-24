@@ -181,11 +181,7 @@ export default function Card({ cardDetails, showCollectModal }) {
           ) : null}
           <button
             ref={collectButtonRef}
-            className={`${
-              cardDetails.hasCollected
-                ? styles.alreadyCollectedButton
-                : styles.collectButton
-            }  flex items-center justify-center`}
+            className={`${styles.collectButton}  flex items-center justify-center`}
             onClick={() => {
               // showModal(ele);
               showCollectModal(cardDetails);
@@ -195,9 +191,7 @@ export default function Card({ cardDetails, showCollectModal }) {
               <Collect />
             </span>
             <span className="font-normal text-[16px] leading-[26px] ml-[8px]">
-              {cardDetails.hasCollected
-                ? "You have already collected this"
-                : "Collect Now"}
+              {cardDetails.hasCollected ? "Collect again" : "Collect Now"}
             </span>
           </button>
         </div>

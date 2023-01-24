@@ -232,17 +232,16 @@ function CollectNFTModal({ shown, close, modalData }) {
               <span className="ml-[12px]">{totalCollects} Collectors</span>
             </div>
             {modalData?.hasCollected || isNftCollectedByMe.current ? (
-              <button
-                className={`${styles.alreadyCollectedButton} flex items-center justify-center py-[7px]`}
-              >
-                <span>
-                  <Collect />
-                </span>
-                <span className="font-bold text-[16px] leading-[26px] ml-[8px]">
-                  You have already collected this
-                </span>
-              </button>
-            ) : (
+              // <button
+              //   className={`${styles.alreadyCollectedButton} flex items-center justify-center py-[7px]`}
+              // >
+              //   <span>
+              //     <Collect />
+              //   </span>
+              //   <span className="font-bold text-[16px] leading-[26px] ml-[8px]">
+              //     You have already collected this
+              //   </span>
+              // </button>
               <button
                 className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
                 onClick={() => collectPost()}
@@ -254,6 +253,25 @@ function CollectNFTModal({ shown, close, modalData }) {
                   <span className="pl-[11px]">Collecting...</span>
                 ) : isNftCollected ? (
                   <span className="pl-[11px]">Collected</span>
+                ) : (
+                  <span className="pl-[11px]">Collect Again</span>
+                )}
+              </button>
+            ) : isNftCollected ? (
+              <span className="pl-[11px]">
+                {" "}
+                <Collect /> Collected
+              </span>
+            ) : (
+              <button
+                className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
+                onClick={() => collectPost()}
+              >
+                <span>
+                  <Collect />
+                </span>
+                {isLoading ? (
+                  <span className="pl-[11px]">Collecting...</span>
                 ) : (
                   <span className="pl-[11px]">Collect Now</span>
                 )}

@@ -215,37 +215,40 @@ export default function VoteImage() {
   }
 
   const submitVote = (dir) => {
-    if (!isUserLoggedIn) {
-      setShouldShowSignInModal(true);
-      return;
-    }
+    // if (!isUserLoggedIn) {
+    //   setShouldShowSignInModal(true);
+    //   return;
+    // }
     if (isVoteInProgress.current) {
       return;
     }
-    setSelectedTheme(consumedData.current[imageIndex]?.themeName);
+    if (isUserLoggedIn) {
+      setSelectedTheme(consumedData.current[imageIndex]?.themeName);
 
-    isVoteInProgress.current = true;
+      isVoteInProgress.current = true;
 
-    const lensPostId = consumedData.current[imageIndex]?.lensPostId;
-    const publicationId = consumedData.current[imageIndex]?.publicationId;
+      const lensPostId = consumedData.current[imageIndex]?.lensPostId;
+      const publicationId = consumedData.current[imageIndex]?.publicationId;
 
-    // console.log({ lensPostId, publicationId });
-    axiosInstance
-      .post(`/reaction`, {
-        reaction: dir == "right" ? ReactionTypes.VOTED : ReactionTypes.IGNORED,
-        lens_post_id: lensPostId,
-      })
-      .finally(() => {
-        isVoteInProgress.current = false;
-      });
-    upvoteImage({ publicationId });
+      // console.log({ lensPostId, publicationId });
+      axiosInstance
+        .post(`/reaction`, {
+          reaction:
+            dir == "right" ? ReactionTypes.VOTED : ReactionTypes.IGNORED,
+          lens_post_id: lensPostId,
+        })
+        .finally(() => {
+          isVoteInProgress.current = false;
+        });
+      upvoteImage({ publicationId });
+    }
   };
 
   const swiped = async (dir) => {
-    if (!isUserLoggedIn) {
-      setShouldShowSignInModal(true);
-      return;
-    }
+    // if (!isUserLoggedIn) {
+    //   setShouldShowSignInModal(true);
+    //   return;
+    // }
 
     animatecard(dir);
     setTimeout(async () => {
@@ -401,10 +404,10 @@ export default function VoteImage() {
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
               onClick={() => {
-                if (!isUserLoggedIn) {
-                  setShouldShowSignInModal(true);
-                  return;
-                }
+                // if (!isUserLoggedIn) {
+                //   setShouldShowSignInModal(true);
+                //   return;
+                // }
                 swiped("left");
                 setIsNotButtonClicked(true);
                 setTimeout(() => {
@@ -432,10 +435,10 @@ export default function VoteImage() {
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
               onClick={() => {
-                if (!isUserLoggedIn) {
-                  setShouldShowSignInModal(true);
-                  return;
-                }
+                // if (!isUserLoggedIn) {
+                //   setShouldShowSignInModal(true);
+                //   return;
+                // }
                 swiped("right");
                 setIsHotButtonClicked(true);
                 setTimeout(() => {
