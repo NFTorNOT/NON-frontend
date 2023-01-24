@@ -89,6 +89,12 @@ export default function Card({ cardDetails, showCollectModal }) {
     }
   };
 
+  const ViewOnLensClick = () => {
+    let viewLensUrl =
+      "https://testnet.lenster.xyz/posts/" + cardDetails?.lensPublicationId;
+    window.open(viewLensUrl, "_blank");
+  };
+
   useEffect(() => {
     const titleHeight = titleWrapperRef.current?.clientHeight;
     const wrapHeight = bioParentWrapperRef.current?.clientHeight;
@@ -146,7 +152,10 @@ export default function Card({ cardDetails, showCollectModal }) {
               {cardDetails.title}
             </div>
             <div className="text-[#ffffff] flex items-center">
-              <div className={`cursor-pointer ${styles.lensSvg}`}>
+              <div
+                className={`cursor-pointer ${styles.lensSvg}`}
+                onClick={ViewOnLensClick}
+              >
                 <LensSvg />
               </div>
             </div>
