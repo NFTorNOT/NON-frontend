@@ -94,7 +94,7 @@ function HallOfFlameModal({
 
                     <div className="flex items-center justify-center">
                       <div
-                        className={`modalPrev mr-[60px] flex justify-center items-center ${styles.swiperArrow}`}
+                        className={`modalPrev mr-[60px] `}
                         onMouseEnter={() => {
                           setHovered(false);
                         }}
@@ -102,14 +102,18 @@ function HallOfFlameModal({
                           setHovered(true);
                         }}
                       >
-                        <LeftArrow hovered={hovered} />
+                        <div
+                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                        >
+                          <LeftArrow hovered={hovered} />
+                        </div>
                       </div>
                       <Card
                         cardDetails={ele}
                         showCollectModal={() => onCollectNow(ele)}
                       />
                       <div
-                        className={`modalNext ml-[60px] flex justify-center items-center ${styles.swiperArrow}`}
+                        className={`modalNext ml-[60px]`}
                         onMouseEnter={() => {
                           setHovered(false);
                         }}
@@ -117,7 +121,11 @@ function HallOfFlameModal({
                           setHovered(true);
                         }}
                       >
-                        <RightArrow hovered={hovered} />
+                        <div
+                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                        >
+                          <RightArrow hovered={hovered} />
+                        </div>
                       </div>
                     </div>
                     {/* <div
