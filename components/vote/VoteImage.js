@@ -18,6 +18,7 @@ import CollectIconSvg from "./svg/CollectIconSvg";
 import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
+import OnBoarding from "../OnBoarding";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -327,7 +328,17 @@ export default function VoteImage() {
     Router.push({ pathname: "/collect" });
   };
 
-  return (
+  const [onBoarding, setOnBoarding] = React.useState(true);
+  let onBoardingKey;
+  React.useEffect(() => {
+    if (localStorage.getItem("onBoardingKey") === "false") {
+      setOnBoarding(false);
+    }
+  }, []);
+
+  return onBoarding ? (
+    <OnBoarding setOnBoarding={setOnBoarding} />
+  ) : (
     <div className="flex items-center justify-center flex-col">
       <TrendingThemeDefault
         selectedTheme={selectedTheme}

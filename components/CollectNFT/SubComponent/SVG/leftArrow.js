@@ -1,6 +1,6 @@
 import React from "react";
 
-function LeftArrow(props) {
+function LeftArrow({ hovered }) {
   return (
     <div>
       <svg
@@ -13,7 +13,7 @@ function LeftArrow(props) {
         <path
           d="M28.75 36.4167L15.3333 23L28.75 9.58334"
           stroke="white"
-          strokeOpacity="0.8"
+          strokeOpacity={hovered ? "1" : "0.8"}
           strokeWidth="4"
           strokeLinecap="round"
           strokeLinejoin="round"

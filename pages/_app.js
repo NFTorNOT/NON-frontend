@@ -1,6 +1,10 @@
 import "../styles/globals.scss";
 import Layout from "../components/Layout";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  connectorsForWallets,
+  getDefaultWallets,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
@@ -9,6 +13,12 @@ import { AuthProvider } from "../context/AuthContext";
 import { BottomTabProvider } from "../context/BottomTabContext";
 import { UserProvider } from "../context/UserContext";
 import { CollectedNFTModalProvider } from "../context/CollectedNFTModalContext";
+import { OnboardingProvider } from "../context/OnboardingContext";
+import {
+  injectedWallet,
+  metaMaskWallet,
+  coinbaseWallet,
+} from "@rainbow-me/rainbowkit/wallets";
 
 function App({ Component, pageProps }) {
   const { chains, provider } = configureChains(
@@ -19,10 +29,23 @@ function App({ Component, pageProps }) {
     ]
   );
 
-  const { connectors } = getDefaultWallets({
-    appName: "NFT or Not",
-    chains,
-  });
+  // const { connectors } = getDefaultWallets({
+  //   appName: "NFT or Not",
+  //   chains,
+  // });
+
+  const connectors = connectorsForWallets([
+    {
+      groupName: "NFT or Not",
+      wallets: [
+        // injectedWallet({ chains }),
+        metaMaskWallet({ chains }),
+        coinbaseWallet({ chains }),
+        // rainbowWallet({ chains }),
+        // walletConnectWallet({ chains }),
+      ],
+    },
+  ]);
 
   const wagmiClient = createClient({
     autoConnect: true,
@@ -34,6 +57,7 @@ function App({ Component, pageProps }) {
       <RainbowKitProvider chains={chains}>
         <AuthProvider>
           <UserProvider>
+            {/* <OnboardingProvider> */}
             <BottomTabProvider>
               <CollectedNFTModalProvider>
                 <Layout>
@@ -41,6 +65,7 @@ function App({ Component, pageProps }) {
                 </Layout>
               </CollectedNFTModalProvider>
             </BottomTabProvider>
+            {/* </OnboardingProvider> */}
           </UserProvider>
         </AuthProvider>
       </RainbowKitProvider>

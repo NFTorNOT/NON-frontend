@@ -17,6 +17,7 @@ function HallOfFlameModal({
   onCollectNow,
 }) {
   const Themes = TRENDING_THEMES;
+  const [hovered, setHovered] = React.useState(false);
   return shown ? (
     <div
       className={styles.modalBackdrop}
@@ -92,15 +93,39 @@ function HallOfFlameModal({
                     </div>
 
                     <div className="flex items-center justify-center">
-                      <div className="modalPrev mr-[60px]">
-                        <LeftArrow />
+                      <div
+                        className={`modalPrev mr-[60px] `}
+                        onMouseEnter={() => {
+                          setHovered(false);
+                        }}
+                        onMouseLeave={() => {
+                          setHovered(true);
+                        }}
+                      >
+                        <div
+                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                        >
+                          <LeftArrow hovered={hovered} />
+                        </div>
                       </div>
                       <Card
                         cardDetails={ele}
                         showCollectModal={() => onCollectNow(ele)}
                       />
-                      <div className="modalNext ml-[60px]">
-                        <RightArrow />
+                      <div
+                        className={`modalNext ml-[60px]`}
+                        onMouseEnter={() => {
+                          setHovered(false);
+                        }}
+                        onMouseLeave={() => {
+                          setHovered(true);
+                        }}
+                      >
+                        <div
+                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                        >
+                          <RightArrow hovered={hovered} />
+                        </div>
                       </div>
                     </div>
                     {/* <div
