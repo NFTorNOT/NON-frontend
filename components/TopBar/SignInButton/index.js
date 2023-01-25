@@ -248,7 +248,6 @@ export default function SignInButton({
             onClose={() => setShouldShowEnableDispatcherModal(false)}
           />
         ) : null}
-        <AboutLens isOpen={isSignInModalOpen} />
         <OpenClaimedHandleModal
           isOpen={shouldShowClaimedHandleModal}
           onRequestClose={() => {

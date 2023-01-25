@@ -4,6 +4,7 @@ import ShowPromptSvg from "../vote/svg/showPromptSvg";
 import HidePromptSvg from "../vote/svg/hidePromptSvg";
 import styles from "./Card.module.scss";
 import Collect from "../CollectNFT/SubComponent/SVG/collect";
+import Image from "next/image";
 
 export default function Card({ cardDetails, showCollectModal }) {
   const hoverWrapperRef = useRef();
@@ -88,6 +89,12 @@ export default function Card({ cardDetails, showCollectModal }) {
     }
   };
 
+  const ViewOnLensClick = () => {
+    let viewLensUrl =
+      "https://testnet.lenster.xyz/posts/" + cardDetails?.lensPublicationId;
+    window.open(viewLensUrl, "_blank");
+  };
+
   useEffect(() => {
     const titleHeight = titleWrapperRef.current?.clientHeight;
     const wrapHeight = bioParentWrapperRef.current?.clientHeight;
@@ -144,7 +151,10 @@ export default function Card({ cardDetails, showCollectModal }) {
             {cardDetails.title}
           </div>
           <div className="text-[#ffffff] flex items-center">
-            <div className={`cursor-pointer ${styles.lensSvg}`}>
+            <div
+              className={`cursor-pointer ${styles.lensSvg}`}
+              onClick={ViewOnLensClick}
+            >
               <LensSvg />
             </div>
           </div>
@@ -189,6 +199,21 @@ export default function Card({ cardDetails, showCollectModal }) {
               : "Collect Now"}
           </span>
         </button>
+      </div>
+      <div
+        className={` absolute top-[16px] rounded-[4px] right-[16px] bg-black/60 px-[8px] py-[6px] flex gap-[5px] items-center`}
+      >
+        <span>
+          <Image
+            src="https://static.plgworks.com/assets/images/non/flame-icon.png"
+            alt="Lens Icon"
+            width="19"
+            height="19"
+          />
+        </span>
+        <span className="font-medium text-[16px] leading-[26px] text-[#ffffff] ml-[3px]">
+          {cardDetails.totalVotes}
+        </span>
       </div>
     </div>
   );

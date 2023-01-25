@@ -31,7 +31,6 @@
   backdrop-filter: blur(8px);
   border-radius: 4px;
   width: 208px;
-
   justify-self: end;
 }
 .bb {
@@ -44,7 +43,6 @@
   border-radius: 8px;
   width: 320px;
   height: 140px;
-
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(60px);
   border-radius: 8px;
@@ -57,7 +55,6 @@
   font-size: 14px;
   line-height: 160%;
   color: rgba(255, 255, 255, 0.6);
-
   text-align: left;
 }
 
@@ -80,11 +77,9 @@
   line-height: 160%;
   text-decoration-line: underline;
   color: #ffffff;
-
   align-items: center;
   justify-content: left;
   grid-gap: 8px;
-
   span {
     text-decoration: none;
   }
@@ -95,7 +90,6 @@
   left: 0;
   top: 0;
   z-index: 100;
-  // background-color: red;
   width: 100%;
   height: 100%;
   display: grid;
