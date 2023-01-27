@@ -4,6 +4,7 @@ import HotOrNot from "../vote/svg/HotOrNot";
 import { LensIconSvg } from "../vote/svg/LensIconSvg";
 import FireSmallSvg from "../vote/svg/FirstTimeUser/FireSmallSvg";
 import styles from "./OnBoarding.module.scss";
+import FireSmallGreySvy from "../vote/svg/FirstTimeUser/FireSmallGreySvg";
 
 function OnboardingContent(props) {
   const onBoardingDetailsArray = props.onBoardingDetailsArray;
@@ -70,10 +71,12 @@ function OnboardingContent(props) {
               <div className={styles.subHeading}>
                 {onBoardingDetailsArray.subTitle}
               </div>
-              <div className={styles.nextCardBtnText}>
+              <div className={`flex ${styles.nextCardBtnText}`}>
+                Click
+                <FireSmallGreySvy />
                 {index === 0
-                  ? "Click to get started →"
-                  : "Click to move to the next card →"}
+                  ? " to get started →"
+                  : " to move to the next card →"}
               </div>
             </>
           )}
