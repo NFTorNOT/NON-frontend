@@ -28,7 +28,7 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
-  const maxCount = 2;
+  const maxCount = 10;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [
@@ -36,6 +36,8 @@ export default function VoteImage() {
     setShouldShowWhatIsTrendingThemeModal,
   ] = useState(false);
   const [data, setData] = useState([]);
+  const cardsLeft = 10;
+  const [totalCards, setTotalCards] = useState(cardsLeft);
   const allTrendingThemes = useRef([]);
 
   const { isUserLoggedIn } = useAuthContext();
@@ -248,6 +250,8 @@ export default function VoteImage() {
   };
 
   const swiped = async (dir) => {
+    setCount(count - 1);
+    setTotalCards(totalCards - 1);
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
       setCount(maxCount);
@@ -385,6 +389,9 @@ export default function VoteImage() {
                 className={`absolute pressable  ${styles.voteCard}`}
               >
                 <VoteCard character={character}></VoteCard>
+                {/* <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+                  {totalCards} left
+                </div> */}
               </div>
             ))}
 

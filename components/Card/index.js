@@ -190,7 +190,7 @@ export default function Card({ cardDetails, showCollectModal }) {
             <Collect />
           </span>
           <span className="font-normal text-[16px] leading-[26px] ml-[8px]">
-            {cardDetails.hasCollected ? "Collect again" : "Collect Now"}
+            {cardDetails.hasCollected ? "Collect Again" : "Collect Now"}
           </span>
         </button>
       </div>

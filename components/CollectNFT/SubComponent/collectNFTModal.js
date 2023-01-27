@@ -15,7 +15,7 @@ function CollectNFTModal({ shown, close, modalData }) {
   const [isLoading, setIsLoading] = useState(false);
   const [apierror, setApiError] = useState("");
   const [isNftCollected, setIsNftCollected] = useState(false);
-  const [collectAgain, setCollectAgain] = useState(false);
+  const [collectAgain, setCollectAgain] = useState(true);
   const isNftCollectedByMe = useRef();
   const { signTypedDataAsync, isError } = useSignTypedData();
   const { data: signer } = useSigner();
@@ -239,8 +239,17 @@ function CollectNFTModal({ shown, close, modalData }) {
               <span className="ml-[12px]">{totalCollects} Collectors</span>
             </div>
 
-            {isNftCollected ? (
-              collectAgain ? (
+            {collectAgain ? (
+              isLoading ? (
+                <div
+                  className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
+                >
+                  <span>
+                    <Collect />
+                  </span>
+                  <span className="pl-[11px]">Collecting...</span>
+                </div>
+              ) : (
                 <button
                   className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
                   onClick={() => collectPost()}
@@ -248,32 +257,18 @@ function CollectNFTModal({ shown, close, modalData }) {
                   <span>
                     <Collect />
                   </span>
-                  {isLoading ? (
-                    <span className="pl-[11px]">Collecting...</span>
-                  ) : (
+                  {isNftCollected ? (
                     <span className="pl-[11px]">Collect Again</span>
+                  ) : (
+                    <span className="pl-[11px]">Collect Now</span>
                   )}
                 </button>
-              ) : (
-                <span className="pl-[11px] flex justify-center gap-[8px] py-[7px] mt-[20px]">
-                  {" "}
-                  <Collect /> Collected
-                </span>
               )
             ) : (
-              <button
-                className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
-                onClick={() => collectPost()}
-              >
-                <span>
-                  <Collect />
-                </span>
-                {isLoading ? (
-                  <span className="pl-[11px]">Collecting...</span>
-                ) : (
-                  <span className="pl-[11px]">Collect now</span>
-                )}
-              </button>
+              <span className="pl-[11px] flex justify-center gap-[8px] py-[7px] mt-[20px]">
+                {" "}
+                <Collect /> Collected
+              </span>
             )}
           </>
         ) : null}
