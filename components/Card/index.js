@@ -95,6 +95,11 @@ export default function Card({ cardDetails, showCollectModal }) {
     window.open(viewLensUrl, "_blank");
   };
 
+  const ViewProfileonLens = () => {
+    let viewLensUrl = "https://testnet.lenster.xyz/u/" + cardDetails?.handle;
+    window.open(viewLensUrl, "_blank");
+  };
+
   useEffect(() => {
     const titleHeight = titleWrapperRef.current?.clientHeight;
     const wrapHeight = bioParentWrapperRef.current?.clientHeight;
@@ -161,7 +166,12 @@ export default function Card({ cardDetails, showCollectModal }) {
         </div>
 
         <div className={`${styles.showPrompt}`} ref={handleWrapperRef}>
-          <div className={styles.id}>@{cardDetails.handle}</div>
+          <div
+            className={`${styles.id} hover:text-[#adff00] cursor-pointer`}
+            onClick={ViewProfileonLens}
+          >
+            @{cardDetails.handle}
+          </div>
           <div
             className="text-white text-opacity-60 cursor-pointer transition flex items-center gap-1"
             onClick={togglePrompt}
