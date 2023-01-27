@@ -131,86 +131,84 @@ export default function Card({ cardDetails, showCollectModal }) {
   }, [showPrompt]);
 
   return (
-    <>
+    <div
+      className={`${styles.card}`}
+      style={{ backgroundImage: `url(${cardDetails.image})` }}
+      ref={hoverWrapperRef}
+      onMouseEnter={cardTransHover}
+      onMouseLeave={cardTransOut}
+    >
       <div
-        className={`${styles.card}`}
-        style={{ backgroundImage: `url(${cardDetails.image})` }}
-        ref={hoverWrapperRef}
-        onMouseEnter={cardTransHover}
-        onMouseLeave={cardTransOut}
+        className={`${styles.card_title_overlay}`}
+        ref={bioParentWrapperRef}
+        style={{ transform: `translateY(${wrapperTransY}px)` }}
       >
         <div
-          className={`${styles.card_title_overlay}`}
-          ref={bioParentWrapperRef}
-          style={{ transform: `translateY(${wrapperTransY}px)` }}
+          className={`${styles.card_title} flex justify-between items-center`}
+          ref={titleWrapperRef}
         >
-          <div
-            className={`${styles.card_title} flex justify-between items-center`}
-            ref={titleWrapperRef}
-          >
-            <div className={`${styles.card_title_text} mr-[25px]`}>
-              {cardDetails.title}
-            </div>
-            <div className="text-[#ffffff] flex items-center">
-              <div
-                className={`cursor-pointer ${styles.lensSvg}`}
-                onClick={ViewOnLensClick}
-              >
-                <LensSvg />
-              </div>
+          <div className={`${styles.card_title_text} mr-[25px]`}>
+            {cardDetails.title}
+          </div>
+          <div className="text-[#ffffff] flex items-center">
+            <div
+              className={`cursor-pointer ${styles.lensSvg}`}
+              onClick={ViewOnLensClick}
+            >
+              <LensSvg />
             </div>
           </div>
-
-          <div className={`${styles.showPrompt}`} ref={handleWrapperRef}>
-            <div className={styles.id}>@{cardDetails.handle}</div>
-            <div
-              className="text-white text-opacity-60 cursor-pointer transition flex items-center gap-1"
-              onClick={togglePrompt}
-            >
-              {promtStatusIcon} {promtStatusText}
-            </div>
-          </div>
-
-          {showPrompt ? (
-            <div
-              className={`${styles.description} flex items-center justify-between`}
-              ref={descriptionWrapperRef}
-            >
-              {cardDetails.description}
-            </div>
-          ) : null}
-          <button
-            ref={collectButtonRef}
-            className={`${styles.collectButton}  flex items-center justify-center`}
-            onClick={() => {
-              // showModal(ele);
-              showCollectModal(cardDetails);
-            }}
-          >
-            <span>
-              <Collect />
-            </span>
-            <span className="font-normal text-[16px] leading-[26px] ml-[8px]">
-              {cardDetails.hasCollected ? "Collect again" : "Collect Now"}
-            </span>
-          </button>
         </div>
-        <div
-          className={` absolute top-[16px] rounded-[4px] right-[16px] bg-black/60 px-[8px] py-[6px] flex gap-[5px] items-center`}
+
+        <div className={`${styles.showPrompt}`} ref={handleWrapperRef}>
+          <div className={styles.id}>@{cardDetails.handle}</div>
+          <div
+            className="text-white text-opacity-60 cursor-pointer transition flex items-center gap-1"
+            onClick={togglePrompt}
+          >
+            {promtStatusIcon} {promtStatusText}
+          </div>
+        </div>
+
+        {showPrompt ? (
+          <div
+            className={`${styles.description} flex items-center justify-between`}
+            ref={descriptionWrapperRef}
+          >
+            {cardDetails.description}
+          </div>
+        ) : null}
+        <button
+          ref={collectButtonRef}
+          className={`${styles.collectButton}  flex items-center justify-center`}
+          onClick={() => {
+            // showModal(ele);
+            showCollectModal(cardDetails);
+          }}
         >
           <span>
-            <Image
-              src="https://static.plgworks.com/assets/images/non/flame-icon.png"
-              alt="Lens Icon"
-              width="19"
-              height="19"
-            />
+            <Collect />
           </span>
-          <span className="font-medium text-[16px] leading-[26px] text-[#ffffff] ml-[3px]">
-            {cardDetails.totalVotes}
+          <span className="font-normal text-[16px] leading-[26px] ml-[8px]">
+            {cardDetails.hasCollected ? "Collect again" : "Collect Now"}
           </span>
-        </div>
+        </button>
       </div>
-    </>
+      <div
+        className={` absolute top-[16px] rounded-[4px] right-[16px] bg-black/60 px-[8px] py-[6px] flex gap-[5px] items-center`}
+      >
+        <span>
+          <Image
+            src="https://static.plgworks.com/assets/images/non/flame-icon.png"
+            alt="Lens Icon"
+            width="19"
+            height="19"
+          />
+        </span>
+        <span className="font-medium text-[16px] leading-[26px] text-[#ffffff] ml-[3px]">
+          {cardDetails.totalVotes}
+        </span>
+      </div>
+    </div>
   );
 }

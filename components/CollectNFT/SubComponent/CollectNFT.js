@@ -195,6 +195,7 @@ function CollectNFT(props) {
             allData.current.map((ele, index) => {
               return (
                 <Card
+                  key={index}
                   cardDetails={ele}
                   showCollectModal={() => showModal(ele)}
                 />

@@ -176,8 +176,8 @@ function Fire(props) {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(41.0005 41.7205) rotate(-90) scale(23.24 19.396)"
           >
-            <stop stop-color="#FA5C00" />
-            <stop offset="1" stop-color="#FAB400" />
+            <stop stopColor="#FA5C00" />
+            <stop offset="1" stopColor="#FAB400" />
           </radialGradient>
           <radialGradient
             id="paint1_radial_2208_14157"
@@ -187,8 +187,8 @@ function Fire(props) {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(40.9918 40.5022) rotate(-90) scale(21.0281 17.55)"
           >
-            <stop stop-color="#FA5C00" />
-            <stop offset="1" stop-color="#FFB800" />
+            <stop stopColor="#FA5C00" />
+            <stop offset="1" stopColor="#FFB800" />
           </radialGradient>
           <radialGradient
             id="paint2_radial_2208_14157"
@@ -198,8 +198,8 @@ function Fire(props) {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(42.7652 28.0943) rotate(-154.525) scale(2.72241 8.50731)"
           >
-            <stop stop-color="#FA5C00" />
-            <stop offset="1" stop-color="#FFB800" />
+            <stop stopColor="#FA5C00" />
+            <stop offset="1" stopColor="#FFB800" />
           </radialGradient>
         </defs>
       </svg>

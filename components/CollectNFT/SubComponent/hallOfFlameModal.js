@@ -17,7 +17,6 @@ function HallOfFlameModal({
   onCollectNow,
 }) {
   const Themes = TRENDING_THEMES;
-  const [hovered, setHovered] = React.useState(false);
   return shown ? (
     <div
       className={styles.modalBackdrop}
@@ -72,7 +71,7 @@ function HallOfFlameModal({
                       {Themes.length > 0 &&
                         Themes.map((item, index) => {
                           return (
-                            <>
+                            <div key={index}>
                               <span
                                 className={`${
                                   ele?.theme?.name == item.name
@@ -87,44 +86,28 @@ function HallOfFlameModal({
                                   className={`${styles.dot} mx-[10px]`}
                                 ></span>
                               ) : null}
-                            </>
+                            </div>
                           );
                         })}
                     </div>
 
                     <div className="flex items-center justify-center">
-                      <div
-                        className={`modalPrev mr-[60px] `}
-                        onMouseEnter={() => {
-                          setHovered(false);
-                        }}
-                        onMouseLeave={() => {
-                          setHovered(true);
-                        }}
-                      >
+                      <div className={`modalPrev mr-[60px] `}>
                         <div
                           className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
                         >
-                          <LeftArrow hovered={hovered} />
+                          <LeftArrow />
                         </div>
                       </div>
                       <Card
                         cardDetails={ele}
                         showCollectModal={() => onCollectNow(ele)}
                       />
-                      <div
-                        className={`modalNext ml-[60px]`}
-                        onMouseEnter={() => {
-                          setHovered(false);
-                        }}
-                        onMouseLeave={() => {
-                          setHovered(true);
-                        }}
-                      >
+                      <div className={`modalNext ml-[60px]`}>
                         <div
                           className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
                         >
-                          <RightArrow hovered={hovered} />
+                          <RightArrow />
                         </div>
                       </div>
                     </div>

@@ -134,7 +134,10 @@ function OnBoarding({ setOnBoarding }) {
         >
           {data.length > 0 &&
             data.map((onBoardingDetailsArray, index) => (
-              <div className={`absolute pressable  ${styles.voteCard}`}>
+              <div
+                key={index}
+                className={`absolute pressable  ${styles.voteCard}`}
+              >
                 <OnboardingContent
                   index={index}
                   onBoardingDetailsArray={onBoardingDetailsArray}
@@ -184,7 +187,6 @@ function OnBoarding({ setOnBoarding }) {
                 setTimeout(() => {
                   setIsHotButtonClicked(false);
                 }, 2000);
-                console.log("data length", data.length);
                 if (data.length === 1) {
                   window.localStorage.setItem("onBoardingKey", false);
                   setOnBoarding(false);

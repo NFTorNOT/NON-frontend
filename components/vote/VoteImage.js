@@ -380,7 +380,10 @@ export default function VoteImage() {
         >
           {data.length > 0 &&
             data.map((character, index) => (
-              <div className={`absolute pressable  ${styles.voteCard}`}>
+              <div
+                key={index}
+                className={`absolute pressable  ${styles.voteCard}`}
+              >
                 <VoteCard character={character}></VoteCard>
               </div>
             ))}
