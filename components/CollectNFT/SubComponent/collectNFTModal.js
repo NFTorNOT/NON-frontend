@@ -15,6 +15,7 @@ function CollectNFTModal({ shown, close, modalData }) {
   const [isLoading, setIsLoading] = useState(false);
   const [apierror, setApiError] = useState("");
   const [isNftCollected, setIsNftCollected] = useState(false);
+  const [collectAgain, setCollectAgain] = useState(false);
   const isNftCollectedByMe = useRef();
   const { signTypedDataAsync, isError } = useSignTypedData();
   const { data: signer } = useSigner();
@@ -78,9 +79,9 @@ function CollectNFTModal({ shown, close, modalData }) {
 
   async function collectPost() {
     try {
-      if (isNftCollected) {
-        return;
-      }
+      // if (isNftCollected) {
+      //   return;
+      // }
       setApiError("");
       setIsLoading(true);
       const collectTypedDataResponse = await CollectApi.createCollectTypedData({
@@ -114,8 +115,14 @@ function CollectNFTModal({ shown, close, modalData }) {
           collect_nft_transaction_hash: res.txHash,
         });
         if (collectApiRes.data.success) {
+          fetchPublicationData();
           setIsNftCollected(true);
           setIsLoading(false);
+          setCollectAgain(false);
+          setTimeout(() => {
+            setIsNftCollected(true);
+            setCollectAgain(true);
+          }, 3000);
         }
       }
     } catch (error) {
@@ -231,37 +238,28 @@ function CollectNFTModal({ shown, close, modalData }) {
               </span>
               <span className="ml-[12px]">{totalCollects} Collectors</span>
             </div>
-            {modalData?.hasCollected || isNftCollectedByMe.current ? (
-              // <button
-              //   className={`${styles.alreadyCollectedButton} flex items-center justify-center py-[7px]`}
-              // >
-              //   <span>
-              //     <Collect />
-              //   </span>
-              //   <span className="font-bold text-[16px] leading-[26px] ml-[8px]">
-              //     You have already collected this
-              //   </span>
-              // </button>
-              <button
-                className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
-                onClick={() => collectPost()}
-              >
-                <span>
-                  <Collect />
+
+            {isNftCollected ? (
+              collectAgain ? (
+                <button
+                  className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
+                  onClick={() => collectPost()}
+                >
+                  <span>
+                    <Collect />
+                  </span>
+                  {isLoading ? (
+                    <span className="pl-[11px]">Collecting...</span>
+                  ) : (
+                    <span className="pl-[11px]">Collect Again</span>
+                  )}
+                </button>
+              ) : (
+                <span className="pl-[11px] flex justify-center gap-[8px] py-[7px] mt-[20px]">
+                  {" "}
+                  <Collect /> Collected
                 </span>
-                {isLoading ? (
-                  <span className="pl-[11px]">Collecting...</span>
-                ) : isNftCollected ? (
-                  <span className="pl-[11px]">Collected</span>
-                ) : (
-                  <span className="pl-[11px]">Collect Again</span>
-                )}
-              </button>
-            ) : isNftCollected ? (
-              <span className="pl-[11px]">
-                {" "}
-                <Collect /> Collected
-              </span>
+              )
             ) : (
               <button
                 className={`${styles.collectButton} flex items-center justify-center py-[7px] mt-[20px]`}
@@ -273,10 +271,10 @@ function CollectNFTModal({ shown, close, modalData }) {
                 {isLoading ? (
                   <span className="pl-[11px]">Collecting...</span>
                 ) : (
-                  <span className="pl-[11px]">Collect Now</span>
+                  <span className="pl-[11px]">Collect now</span>
                 )}
               </button>
-            )}{" "}
+            )}
           </>
         ) : null}
       </div>

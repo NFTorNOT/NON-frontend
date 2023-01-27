@@ -31,7 +31,8 @@ function OnboardingContent(props) {
                 {onBoardingDetailsArray.title}
               </div>
               <div className={styles.subHeading}>
-                Click <FireSmallSvg /> to move to the next card
+                Click <FireSmallSvg height={26} width={24} /> to move to the
+                next card
               </div>
               <div className="absolute w-[104px] h-[143px] top-[383px]">
                 {onBoardingDetailsArray.type === "gif" ? (

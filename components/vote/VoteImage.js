@@ -28,6 +28,8 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
+  const maxCount = 2;
+  const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [
     shouldShowWhatIsTremdingThemeModal,
@@ -215,10 +217,11 @@ export default function VoteImage() {
   }
 
   const submitVote = (dir) => {
-    // if (!isUserLoggedIn) {
-    //   setShouldShowSignInModal(true);
-    //   return;
-    // }
+    if (!isUserLoggedIn && count === 0) {
+      setShouldShowSignInModal(true);
+      setCount(maxCount);
+      return;
+    }
     if (isVoteInProgress.current) {
       return;
     }
@@ -245,10 +248,11 @@ export default function VoteImage() {
   };
 
   const swiped = async (dir) => {
-    // if (!isUserLoggedIn) {
-    //   setShouldShowSignInModal(true);
-    //   return;
-    // }
+    if (!isUserLoggedIn && count === 0) {
+      setShouldShowSignInModal(true);
+      setCount(maxCount);
+      return;
+    }
 
     animatecard(dir);
     setTimeout(async () => {
@@ -362,6 +366,7 @@ export default function VoteImage() {
         <CustomSignInModal
           isOpen={shouldShowSignInModal}
           onRequestClose={() => setShouldShowSignInModal(false)}
+          pageInfo={"votePage"}
         />
 
         <TrendingThemeModal
@@ -404,10 +409,12 @@ export default function VoteImage() {
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
               onClick={() => {
-                // if (!isUserLoggedIn) {
-                //   setShouldShowSignInModal(true);
-                //   return;
-                // }
+                setCount(count - 1);
+                if (!isUserLoggedIn && count === 0) {
+                  setShouldShowSignInModal(true);
+                  setCount(maxCount);
+                  return;
+                }
                 swiped("left");
                 setIsNotButtonClicked(true);
                 setTimeout(() => {
@@ -435,10 +442,12 @@ export default function VoteImage() {
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
               onClick={() => {
-                // if (!isUserLoggedIn) {
-                //   setShouldShowSignInModal(true);
-                //   return;
-                // }
+                setCount(count - 1);
+                if (!isUserLoggedIn && count === 0) {
+                  setShouldShowSignInModal(true);
+                  setCount(maxCount);
+                  return;
+                }
                 swiped("right");
                 setIsHotButtonClicked(true);
                 setTimeout(() => {

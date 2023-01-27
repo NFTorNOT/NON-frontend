@@ -5,8 +5,9 @@ import SignInButton from "../TopBar/SignInButton";
 import CheckedCircle from "../SignInModal/CheckedCircle";
 import { useAccount } from "wagmi";
 import CustomConnectButton from "../TopBar/SignInButton/CustomConnectButton";
+import FireSmallSvg from "../vote/svg/FirstTimeUser/FireSmallSvg";
 Modal.setAppElement("*");
-const CustomSignInModal = ({ onRequestClose, isOpen }) => {
+const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo }) => {
   const { isConnected } = useAccount();
   const [shouldCallSignInMethod, setShouldCallSignInMethopd] = useState(false);
   const isPreviouslyConnected = useRef(isConnected);
@@ -44,7 +45,7 @@ const CustomSignInModal = ({ onRequestClose, isOpen }) => {
   return (
     <Modal onRequestClose={onRequestClose} isOpen={isOpen} style={customStyles}>
       <div
-        className={`flex flex-col justify-start items-start rounded-[16px] backdrop-blur-3xl  ${styles.ModalContainer}`}
+        className={`flex flex-col justify-center items-center rounded-[16px] backdrop-blur-3xl  ${styles.ModalContainer}`}
       >
         {!isConnected ? (
           <CustomConnectButton />
@@ -56,6 +57,14 @@ const CustomSignInModal = ({ onRequestClose, isOpen }) => {
             key={isConnected}
             isWalletConnected={shouldCallSignInMethod}
           />
+        )}
+        {pageInfo === "votePage" && (
+          <div className="flex relative -top-[12px] justify-center gap-[4px] items-center text-[12px] leading-[160%] font-medium text-white/60">
+            and
+            <span className="flex justify-center items-center text-[12px] leading-[160%] font-medium text-white/80 ">
+              Save your <FireSmallSvg height={18} width={16} /> votes now
+            </span>
+          </div>
         )}
         <div
           className={`flex justify-start flex-col gap-[12px] not-italic text-[12px] font-medium ${styles.LensInfo}`}
@@ -72,7 +81,7 @@ const CustomSignInModal = ({ onRequestClose, isOpen }) => {
             <CheckedCircle />
             Collect other NFTs
           </div>
-          <div className="flex justify-start items-center text-[13px] leading-[160%] font-medium text-[rgba(255, 255, 255, 0.8)]">
+          <div className="flex justify-start items-center text-[13px] leading-[160%] font-medium text-white/80">
             New to Lens?
             <span
               className="underline cursor-pointer ml-2 text-[#ADFF00]"
@@ -84,6 +93,17 @@ const CustomSignInModal = ({ onRequestClose, isOpen }) => {
             </span>
           </div>
         </div>
+        {pageInfo === "votePage" && (
+          <div className="flex flex-col justify-center gap-[4px] items-center text-[12px] leading-[160%] font-medium text-white/60">
+            or
+            <span
+              className="flex hover:underline justify-center items-center text-[12px] leading-[160%] font-medium text-white/80 cursor-pointer"
+              onClick={onRequestClose}
+            >
+              Continue without signing in
+            </span>
+          </div>
+        )}
       </div>
     </Modal>
   );
