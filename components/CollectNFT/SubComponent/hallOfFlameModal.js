@@ -8,6 +8,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Navigation } from "swiper";
 import { TRENDING_THEMES } from "../../../utils/Constants";
 import Card from "../../Card";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 function HallOfFlameModal({
   shown,
@@ -32,7 +33,7 @@ function HallOfFlameModal({
           e.stopPropagation();
         }}
       >
-        <button onClick={close} className="absolute top-0 right-0">
+        <button onClick={close} className="absolute top-[10px] right-[10px]">
           <HofCross />
         </button>
 
@@ -90,19 +91,22 @@ function HallOfFlameModal({
                           );
                         })}
                     </div>
-
-                    <div className="flex items-center justify-center">
-                      <div className="modalPrev mr-[60px]">
-                        <LeftArrow />
+                      <div className="flex items-center justify-center">
+                        <div className="modalPrev mr-[60px]">
+                          <LeftArrow />
+                        </div>
+                    <OutsideClickHandler
+                      onOutsideClick={() => {close(); console.log("Done")}}
+                    >
+                        <Card
+                          cardDetails={ele}
+                          showCollectModal={() => onCollectNow(ele)}
+                        />
+                    </OutsideClickHandler>
+                        <div className="modalNext ml-[60px]">
+                          <RightArrow />
+                        </div>
                       </div>
-                      <Card
-                        cardDetails={ele}
-                        showCollectModal={() => onCollectNow(ele)}
-                      />
-                      <div className="modalNext ml-[60px]">
-                        <RightArrow />
-                      </div>
-                    </div>
                     {/* <div
                       className={`${styles.card} flex items-center justify-center mt-[20px]`}
                       style={{

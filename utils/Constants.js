@@ -33,10 +33,10 @@ export const TRENDING_THEMES = [
     id: 3,
     name: "magical",
   },
-  {
-    id: 4,
-    name: "other",
-  },
+  // {
+  //   id: 4,
+  //   name: "other",
+  // },
 ];
 
 export const CURRENT_TRENDING_THEMES = [
