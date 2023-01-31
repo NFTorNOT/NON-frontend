@@ -189,7 +189,7 @@ export default function SignInButton({
           return image.id == userDetails.lens_profile_image_id;
         });
 
-        console.log(typeof userDetails, userDetails);
+        // console.log(typeof userDetails, userDetails);
 
         userDetails.imageUrl = userImage?.url ? "" : userImage?.url;
         SessionHelper.handleSessionTokens({
@@ -212,12 +212,12 @@ export default function SignInButton({
     }
   }
 
-  console.log({ isWalletConnected });
+  // console.log({ isWalletConnected });
   if (isWalletConnected) {
     onSignIn();
   }
 
-  console.log({ shouldShowClaimedHandleModal, isWalletConnected });
+  // console.log({ shouldShowClaimedHandleModal, isWalletConnected });
 
   return (
     isUserLoggedIn !== undefined && (
@@ -248,7 +248,6 @@ export default function SignInButton({
             onClose={() => setShouldShowEnableDispatcherModal(false)}
           />
         ) : null}
-        <AboutLens isOpen={isSignInModalOpen} />
         <OpenClaimedHandleModal
           isOpen={shouldShowClaimedHandleModal}
           onRequestClose={() => {

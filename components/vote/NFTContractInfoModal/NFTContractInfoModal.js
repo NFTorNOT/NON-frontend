@@ -7,7 +7,7 @@ export default function NFTContractInfoModal({
   ipfsCid,
   txHash,
 }) {
-  console.log({ txHash });
+  // console.log({ txHash });
   if (!visible) {
     return null;
   }

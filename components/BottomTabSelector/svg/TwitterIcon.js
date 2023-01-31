@@ -1,6 +1,6 @@
 import React from "react";
-import styles from './twitterIcon.module.scss';
-const twitterIconStyle = {fill: '#FA5C00'};
+import styles from "./twitterIcon.module.scss";
+const twitterIconStyle = { fill: "#FA5C00" };
 
 function TwitterIcon(props) {
   return (

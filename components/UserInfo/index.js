@@ -35,7 +35,7 @@ export default function UserInfo() {
           return image.id == userDetails.lens_profile_image_id;
         });
 
-        console.log(typeof userDetails, userDetails);
+        // console.log(typeof userDetails, userDetails);
 
         userDetails.imageUrl = userImage?.url ? "" : userImage?.url;
 

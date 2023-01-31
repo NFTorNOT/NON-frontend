@@ -36,7 +36,7 @@ export default function BottomTabSelector() {
   };
 
   const handleGithub = () => {
-    const gitHubUrl = "https://github.com/orgs/NFTorNOT/repositories";
+    const gitHubUrl = "https://github.com/NFTorNOT ";
     window.open(gitHubUrl, "_blank");
   };
 
@@ -98,18 +98,18 @@ export default function BottomTabSelector() {
       ) : null}
       <div className={`${styles.background} grid grid-cols-5 items-center`}>
         <div className="flex items-center mt-[12px] md:mt-0 justify-items-start">
-          <div
+          <button
             className={`${styles.howItWorks} flex items-center justify-start cursor-pointer relative`}
+            onClick={handleHowItWorks}
           >
             <QuestionMarkIcon />
-            <button
-              onClick={handleHowItWorks}
+            <div
               className={`${styles.hiwText} text-[#ffffff] font-medium absolute w-[100px] left-[25px] top-0`}
             >
               How it works
-            </button>
+            </div>
             <div className={styles.hiwSpace}></div>
-          </div>
+          </button>
 
           <TwitterShareButton
             className={`${styles.twitterShare} cursor-pointer ml-[15px] flex`}
@@ -127,19 +127,19 @@ export default function BottomTabSelector() {
             <div className={styles.twitterTextSpace}></div>
           </TwitterShareButton>
 
-          <div
+          <button
             className={`${styles.githubShare} cursor-pointer ml-[15px] flex`}
+            onClick={handleGithub}
           >
             <span className="z-10 pl-[5px]">
               <GithubIcon />
             </span>
-            <button
+            <div
               className={`${styles.githubText} pl-[5px] text-[#ffffff] font-medium`}
-              onClick={handleGithub}
             >
               Github
-            </button>
-          </div>
+            </div>
+          </button>
         </div>
         <div
           className={`${styles.container} w-[640px] h-[56px] m-auto grid grid-cols-3 content-center gap-[8px] p-[8px] md:rounded-[100px] col-span-3 relative z-10`}

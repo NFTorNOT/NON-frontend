@@ -15,7 +15,7 @@ const CollectIconSvg = () => {
           height="4"
           rx="1.5"
           fill="white"
-          fill-opacity="0.01"
+          fillOpacity="0.01"
         />
         <rect
           x="5.25"
@@ -24,8 +24,8 @@ const CollectIconSvg = () => {
           height="5.5"
           rx="2.25"
           stroke="white"
-          stroke-width="1.5"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
         />
       </g>
       <g filter="url(#filter1_b_3774_2481)">
@@ -36,7 +36,7 @@ const CollectIconSvg = () => {
           height="6"
           rx="1.5"
           fill="white"
-          fill-opacity="0.01"
+          fillOpacity="0.01"
         />
         <rect
           x="3.75"
@@ -45,7 +45,7 @@ const CollectIconSvg = () => {
           height="7.5"
           rx="2.25"
           stroke="white"
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
       </g>
       <g filter="url(#filter2_b_3774_2481)">
@@ -56,7 +56,7 @@ const CollectIconSvg = () => {
           height="7"
           rx="1.5"
           fill="white"
-          fill-opacity="0.01"
+          fillOpacity="0.01"
         />
         <rect
           x="2.25"
@@ -65,7 +65,7 @@ const CollectIconSvg = () => {
           height="8.5"
           rx="2.25"
           stroke="white"
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
       </g>
       <defs>
@@ -76,9 +76,9 @@ const CollectIconSvg = () => {
           width="59"
           height="55"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feGaussianBlur in="BackgroundImageFix" stdDeviation="12" />
           <feComposite
             in2="SourceAlpha"
@@ -99,9 +99,9 @@ const CollectIconSvg = () => {
           width="62"
           height="57"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feGaussianBlur in="BackgroundImageFix" stdDeviation="12" />
           <feComposite
             in2="SourceAlpha"
@@ -122,9 +122,9 @@ const CollectIconSvg = () => {
           width="65"
           height="58"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feGaussianBlur in="BackgroundImageFix" stdDeviation="12" />
           <feComposite
             in2="SourceAlpha"

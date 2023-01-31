@@ -179,7 +179,7 @@ const Query = {
 
 class UserApi {
   profiles({ ownedBy }) {
-    console.log({ ownedBy });
+    // console.log({ ownedBy });
     return apolloClient.query({
       query: Query.profiles,
       variables: {

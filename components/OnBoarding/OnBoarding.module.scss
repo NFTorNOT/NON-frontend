@@ -1,3 +1,103 @@
+.card {
+  width: 80vw;
+  position: absolute;
+  max-width: 300px;
+  height: 300px;
+  // box-shadow: 1px 1px 6px 0px rgb(0 0 0 / 30%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-content: end;
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.4), 0px 16px 24px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(60px);
+
+  @media screen and (min-width: 568px) {
+    margin: 0 20px;
+    max-width: 512px;
+    height: 512px;
+  }
+}
+.cardContainer {
+  height: 300px;
+
+  @media screen and (min-width: 568px) {
+    max-width: 300px;
+    width: 90vw;
+    margin: 0 20px;
+    max-width: 512px;
+    height: 512px;
+  }
+}
+
+.voteCards {
+  animation: hot;
+
+  .voteCard {
+    &:last-child {
+      // transform: rotate(0deg) scale(1) !important;
+      transition-delay: 0.25s;
+      transition-duration: 1s;
+    }
+
+    &:nth-last-child(2) {
+      transform: rotate(5deg) scale(0.92) !important;
+      transform-origin: bottom right;
+      transition-delay: 0.25s;
+      transition-duration: 1s;
+    }
+
+    &:nth-last-child(3) {
+      transform: rotate(-5deg) scale(0.92) !important;
+      transform-origin: bottom left;
+      transition-delay: 0.25s;
+      transition-duration: 1s;
+    }
+  }
+}
+
+.buttonClassNot {
+  margin-right: 60px;
+  padding: 8px;
+
+  svg {
+    path {
+      fill-opacity: 1;
+    }
+  }
+
+  &:hover {
+    svg {
+      path {
+        fill-opacity: 0.9;
+      }
+    }
+  }
+}
+
+.buttonClassHot {
+  margin-left: 60px;
+  padding: 8px;
+
+  svg {
+    path {
+      fill-opacity: 1;
+    }
+  }
+
+  &:hover {
+    svg {
+      path {
+        fill-opacity: 0.9;
+      }
+    }
+  }
+}
+
 .onBoardingCard {
   box-sizing: border-box;
   display: flex;
@@ -20,6 +120,8 @@
 .headingContainer {
   display: flex;
   flex-direction: row;
+  position: absolute;
+  top: 43px;
 }
 
 .onBoardingHeading {
@@ -55,7 +157,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.subHeading {
+.heading {
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -70,7 +172,7 @@
   color: #ffffff;
 }
 
-.description {
+.subHeading {
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -89,4 +191,14 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.nextCardBtnText{
+  font-family: 'Satoshi Variable';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 160%;
+    font-feature-settings: 'salt' on;
+    color: rgba(255, 255, 255, 0.2);
 }

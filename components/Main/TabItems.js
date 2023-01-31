@@ -9,20 +9,20 @@ export const TabNames = {
 };
 
 export const TabItems = {
-  [TabNames.NftOfTheDay]: {
-    id: "Collect",
-    tabName: "Collect NFT’s",
-    Component: () => <NFTOfTheDay />,
+  [TabNames.VoteImage]: {
+    id: "Vote",
+    tabName: "Vote",
+    Component: () => <VoteImage />,
   },
   [TabNames.GenerateImage]: {
     id: "SubmitYourOwn",
     tabName: "Submit Your Own",
     Component: () => <GenerateNFT />,
   },
-  [TabNames.VoteImage]: {
-    id: "Vote",
-    tabName: "Vote",
-    Component: () => <VoteImage />,
+  [TabNames.NftOfTheDay]: {
+    id: "Collect",
+    tabName: "Collect NFT’s",
+    Component: () => <NFTOfTheDay />,
   },
 };
 

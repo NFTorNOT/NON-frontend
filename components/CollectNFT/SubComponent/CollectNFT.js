@@ -75,6 +75,7 @@ function CollectNFT(props) {
             hasCollected:
               !!currentUserLensPostRelation?.collect_nft_transaction_hash,
             handle: ownerUser?.lens_profile_username,
+            totalVotes: lensPostDetail?.total_votes,
           };
 
           data.push(postData);
@@ -110,7 +111,7 @@ function CollectNFT(props) {
     const target = event.target;
 
     if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-      console.log("reached end", hasNextPageIdentifier.current);
+      // console.log("reached end", hasNextPageIdentifier.current);
       if (hasNextPageIdentifier.current) {
         fetchCollectData();
       }
@@ -193,6 +194,7 @@ function CollectNFT(props) {
             allData.current.map((ele, index) => {
               return (
                 <Card
+                  key={index}
                   cardDetails={ele}
                   showCollectModal={() => showModal(ele)}
                 />
