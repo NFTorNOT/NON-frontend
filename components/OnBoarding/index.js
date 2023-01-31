@@ -186,7 +186,7 @@ function OnBoarding({ setOnBoarding }) {
               <div
                 className={`${styles.buttonClassNot} ${
                   isNotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <ClickOnHot />
               </div>
@@ -226,7 +226,7 @@ function OnBoarding({ setOnBoarding }) {
               <div
                 className={`${styles.buttonClassHot} ${
                   isHotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <Image
                   src="https://static.plgworks.com/assets/images/non/vote/hotButtonClick.png"
