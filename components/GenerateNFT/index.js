@@ -263,7 +263,7 @@ export default function GenerateNFT() {
         />
         <div className={styles.enter_prompt_container}>
           <>
-            <div>Themes</div>
+            <div className={styles.containerHeadText}>Themes</div>
             <div className={styles.generateText}>
               Select a theme that the prompt describes
             </div>
@@ -279,12 +279,12 @@ export default function GenerateNFT() {
               {trendingThemes.current.map((ele) => {
                 return (
                   <option key={ele?.id} value={ele?.name}>
-                    #{ele?.name}
+                    #{ele?.name.charAt(0).toUpperCase()+ele?.name.substr(1)}
                   </option>
                 );
               })}
             </select>
-            <div className="mt-[24px] mb-[8px]">Enter Prompt</div>
+            <div className={` ${styles.containerHeadText} mt-[24px] mb-[8px]`}>Enter Prompt</div>
             <textarea
               placeholder="Dramatic sky and buildings painting"
               value={prompt}
@@ -294,7 +294,7 @@ export default function GenerateNFT() {
                 setPromt(e.target.value);
               }}
             ></textarea>
-            <div className="mt-[12px] mb-[8px]">Filter</div>
+            <div className={`${styles.containerHeadText} mt-[12px]`}>Filter</div>
             <div className={styles.generateText}>
               Explore various stylistic filters you can apply
             </div>
@@ -325,7 +325,7 @@ export default function GenerateNFT() {
             title="Generate Image"
           >
             <div className="flex flex-row justify-between">
-              <span className={styles.generateText}>Generate Image</span>
+              <span className="not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]">Generate Image</span>
               <div>
                 <MagicIcon />
               </div>
