@@ -440,7 +440,7 @@ export default function VoteImage() {
               <div
                 className={`${styles.buttonClassNot} ${
                   isNotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <ClickOnHot />
               </div>
