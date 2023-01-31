@@ -19,6 +19,9 @@ import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
 import OnBoarding from "../OnBoarding";
+import HoverOnNotSvg from "./svg/HoverOnNotSvg";
+import HoverOnHotSvg from "./svg/HoverOnHotSvg";
+import HotButtonSvg from "./svg/HotButtonSvg";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -29,6 +32,9 @@ export default function VoteImage() {
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
+  const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
+  const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
+
   const [
     shouldShowWhatIsTremdingThemeModal,
     setShouldShowWhatIsTrendingThemeModal,
@@ -403,6 +409,8 @@ export default function VoteImage() {
             <button
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
+              onMouseEnter={() => {setNotActiveToolTip(true)}}
+              onMouseLeave={() => {setNotActiveToolTip(false)}}
               onClick={() => {
                 if (!isUserLoggedIn) {
                   setShouldShowSignInModal(true);
@@ -415,17 +423,24 @@ export default function VoteImage() {
                 }, 2000);
               }}
             >
-              <div
-                className={`${styles.buttonClassNot} ${
-                  !isNotButtonClicked ? `block` : `hidden`
-                } m-[8px]`}
-              >
-                <Not />
-              </div>
+                <div
+                  className={`${styles.buttonClassNot} ${
+                    !isNotButtonClicked && !NotactiveToolTip? `block` : `hidden`
+                  } m-[8px]`}
+                >
+                  <Not /> 
+                </div>
+
+                {NotactiveToolTip && !isNotButtonClicked && (
+                  <div className={`${styles.buttonClassNot} m-[8px]`}>
+                      <HoverOnNotSvg/>
+                  </div>
+              )}
+
               <div
                 className={`${styles.buttonClassNot} ${
                   isNotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <ClickOnHot />
               </div>
@@ -434,6 +449,8 @@ export default function VoteImage() {
             <button
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
+              onMouseEnter={() => {setHotActiveToolTip(true)}}
+              onMouseLeave={() => {setHotActiveToolTip(false)}}
               onClick={() => {
                 if (!isUserLoggedIn) {
                   setShouldShowSignInModal(true);
@@ -448,15 +465,22 @@ export default function VoteImage() {
             >
               <div
                 className={`${styles.buttonClassHot} ${
-                  !isHotButtonClicked ? `block` : `hidden`
+                  !isHotButtonClicked  && !HotactiveToolTip? `block` : `hidden`
                 } m-[8px]`}
               >
-                <FireSvg />
+                <HotButtonSvg />
               </div>
+              {HotactiveToolTip && !isHotButtonClicked && (
+                  <div className={`${styles.buttonClassHot} m-[8px]`}>
+                      
+                      <HoverOnHotSvg/>
+                  </div>
+              )}
+
               <div
                 className={`${styles.buttonClassHot} ${
                   isHotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <Image
                   src="https://static.plgworks.com/assets/images/non/vote/hotButtonClick.png"

@@ -32,7 +32,7 @@ function HallOfFlameModal({
           e.stopPropagation();
         }}
       >
-        <button onClick={close} className="absolute top-0 right-0">
+        <button onClick={close} className="absolute top-[7.64%] right-[7.64%]">
           <HofCross />
         </button>
 
