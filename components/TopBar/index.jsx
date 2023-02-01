@@ -3,6 +3,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
 import NONLogo from "../NONLogo";
+import { NONLogoSvg } from "../NONLogo/NONLogoSvg";
 import SignInButton from "./SignInButton";
 import ToastIcon from "./ToastIcon";
 import styles from "./TopBar.module.scss";
@@ -25,7 +26,7 @@ export const notify = ({ text }) =>
     </div>
   ));
 
-export default function TopBar() {
+export default function TopBar({smallScreen}) {
   const { isUserLoggedIn } = useAuthContext();
   const { userProfile } = useUserContext();
 
@@ -39,6 +40,7 @@ export default function TopBar() {
 
   return (
     <div className={styles.container}>
+      {smallScreen ? <div className="flex items-center justify-center"> <NONLogoSvg width={208} height={52} /> </div>: <>
       <NONLogo />
       <div>
         <Toaster
@@ -48,7 +50,8 @@ export default function TopBar() {
         />
       </div>
 
-      <SignInButton />
+      <SignInButton /></>}
+      
     </div>
   );
 }

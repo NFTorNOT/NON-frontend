@@ -1,8 +1,8 @@
 export const NONLogoSvg = (props) => {
   return (
     <svg
-      width={132}
-      height={33}
+      width={props.width}
+      height={props.height}
       viewBox="0 0 132 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

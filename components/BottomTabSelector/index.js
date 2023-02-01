@@ -12,7 +12,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import GithubIcon from "./svg/GithubIcon";
 
-export default function BottomTabSelector() {
+export default function BottomTabSelector({ smallScreen }) {
   const { currentTab, onTabChange } = useBottomTab();
   const routesMap = {
     SubmitYourOwn: "/generate-image",

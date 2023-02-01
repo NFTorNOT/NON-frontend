@@ -18,7 +18,7 @@ export default function NONLogo() {
       className="relative h-[22px] w-[91px] md:h-[44px] md:w-[182px] cursor-pointer z-10"
       onClick={onNonLogoPress}
     >
-      <NONLogoSvg />
+      <NONLogoSvg width={132} height={33} />
       {/* <Image
         src="https://static.plgworks.com/assets/images/hon/hon-logo.png"
         alt="HoN Logo"
