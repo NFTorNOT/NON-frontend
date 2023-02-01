@@ -230,3 +230,19 @@ $github-fill-color: #FFFFFF;
 //   backdrop-filter: blur(12px);
 //   border-radius: 100px;
 // }
+
+@media only screen and (max-width: 1024px) {
+  .leftBar{
+    width: 100%;
+  }
+  .madeWithPLG{
+    width: 100%;
+  }
+  .container {
+    display: none;
+  }
+  .collectedNfts
+  {
+    display: none;
+   }
+}

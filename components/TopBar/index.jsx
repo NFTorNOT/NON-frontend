@@ -26,7 +26,7 @@ export const notify = ({ text }) =>
     </div>
   ));
 
-export default function TopBar({smallScreen}) {
+export default function TopBar() {
   const { isUserLoggedIn } = useAuthContext();
   const { userProfile } = useUserContext();
 
@@ -39,8 +39,11 @@ export default function TopBar({smallScreen}) {
   }, [isUserLoggedIn]);
 
   return (
-    <div className={styles.container}>
-      {smallScreen ? <div className="flex items-center justify-center"> <NONLogoSvg width={208} height={52} /> </div>: <>
+  <>
+      <div className={styles.newImage}>
+        <div className="flex items-center justify-center"> <NONLogoSvg width={208} height={52} /> </div>
+      </div>
+      <div className={styles.container}>
       <NONLogo />
       <div>
         <Toaster
@@ -49,9 +52,8 @@ export default function TopBar({smallScreen}) {
           toastOptions={{ duration: 4000 }}
         />
       </div>
-
-      <SignInButton /></>}
-      
-    </div>
+      <SignInButton />
+      </div>
+      </>
   );
 }

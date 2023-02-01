@@ -32,3 +32,16 @@
 
   color: rgba(255, 255, 255, 0.8);
 }
+
+.newImage {
+  display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    display: none;
+  }
+  .newImage{
+    display: block;
+  }
+}

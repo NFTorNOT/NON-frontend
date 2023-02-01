@@ -12,7 +12,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import GithubIcon from "./svg/GithubIcon";
 
-export default function BottomTabSelector({ smallScreen }) {
+export default function BottomTabSelector() {
   const { currentTab, onTabChange } = useBottomTab();
   const routesMap = {
     SubmitYourOwn: "/generate-image",
@@ -96,8 +96,10 @@ export default function BottomTabSelector({ smallScreen }) {
       {route == "/collect" ? (
         <div className={styles.bottomContainer}></div>
       ) : null}
-      <div className={`${styles.background} grid grid-cols-5 items-center`}>
-        <div className="flex items-center mt-[12px] md:mt-0 justify-items-start">
+      <div className={`${styles.background} flex items-center`}>
+        <div
+          className={`${styles.leftBar} flex items-center mt-[12px] md:mt-0 justify-items-start`}
+        >
           <button
             className={`${styles.howItWorks} flex items-center justify-start cursor-pointer relative`}
             onClick={handleHowItWorks}
@@ -141,6 +143,7 @@ export default function BottomTabSelector({ smallScreen }) {
             </div>
           </button>
         </div>
+
         <div
           className={`${styles.container} w-[640px] h-[56px] m-auto grid grid-cols-3 content-center gap-[8px] p-[8px] md:rounded-[100px] col-span-3 relative z-10`}
         >
@@ -182,7 +185,7 @@ export default function BottomTabSelector({ smallScreen }) {
         </div>
 
         <button
-          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] text-end items-center`}
+          className={`${styles.madeWithPLG} font-medium text-[16px] leading-[26px] text-[#ffffff99] text-end items-center justify-items-end `}
           onClick={handlePLGClick}
         >
           Made with <span className="text-[#FA5C00]">🧡</span> by PLG
