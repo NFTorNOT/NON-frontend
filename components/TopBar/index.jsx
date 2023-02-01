@@ -39,20 +39,20 @@ export default function TopBar() {
   }, [isUserLoggedIn]);
 
   return (
-  <>
-      <div className={styles.newImage}>
+    <>
+    <div className={styles.newImage}>
         <div className="flex items-center justify-center"> <NONLogoSvg width={208} height={52} /> </div>
       </div>
       <div className={styles.container}>
-      <NONLogo />
-      <div>
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{ duration: 4000 }}
-        />
-      </div>
-      <SignInButton />
+        <NONLogo />
+        <div>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{ duration: 4000 }}
+          />
+        </div>
+        <SignInButton />
       </div>
       </>
   );

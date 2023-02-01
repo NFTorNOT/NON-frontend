@@ -29,10 +29,6 @@ export default function Layout({ children, ...props }) {
             <JoinedFromSmallScreen />
           </div>
           <BottomTabSelector />
-
-          {/* <TopBar smallScreen={width > 1024 ? false : true} />
-          {width > 1024 ? <>{children}</> : <JoinedFromSmallScreen />}
-          <BottomTabSelector smallScreen={width > 1024 ? false : true} />{" "} */}
         </div>
       </div>
     );
