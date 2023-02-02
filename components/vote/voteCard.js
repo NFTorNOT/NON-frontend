@@ -172,7 +172,7 @@ export default function VoteCard(props) {
         <div className={`${styles.showPrompt} `} ref={handleWrapperRef}>
           <div className={`${styles.id} mb-[16px]`}>@{character.handle}</div>
           <div
-            className={`${styles.showPromptHover} opacity-60 hover:opacity-100 text-[#fff] cursor-pointer transition flex items-center gap-1 mb-[16px]`}
+            className={`${styles.showPromptHover} opacity-60 hover:opacity-100 text-[#fff] cursor-pointer transition flex items-center gap-1 mb-[16px] font-semibold`}
             onClick={togglePrompt}
           >
             {promtStatusIcon} {promtStatusText}
