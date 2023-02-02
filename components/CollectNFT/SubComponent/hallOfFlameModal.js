@@ -92,7 +92,7 @@ function HallOfFlameModal({
                         })}
                     </div>
                       <OutsideClickHandler
-                    onOutsideClick={() => {close(); console.log("Done")}}
+                    onOutsideClick={() => {close();}}
                   >
                     <div className="flex items-center justify-center">
                       <div className={`modalPrev mr-[60px] `}>

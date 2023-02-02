@@ -26,6 +26,6 @@ const filterToText = {
   MASTERPIECE:
     "sf, intricate artwork masterpiece, ominous, matte painting movie poster, golden ratio, trending on cgsociety, intricate, epic, trending on artstation, by artgerm, h. r. giger and beksinski, highly detailed, vibrant, production cinematic character render, ultra high quality model",
   NONE:
-    "",
+    "None",
 };
 export default filterToText;
