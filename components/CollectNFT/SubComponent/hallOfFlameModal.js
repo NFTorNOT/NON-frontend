@@ -33,7 +33,7 @@ function HallOfFlameModal({
           e.stopPropagation();
         }}
       >
-        <button onClick={close} className="absolute top-[10px] right-[10px]">
+        <button onClick={close} className="absolute top-[7.64%] right-[7.64%]">
           <HofCross />
         </button>
 
@@ -91,7 +91,6 @@ function HallOfFlameModal({
                           );
                         })}
                     </div>
-
                       <OutsideClickHandler
                     onOutsideClick={() => {close(); console.log("Done")}}
                   >
