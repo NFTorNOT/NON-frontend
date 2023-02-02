@@ -53,11 +53,17 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   margin-top: 8px;
+  padding-left: 12px;
 
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 160%;
+  appearance: none;
+  background-image: url('./DropDownArrow.svg');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 15.75px) center;
+  background-size: 10px;
   /* identical to box height, or 26px */
 }
 
@@ -234,16 +240,11 @@
   box-shadow: 0px 8px 32px rgba(250, 92, 0, 0.32);
   border-radius: 4px;
 }
-.generateText {
+
+.containerHeadText{
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 160%;
-  /* or 22px */
-
-  font-feature-settings: "salt" on;
-
-  /* Whites/White - 100 */
-
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.8);
 }

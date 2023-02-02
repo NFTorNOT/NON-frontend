@@ -11,12 +11,17 @@ import GenerateSvg from "../vote/svg/FirstTimeUser/GenerateSvg";
 import CollectSvg from "../vote/svg/FirstTimeUser/CollectSvg";
 import OnboardingContent from "./OnBoardingContent";
 import ClickOnHot from "../vote/svg/clickOnHot";
+import HotButtonSvg from "../vote/svg/HotButtonSvg";
+import HoverOnHotSvg from "../vote/svg/HoverOnHotSvg";
+import HoverOnNotSvg from "../vote/svg/HoverOnNotSvg";
+
 import { id } from "ethers/lib/utils.js";
 
 function OnBoarding({ setOnBoarding }) {
   const [isNotButtonClicked, setIsNotButtonClicked] = React.useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = React.useState(false);
-
+  const [HotactiveToolTip, setHotActiveToolTip] = React.useState(false);
+  const [NotactiveToolTip, setNotActiveToolTip] = React.useState(false);
   const onBoardingDetailsArray = [
     {
       title:
@@ -150,6 +155,8 @@ function OnBoarding({ setOnBoarding }) {
             <button
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
+              onMouseEnter={() => {setNotActiveToolTip(true)}}
+              onMouseLeave={() => {setNotActiveToolTip(false)}}
               onClick={() => {
                 swiped("left");
                 setIsNotButtonClicked(true);
@@ -163,16 +170,23 @@ function OnBoarding({ setOnBoarding }) {
               }}
             >
               <div
-                className={`${styles.buttonClassNot} ${
-                  !isNotButtonClicked ? `block` : `hidden`
-                } m-[8px]`}
-              >
-                <Not />
-              </div>
+                  className={`${styles.buttonClassNot} ${
+                    !isNotButtonClicked && !NotactiveToolTip? `block` : `hidden`
+                  } m-[8px]`}
+                >
+                  <Not /> 
+                </div>
+
+                {NotactiveToolTip && !isNotButtonClicked && (
+                  <div className={`${styles.buttonClassNot} m-[8px]`}>
+                      <HoverOnNotSvg/>
+                  </div>
+              )}
+
               <div
                 className={`${styles.buttonClassNot} ${
                   isNotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <ClickOnHot />
               </div>
@@ -181,6 +195,8 @@ function OnBoarding({ setOnBoarding }) {
             <button
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
+              onMouseEnter={() => {setHotActiveToolTip(true)}}
+              onMouseLeave={() => {setHotActiveToolTip(false)}}
               onClick={() => {
                 swiped("right");
                 setIsHotButtonClicked(true);
@@ -195,15 +211,22 @@ function OnBoarding({ setOnBoarding }) {
             >
               <div
                 className={`${styles.buttonClassHot} ${
-                  !isHotButtonClicked ? `block` : `hidden`
+                  !isHotButtonClicked  && !HotactiveToolTip? `block` : `hidden`
                 } m-[8px]`}
               >
-                <FireSvg />
+                <HotButtonSvg />
               </div>
+              {HotactiveToolTip && !isHotButtonClicked && (
+                  <div className={`${styles.buttonClassHot} m-[8px]`}>
+                      
+                      <HoverOnHotSvg/>
+                  </div>
+              )}
+
               <div
                 className={`${styles.buttonClassHot} ${
                   isHotButtonClicked ? `block` : `hidden`
-                }`}
+                } m-[8px]`}
               >
                 <Image
                   src="https://static.plgworks.com/assets/images/non/vote/hotButtonClick.png"
