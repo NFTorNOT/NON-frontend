@@ -436,16 +436,6 @@ export default function VoteImage() {
               )}
             </div>
           ) : null}
-          {/* {data.length == 0 && !isUserLoggedIn && isFirstTimeLoaded.current ? (
-            <div className={`absolute pressable  ${styles.voteCard}`}>
-              <div className={styles.emptyCard}>
-                <div className={styles.emptyText}>
-                  Oops, all generations are exhausted. Signin to save your votes
-                  now
-                </div>
-              </div>
-            </div>
-          ) : null} */}
         </div>
         {data.length > 0 ? (
           <>
