@@ -19,6 +19,7 @@ import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
 import OnBoarding from "../OnBoarding";
+import FireSmallSvg from "./svg/FirstTimeUser/FireSmallSvg";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -28,7 +29,7 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
-  const maxCount = 10;
+  const maxCount = 6;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [
@@ -60,7 +61,7 @@ export default function VoteImage() {
 
   setTimeout(() => {
     isFirstTimeLoaded.current = true;
-  }, 4000);
+  }, 1000);
 
   async function fetchLensPost() {
     const lensPostData = await axiosInstance.get(`/nfts`, {
@@ -142,7 +143,6 @@ export default function VoteImage() {
         filter: lensPost?.filter,
       });
     }
-
     makeData(lensPostDetails);
   }
 
@@ -397,23 +397,51 @@ export default function VoteImage() {
 
           {data.length == 0 && isFirstTimeLoaded.current ? (
             <div className={`absolute pressable  ${styles.voteCard}`}>
+              {isUserLoggedIn ? (
+                <div
+                  className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
+                >
+                  <div className={styles.emptyText}>
+                    Oops, all generations are exhausted. Meanwhile, Collect hot
+                    NFTs by your lens frens and show your support💰
+                  </div>
+                  <div
+                    className={styles.collectButtonContainer}
+                    onClick={onCollectButtonClick}
+                  >
+                    <CollectIconSvg />
+                    <div className={styles.collectButtonText}>Collect Now</div>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-0 w-[512px] h-[512px] ${styles.emptyCard}`}
+                >
+                  <div className={styles.emptyText}>
+                    <span>Oops, all generations are exhausted.</span>
+                  </div>
+                  <div
+                    className={`flex justify-center items-center ${styles.emptyText}`}
+                  >
+                    Sign in to save your <FireSmallSvg height={26} width={24} />{" "}
+                    votes now.
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : null}
+          {/* {data.length == 0 && !isUserLoggedIn && isFirstTimeLoaded.current ? (
+            <div className={`absolute pressable  ${styles.voteCard}`}>
               <div className={styles.emptyCard}>
                 <div className={styles.emptyText}>
-                  Oops, all generations are exhausted. Meanwhile, Collect hot
-                  NFTs by your lens frens and show your support💰
-                </div>
-                <div
-                  className={styles.collectButtonContainer}
-                  onClick={onCollectButtonClick}
-                >
-                  <CollectIconSvg />
-                  <div className={styles.collectButtonText}>Collect Now</div>
+                  Oops, all generations are exhausted. Signin to save your votes
+                  now
                 </div>
               </div>
             </div>
-          ) : null}
+          ) : null} */}
         </div>
-        {consumedData.current.length > 0 ? (
+        {data.length > 0 ? (
           <>
             <button
               className={`absolute md:relative left-0`}
