@@ -318,7 +318,7 @@ export default function GenerateNFT() {
           </>
 
           <div
-            className={`${styles.button} mt-auto p-[8px]`}
+            className={`${styles.button} mt-auto p-[8px] cursor-pointer`}
             onClick={() => {
               submitForGeneration();
             }}

@@ -229,7 +229,11 @@ function CollectNFTModal({ shown, close, modalData }) {
                   height="26"
                 />
               </span>
-              <span className="ml-[12px]">{totalCollects} Collectors</span>
+              {
+                totalCollects == 1 ?
+                <span className="ml-[12px]">{totalCollects} Collector </span> :
+                <span className="ml-[12px]">{totalCollects} Collectors </span>
+              }
             </div>
             {modalData?.hasCollected || isNftCollectedByMe.current ? (
               <button
