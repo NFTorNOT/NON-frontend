@@ -26,13 +26,13 @@ export default function Layout({ children, ...props }) {
         <div className={styles.innerContainer}>
           <TopBar />
           <div className={styles.pageWrap}>{children}</div>
+          <div className={styles.tabletView}>
+            <JoinedFromTablet />
+          </div>
           <div className={styles.mobileview}>
             <div className="flex flex-col justify-center items-center px-[52px] gap-[20px]">
               <SmallScreenData />
             </div>
-          </div>
-          <div className={styles.tabletView}>
-            <JoinedFromTablet />
           </div>
           <BottomTabSelector />
         </div>
