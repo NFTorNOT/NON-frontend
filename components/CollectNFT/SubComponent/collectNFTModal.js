@@ -122,7 +122,7 @@ function CollectNFTModal({ shown, close, modalData }) {
           setTimeout(() => {
             setIsNftCollected(true);
             setCollectAgain(true);
-          }, 3000);
+          }, 4000);
         }
       }
     } catch (error) {
@@ -236,11 +236,11 @@ function CollectNFTModal({ shown, close, modalData }) {
                   height="26"
                 />
               </span>
-              {
-                totalCollects == 1 ?
-                <span className="ml-[12px]">{totalCollects} Collector </span> :
+              {totalCollects == 1 ? (
+                <span className="ml-[12px]">{totalCollects} Collector </span>
+              ) : (
                 <span className="ml-[12px]">{totalCollects} Collectors </span>
-              }
+              )}
             </div>
 
             {collectAgain ? (
