@@ -11,9 +11,6 @@ on:
         description: "Enter description about deployment"
         required: true
         default: "New feature release"
-  push:
-    branches:
-      - secret_changes
 
 jobs:
   deploy:
