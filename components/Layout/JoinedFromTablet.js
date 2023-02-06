@@ -1,7 +1,6 @@
 import React from "react";
 import { LensIconSvg } from "../vote/svg/LensIconSvg";
 import styles from "./SmallScreen.module.scss";
-import Image from "next/image";
 import SmallScreenData from "./SmallScreenData";
 
 function JoinedFromTablet() {

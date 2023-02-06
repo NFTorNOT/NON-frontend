@@ -29,11 +29,13 @@ export default function Layout({ children, ...props }) {
           <div className={styles.tabletView}>
             <JoinedFromTablet />
           </div>
+
           <div className={styles.mobileview}>
-            <div className="flex flex-col justify-center items-center px-[52px] gap-[20px]">
+            <div className="flex flex-col justify-center items-center px-[52px] pb-[52px] gap-[20px]">
               <SmallScreenData />
             </div>
           </div>
+
           <BottomTabSelector />
         </div>
       </div>
