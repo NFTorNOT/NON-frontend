@@ -93,9 +93,10 @@ function CollectNFT(props) {
   };
 
   const showModal = (ele) => {
-    if (ele.hasCollected) {
-      return;
-    }
+    //removed to allow multiple collect
+    // if (ele.hasCollected) {
+    //   return;
+    // }
     setModalData({ ...ele });
     toggleModal(!modalShown);
   };

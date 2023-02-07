@@ -205,6 +205,9 @@ export default function SignInButton({
         if (!dispatcherAddress) {
           setShouldShowEnableDispatcherModal(true);
         }
+        if (router.pathname === "/") {
+          router.reload();
+        }
       }
     } catch (error) {
       console.log("error", error);
