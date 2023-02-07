@@ -409,8 +409,12 @@ export default function VoteImage() {
             <button
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
-              onMouseEnter={() => {setNotActiveToolTip(true)}}
-              onMouseLeave={() => {setNotActiveToolTip(false)}}
+              onMouseEnter={() => {
+                setNotActiveToolTip(true);
+              }}
+              onMouseLeave={() => {
+                setNotActiveToolTip(false);
+              }}
               onClick={() => {
                 if (!isUserLoggedIn) {
                   setShouldShowSignInModal(true);
@@ -423,18 +427,18 @@ export default function VoteImage() {
                 }, 2000);
               }}
             >
-                <div
-                  className={`${styles.buttonClassNot} ${
-                    !isNotButtonClicked && !NotactiveToolTip? `block` : `hidden`
-                  } m-[8px]`}
-                >
-                  <Not /> 
-                </div>
+              <div
+                className={`${styles.buttonClassNot} ${
+                  !isNotButtonClicked && !NotactiveToolTip ? `block` : `hidden`
+                } m-[8px]`}
+              >
+                <Not />
+              </div>
 
-                {NotactiveToolTip && !isNotButtonClicked && (
-                  <div className={`${styles.buttonClassNot} m-[8px]`}>
-                      <HoverOnNotSvg/>
-                  </div>
+              {NotactiveToolTip && !isNotButtonClicked && (
+                <div className={`${styles.buttonClassNot} m-[8px]`}>
+                  <HoverOnNotSvg />
+                </div>
               )}
 
               <div
@@ -449,8 +453,12 @@ export default function VoteImage() {
             <button
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
-              onMouseEnter={() => {setHotActiveToolTip(true)}}
-              onMouseLeave={() => {setHotActiveToolTip(false)}}
+              onMouseEnter={() => {
+                setHotActiveToolTip(true);
+              }}
+              onMouseLeave={() => {
+                setHotActiveToolTip(false);
+              }}
               onClick={() => {
                 if (!isUserLoggedIn) {
                   setShouldShowSignInModal(true);
@@ -465,16 +473,15 @@ export default function VoteImage() {
             >
               <div
                 className={`${styles.buttonClassHot} ${
-                  !isHotButtonClicked  && !HotactiveToolTip? `block` : `hidden`
+                  !isHotButtonClicked && !HotactiveToolTip ? `block` : `hidden`
                 } m-[8px]`}
               >
                 <HotButtonSvg />
               </div>
               {HotactiveToolTip && !isHotButtonClicked && (
-                  <div className={`${styles.buttonClassHot} m-[8px]`}>
-                      
-                      <HoverOnHotSvg/>
-                  </div>
+                <div className={`${styles.buttonClassHot} m-[8px]`}>
+                  <HoverOnHotSvg />
+                </div>
               )}
 
               <div
