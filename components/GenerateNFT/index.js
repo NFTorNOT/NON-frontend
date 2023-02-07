@@ -279,7 +279,7 @@ export default function GenerateNFT() {
               {trendingThemes.current.map((ele) => {
                 return (
                   <option key={ele?.id} value={ele?.name}>
-                    #{ele?.name.charAt(0).toUpperCase()+ele?.name.substr(1)}
+                    {ele?.name === "other" ? "None" : `#${ele?.name.charAt(0).toUpperCase()+ele?.name.substr(1)}`}
                   </option>
                 );
               })}
@@ -318,7 +318,7 @@ export default function GenerateNFT() {
           </>
 
           <div
-            className={`${styles.button} mt-auto p-[8px]`}
+            className={`${styles.button} mt-auto p-[8px] cursor-pointer`}
             onClick={() => {
               submitForGeneration();
             }}

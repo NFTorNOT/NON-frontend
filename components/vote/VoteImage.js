@@ -19,6 +19,7 @@ import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
 import OnBoarding from "../OnBoarding";
+import FireSmallSvg from "./svg/FirstTimeUser/FireSmallSvg";
 import HoverOnNotSvg from "./svg/HoverOnNotSvg";
 import HoverOnHotSvg from "./svg/HoverOnHotSvg";
 import HotButtonSvg from "./svg/HotButtonSvg";
@@ -31,6 +32,8 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
+  const maxCount = 6;
+  const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
   const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
@@ -40,6 +43,8 @@ export default function VoteImage() {
     setShouldShowWhatIsTrendingThemeModal,
   ] = useState(false);
   const [data, setData] = useState([]);
+  const cardsLeft = 10;
+  const [totalCards, setTotalCards] = useState(cardsLeft);
   const allTrendingThemes = useRef([]);
 
   const { isUserLoggedIn } = useAuthContext();
@@ -62,7 +67,7 @@ export default function VoteImage() {
 
   setTimeout(() => {
     isFirstTimeLoaded.current = true;
-  }, 4000);
+  }, 1000);
 
   async function fetchLensPost() {
     const lensPostData = await axiosInstance.get(`/nfts`, {
@@ -144,7 +149,6 @@ export default function VoteImage() {
         filter: lensPost?.filter,
       });
     }
-
     makeData(lensPostDetails);
   }
 
@@ -221,35 +225,42 @@ export default function VoteImage() {
   }
 
   const submitVote = (dir) => {
-    if (!isUserLoggedIn) {
+    if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setCount(maxCount);
       return;
     }
     if (isVoteInProgress.current) {
       return;
     }
-    setSelectedTheme(consumedData.current[imageIndex]?.themeName);
+    if (isUserLoggedIn) {
+      setSelectedTheme(consumedData.current[imageIndex]?.themeName);
 
-    isVoteInProgress.current = true;
+      isVoteInProgress.current = true;
 
-    const lensPostId = consumedData.current[imageIndex]?.lensPostId;
-    const publicationId = consumedData.current[imageIndex]?.publicationId;
+      const lensPostId = consumedData.current[imageIndex]?.lensPostId;
+      const publicationId = consumedData.current[imageIndex]?.publicationId;
 
-    // console.log({ lensPostId, publicationId });
-    axiosInstance
-      .post(`/reaction`, {
-        reaction: dir == "right" ? ReactionTypes.VOTED : ReactionTypes.IGNORED,
-        lens_post_id: lensPostId,
-      })
-      .finally(() => {
-        isVoteInProgress.current = false;
-      });
-    upvoteImage({ publicationId });
+      // console.log({ lensPostId, publicationId });
+      axiosInstance
+        .post(`/reaction`, {
+          reaction:
+            dir == "right" ? ReactionTypes.VOTED : ReactionTypes.IGNORED,
+          lens_post_id: lensPostId,
+        })
+        .finally(() => {
+          isVoteInProgress.current = false;
+        });
+      upvoteImage({ publicationId });
+    }
   };
 
   const swiped = async (dir) => {
-    if (!isUserLoggedIn) {
+    setCount(count - 1);
+    setTotalCards(totalCards - 1);
+    if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setCount(maxCount);
       return;
     }
 
@@ -365,6 +376,7 @@ export default function VoteImage() {
         <CustomSignInModal
           isOpen={shouldShowSignInModal}
           onRequestClose={() => setShouldShowSignInModal(false)}
+          pageInfo={"votePage"}
         />
 
         <TrendingThemeModal
@@ -383,28 +395,49 @@ export default function VoteImage() {
                 className={`absolute pressable  ${styles.voteCard}`}
               >
                 <VoteCard character={character}></VoteCard>
+                {/* <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+                  {totalCards} left
+                </div> */}
               </div>
             ))}
 
           {data.length == 0 && isFirstTimeLoaded.current ? (
             <div className={`absolute pressable  ${styles.voteCard}`}>
-              <div className={styles.emptyCard}>
-                <div className={styles.emptyText}>
-                  Oops, all generations are exhausted. Meanwhile, Collect hot
-                  NFTs by your lens frens and show your support💰
-                </div>
+              {isUserLoggedIn ? (
                 <div
-                  className={styles.collectButtonContainer}
-                  onClick={onCollectButtonClick}
+                  className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
-                  <CollectIconSvg />
-                  <div className={styles.collectButtonText}>Collect Now</div>
+                  <div className={styles.emptyText}>
+                    Oops, all generations are exhausted. Meanwhile, Collect hot
+                    NFTs by your lens frens and show your support💰
+                  </div>
+                  <div
+                    className={styles.collectButtonContainer}
+                    onClick={onCollectButtonClick}
+                  >
+                    <CollectIconSvg />
+                    <div className={styles.collectButtonText}>Collect Now</div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-0 w-[512px] h-[512px] ${styles.emptyCard}`}
+                >
+                  <div className={styles.emptyText}>
+                    <span>Oops, all generations are exhausted.</span>
+                  </div>
+                  <div
+                    className={`flex justify-center items-center ${styles.emptyText}`}
+                  >
+                    Sign in to save your <FireSmallSvg height={26} width={24} />{" "}
+                    votes now.
+                  </div>
+                </div>
+              )}
             </div>
           ) : null}
         </div>
-        {consumedData.current.length > 0 ? (
+        {data.length > 0 ? (
           <>
             <button
               className={`absolute md:relative left-0`}
@@ -416,8 +449,10 @@ export default function VoteImage() {
                 setNotActiveToolTip(false);
               }}
               onClick={() => {
-                if (!isUserLoggedIn) {
+                setCount(count - 1);
+                if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setCount(maxCount);
                   return;
                 }
                 swiped("left");
@@ -460,8 +495,10 @@ export default function VoteImage() {
                 setHotActiveToolTip(false);
               }}
               onClick={() => {
-                if (!isUserLoggedIn) {
+                setCount(count - 1);
+                if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setCount(maxCount);
                   return;
                 }
                 swiped("right");

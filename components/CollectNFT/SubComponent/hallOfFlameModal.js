@@ -8,6 +8,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Navigation } from "swiper";
 import { TRENDING_THEMES } from "../../../utils/Constants";
 import Card from "../../Card";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 function HallOfFlameModal({
   shown,
@@ -90,10 +91,12 @@ function HallOfFlameModal({
                           );
                         })}
                     </div>
-
+                      <OutsideClickHandler
+                    onOutsideClick={() => {close();}}
+                  >
                     <div className="flex items-center justify-center">
                       <div className={`modalPrev mr-[60px] `}>
-                        <div
+                    <div
                           className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
                         >
                           <LeftArrow />
@@ -110,7 +113,6 @@ function HallOfFlameModal({
                           <RightArrow />
                         </div>
                       </div>
-                    </div>
                     {/* <div
                       className={`${styles.card} flex items-center justify-center mt-[20px]`}
                       style={{
@@ -177,8 +179,9 @@ function HallOfFlameModal({
                             </span>
                           </button>
                         )}
-                      </div>
-                    </div> */}
+                      </div>*/}
+                    </div> 
+                    </OutsideClickHandler>
                   </div>
                 </SwiperSlide>
               );
