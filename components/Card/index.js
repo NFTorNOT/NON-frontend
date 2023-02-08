@@ -135,7 +135,6 @@ export default function Card({ cardDetails, showCollectModal,style }) {
     }
   }, [showPrompt]);
 
-  ;
   return (
     <div
       className={`${styles.card}`}
