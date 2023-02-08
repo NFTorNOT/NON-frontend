@@ -163,7 +163,7 @@ export default function Card({ cardDetails, showCollectModal }) {
         <div className={`${styles.showPrompt}`} ref={handleWrapperRef}>
           <div className={styles.id}>@{cardDetails.handle}</div>
           <div
-            className="text-white text-opacity-60 cursor-pointer transition flex items-center gap-1"
+            className="opacity-60 hover:opacity-100 text-[#fff] cursor-pointer transition flex items-center gap-1 mb-[16px] font-medium"
             onClick={togglePrompt}
           >
             {promtStatusIcon} {promtStatusText}
