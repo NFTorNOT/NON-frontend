@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
+import { NONLogoSvgBig } from "../Layout/NONLogoSvgBig";
 import NONLogo from "../NONLogo";
-import { NONLogoSvg } from "../NONLogo/NONLogoSvg";
 import SignInButton from "./SignInButton";
 import ToastIcon from "./ToastIcon";
 import styles from "./TopBar.module.scss";
@@ -41,10 +41,10 @@ export default function TopBar() {
   return (
     <>
     <div className={styles.newImage}>
-        <div className="flex items-center justify-center"> <NONLogoSvg width={208} height={52} /> </div>
+        <div className="flex items-center justify-center"> <NONLogoSvgBig /> </div>
       </div>
       <div className={styles.container}>
-        <NONLogo />
+          <NONLogo />
         <div>
           <Toaster
             position="top-center"

@@ -1,12 +1,13 @@
 import React from "react";
 import { LensIconSvg } from "../vote/svg/LensIconSvg";
+import { NONLogoSvgSmall } from "./NONLogoSvgBig";
 import styles from "./SmallScreen.module.scss";
 import SmallScreenData from "./SmallScreenData";
 
 function JoinedFromTablet() {
   let data = [1, 2, 3];
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <div
         id="vote-card"
         className={`${styles.cardContainer} flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] ${styles.voteCards}`}

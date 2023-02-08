@@ -32,7 +32,7 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
-  const maxCount = 6;
+  const maxCount = 5;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
@@ -44,7 +44,7 @@ export default function VoteImage() {
   ] = useState(false);
   const [data, setData] = useState([]);
   const cardsLeft = 10;
-  const [totalCards, setTotalCards] = useState(cardsLeft);
+  const [totalCards, setTotalCards] = useState();
   const allTrendingThemes = useRef([]);
 
   const { isUserLoggedIn } = useAuthContext();
@@ -67,7 +67,7 @@ export default function VoteImage() {
 
   setTimeout(() => {
     isFirstTimeLoaded.current = true;
-  }, 1000);
+  }, 4000);
 
   async function fetchLensPost() {
     const lensPostData = await axiosInstance.get(`/nfts`, {
@@ -96,6 +96,20 @@ export default function VoteImage() {
     const usersMap = lensPostResponseData.users;
     const themesMap = lensPostResponseData.themes;
     const activeThemes = lensPostResponseData.active_theme_ids;
+    const total_posts_count = lensPostResponseData.stats.total_posts_count;
+    const total_ignored = lensPostResponseData?.user_stats?.total_ignored;
+    const total_voted = lensPostResponseData?.user_stats?.total_voted;
+    const total_no_reactions =
+      lensPostResponseData?.user_stats?.total_no_reactions;
+    if (!isUserLoggedIn) {
+      setTotalCards(10);
+    } else {
+      setTotalCards(
+        lensPostResponseData.user_stats
+          ? total_posts_count - total_ignored - total_voted - total_no_reactions
+          : total_posts_count
+      );
+    }
     const lensPostDetails = [];
 
     let trendingThemes = [];
@@ -395,9 +409,9 @@ export default function VoteImage() {
                 className={`absolute pressable  ${styles.voteCard}`}
               >
                 <VoteCard character={character}></VoteCard>
-                {/* <div className={`${styles.cardCount} text-white/80 z-[10]`}>
-                  {totalCards} left
-                </div> */}
+                <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+                  {totalCards > 30 ? "30+" : totalCards} left
+                </div>
               </div>
             ))}
 
