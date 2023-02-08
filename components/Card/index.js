@@ -6,7 +6,7 @@ import styles from "./Card.module.scss";
 import Collect from "../CollectNFT/SubComponent/SVG/collect";
 import Image from "next/image";
 
-export default function Card({ cardDetails, showCollectModal }) {
+export default function Card({ cardDetails, showCollectModal,style }) {
   const hoverWrapperRef = useRef();
   const bioParentWrapperRef = useRef();
   const titleWrapperRef = useRef();
@@ -135,10 +135,11 @@ export default function Card({ cardDetails, showCollectModal }) {
     }
   }, [showPrompt]);
 
+  ;
   return (
     <div
       className={`${styles.card}`}
-      style={{ backgroundImage: `url(${cardDetails.image})` }}
+      style={Object.assign({}, style,{ backgroundImage: `url(${cardDetails.image})`})}
       ref={hoverWrapperRef}
       onMouseEnter={cardTransHover}
       onMouseLeave={cardTransOut}
