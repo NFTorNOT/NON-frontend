@@ -13,7 +13,7 @@ function SubmitForVoteModal({
   const infoMap = [
     {
       svgIcon: <MessageCircle />,
-      desc: "When you submit your NFT generation, a post is made on Lenster",
+      desc: "When you submit your NFT generation, a post is made on Lens",
     },
     {
       svgIcon: <Collect />,

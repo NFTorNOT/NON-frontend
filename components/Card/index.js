@@ -95,6 +95,11 @@ export default function Card({ cardDetails, showCollectModal }) {
     window.open(viewLensUrl, "_blank");
   };
 
+  const ViewProfileonLens = () => {
+    let viewLensUrl = "https://testnet.lenster.xyz/u/" + cardDetails?.handle;
+    window.open(viewLensUrl, "_blank");
+  };
+
   useEffect(() => {
     const titleHeight = titleWrapperRef.current?.clientHeight;
     const wrapHeight = bioParentWrapperRef.current?.clientHeight;
@@ -161,7 +166,12 @@ export default function Card({ cardDetails, showCollectModal }) {
         </div>
 
         <div className={`${styles.showPrompt}`} ref={handleWrapperRef}>
-          <div className={styles.id}>@{cardDetails.handle}</div>
+          <div
+            className={`${styles.id} hover:text-[#adff00] cursor-pointer`}
+            onClick={ViewProfileonLens}
+          >
+            @{cardDetails.handle}
+          </div>
           <div
             className="opacity-60 hover:opacity-100 text-[#fff] cursor-pointer transition flex items-center gap-1 mb-[16px] font-medium"
             onClick={togglePrompt}
@@ -180,11 +190,7 @@ export default function Card({ cardDetails, showCollectModal }) {
         ) : null}
         <button
           ref={collectButtonRef}
-          className={`${
-            cardDetails.hasCollected
-              ? styles.alreadyCollectedButton
-              : styles.collectButton
-          }  flex items-center justify-center`}
+          className={`${styles.collectButton}  flex items-center justify-center`}
           onClick={() => {
             // showModal(ele);
             showCollectModal(cardDetails);
@@ -194,9 +200,7 @@ export default function Card({ cardDetails, showCollectModal }) {
             <Collect />
           </span>
           <span className="font-normal text-[16px] leading-[26px] ml-[8px]">
-            {cardDetails.hasCollected
-              ? "You have already collected this"
-              : "Collect Now"}
+            {cardDetails.hasCollected ? "Collect Again" : "Collect Now"}
           </span>
         </button>
       </div>
