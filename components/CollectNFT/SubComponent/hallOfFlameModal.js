@@ -84,7 +84,7 @@ function HallOfFlameModal({
                               </span>
                               {index < Themes.length - 1 ? (
                                 <span
-                                  className={`${styles.dot} mx-[10px]`}
+                                  className={`${styles.dot} mx-[10px] inline-block mb-[5px]`}
                                 ></span>
                               ) : null}
                             </div>
