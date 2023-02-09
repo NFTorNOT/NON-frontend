@@ -404,13 +404,13 @@ export default function VoteImage() {
               </div>
             ))}
 
-          {data.length !== 0 && isFirstTimeLoaded.current ? (
+          {data.length == 0 && isFirstTimeLoaded.current ? (
             <div className={`absolute pressable  ${styles.voteCard}`}>
               {isUserLoggedIn ? (
                 <div
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
-                  <div className={styles.emptyText}>
+                  <div className={`flex items-end ${styles.emptyText}`}>
                     Oops, all generations are exhausted. Meanwhile, Collect hot
                     NFTs by your lens frens and show your support💰
                   </div>
@@ -429,25 +429,26 @@ export default function VoteImage() {
                   <div className={styles.emptyText}>
                     <span>That's all for now folks!</span>
                   </div>
-                  <div
-                    className={`flex justify-center items-center ${styles.emptyText}`}
-                  >
-                    <span>
-                      To continue voting,
+                  <div className={`flex justify-center items-center`}>
+                    <span className={`${styles.emptyText}`}>
+                      To continue voting,{" "}
                       <button
                         onClick={() => {
                           setShouldShowSignInModal(true);
                           setPageInfo("");
                         }}
+                        className="hover:text-[#adff00]"
                       >
                         Sign in
                       </button>{" "}
                       and get started & save your
+                      <FireSmallSvg
+                        className={"inline"}
+                        height={26}
+                        width={24}
+                      />
+                      votes now.
                     </span>
-                    <span>
-                      <FireSmallSvg height={26} width={24} />
-                    </span>
-                    <span>votes now.</span>
                   </div>
                 </div>
               )}
