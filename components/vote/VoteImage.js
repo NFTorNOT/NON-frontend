@@ -101,15 +101,13 @@ export default function VoteImage() {
     const total_voted = lensPostResponseData?.user_stats?.total_voted;
     const total_no_reactions =
       lensPostResponseData?.user_stats?.total_no_reactions;
-    if (!isUserLoggedIn) {
-      setTotalCards(10);
-    } else {
-      setTotalCards(
-        lensPostResponseData.user_stats
-          ? total_posts_count - total_ignored - total_voted - total_no_reactions
-          : total_posts_count
-      );
-    }
+
+    setTotalCards(
+      lensPostResponseData.user_stats
+        ? total_posts_count - total_ignored - total_voted - total_no_reactions
+        : total_posts_count
+    );
+
     const lensPostDetails = [];
 
     let trendingThemes = [];
@@ -409,9 +407,11 @@ export default function VoteImage() {
                 className={`absolute pressable  ${styles.voteCard}`}
               >
                 <VoteCard character={character}></VoteCard>
-                <div className={`${styles.cardCount} text-white/80 z-[10]`}>
-                  {totalCards > 30 ? "30+" : totalCards} left
-                </div>
+                {isUserLoggedIn && (
+                  <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+                    {totalCards > 30 ? "30+" : totalCards} left
+                  </div>
+                )}
               </div>
             ))}
 
