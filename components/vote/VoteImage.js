@@ -35,6 +35,7 @@ export default function VoteImage() {
   const maxCount = 6;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
+  const [pageInfo, setPageInfo] = useState();
   const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
   const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
 
@@ -227,6 +228,7 @@ export default function VoteImage() {
   const submitVote = (dir) => {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setPageInfo("votePage");
       setCount(maxCount);
       return;
     }
@@ -260,6 +262,7 @@ export default function VoteImage() {
     setTotalCards(totalCards - 1);
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setPageInfo("votePage");
       setCount(maxCount);
       return;
     }
@@ -376,7 +379,7 @@ export default function VoteImage() {
         <CustomSignInModal
           isOpen={shouldShowSignInModal}
           onRequestClose={() => setShouldShowSignInModal(false)}
-          pageInfo={"votePage"}
+          pageInfo={pageInfo}
         />
 
         <TrendingThemeModal
@@ -424,13 +427,25 @@ export default function VoteImage() {
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-0 w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
                   <div className={styles.emptyText}>
-                    <span>Oops, all generations are exhausted.</span>
+                    <span>That's all for now folks!</span>
                   </div>
                   <div
                     className={`flex justify-center items-center ${styles.emptyText}`}
                   >
-                    Sign in to save your <FireSmallSvg height={26} width={24} />{" "}
-                    votes now.
+                    <p>
+                      To continue voting,{" "}
+                      <button
+                        onClick={() => {
+                          setShouldShowSignInModal(true);
+                          setPageInfo("");
+                        }}
+                      >
+                        Sign in
+                      </button>{" "}
+                      and get started & save your{" "}
+                    </p>
+                    <FireSmallSvg height={26} width={24} />
+                    <span>votes now.</span>
                   </div>
                 </div>
               )}
@@ -452,6 +467,7 @@ export default function VoteImage() {
                 setCount(count - 1);
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setPageInfo("votePage");
                   setCount(maxCount);
                   return;
                 }
@@ -498,6 +514,7 @@ export default function VoteImage() {
                 setCount(count - 1);
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setPageInfo("votePage");
                   setCount(maxCount);
                   return;
                 }
