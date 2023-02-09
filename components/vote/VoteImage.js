@@ -404,7 +404,7 @@ export default function VoteImage() {
               </div>
             ))}
 
-          {data.length == 0 && isFirstTimeLoaded.current ? (
+          {data.length !== 0 && isFirstTimeLoaded.current ? (
             <div className={`absolute pressable  ${styles.voteCard}`}>
               {isUserLoggedIn ? (
                 <div
@@ -431,22 +431,21 @@ export default function VoteImage() {
                   </div>
                   <div className={`flex justify-center items-center`}>
                     <span className={`${styles.emptyText}`}>
-                      To continue voting,{" "}
                       <button
                         onClick={() => {
                           setShouldShowSignInModal(true);
                           setPageInfo("");
                         }}
-                        className="hover:text-[#adff00]"
+                        className="hover:text-[#adff00] underline"
                       >
                         Sign in
                       </button>{" "}
-                      and get started & save your
+                      to get started & save your{" "}
                       <FireSmallSvg
                         className={"inline"}
                         height={26}
                         width={24}
-                      />
+                      />{" "}
                       votes now.
                     </span>
                   </div>
