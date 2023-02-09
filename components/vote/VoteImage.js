@@ -404,7 +404,7 @@ export default function VoteImage() {
               </div>
             ))}
 
-          {data.length !== 0 && isFirstTimeLoaded.current ? (
+          {data.length == 0 && isFirstTimeLoaded.current ? (
             <div className={`absolute pressable  ${styles.voteCard}`}>
               {isUserLoggedIn ? (
                 <div
