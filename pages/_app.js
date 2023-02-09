@@ -62,83 +62,58 @@ function App({ Component, pageProps }) {
         <link
           rel="icon"
           type="image/png"
-          sizes="16x16"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/16.png`}
-        />
-        <link
-          rel="image/png"
-          sizes="32x32"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/32.png`}
-        />
-        <link
-          rel="image/png"
-          sizes="48x48"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/48.png`}
+          sizes="64x64"
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-64x64.png`}
         />
         <link
           rel="apple-touch-icon"
           sizes="57x57"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/57.png`}
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-57x57.png`}
         />
         <link
           rel="apple-touch-icon"
           sizes="60x60"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/60.png`}
-        />
-        <link
-          rel="image/png"
-          sizes="64x64"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/64.png`}
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-60x60.png`}
         />
         <link
           rel="apple-touch-icon"
           sizes="72x72"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/72.png`}
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-72x72.png`}
         />
         <link
           rel="apple-touch-icon"
           sizes="76x76"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/76.png`}
-        />
-        <link
-          rel="image/png"
-          sizes="96x96"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/96.png`}
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-76x76.png`}
         />
         <link
           rel="apple-touch-icon"
-          sizes="180x180"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/180.png`}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/64.png`}
-        />
-        <link
-          rel="icon"
-          type="image/png"
           sizes="114x114"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/114.png`}
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-114x114.png`}
         />
         <link
-          rel="icon"
-          type="image/png"
+          rel="apple-touch-icon"
           sizes="120x120"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/120.png`}
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-120x120.png`}
         />
+
         <link
           rel="icon"
           type="image/png"
-          sizes="144x144"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/144.png`}
+          sizes="32x32"
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-32x32.png`}
+        />
+
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-16x16.png`}
         />
         <link
           rel="shortcut icon"
           type="image/png"
-          sizes="152x152"
-          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/152.png`}
+          sizes="48x48"
+          href={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/favicons/non-48x48.png`}
         />
       </Head>
       <WagmiConfig client={wagmiClient}>
