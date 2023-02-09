@@ -124,6 +124,11 @@ export default function VoteCard(props) {
     window.open(viewLensUrl, "_blank");
   };
 
+  const ViewProfileonLens = () => {
+    let viewLensUrl = "https://testnet.lenster.xyz/u/" + character?.handle;
+    window.open(viewLensUrl, "_blank");
+  };
+
   useEffect(() => {
     const titleHeight = titleWrapperRef.current?.clientHeight;
     const wrapHeight = bioParentWrapperRef.current?.clientHeight;
@@ -170,9 +175,14 @@ export default function VoteCard(props) {
         </div>
 
         <div className={`${styles.showPrompt} `} ref={handleWrapperRef}>
-          <div className={`${styles.id} mb-[16px]`}>@{character.handle}</div>
           <div
-            className={`${styles.showPromptHover} opacity-60 hover:opacity-100 text-[#fff] cursor-pointer transition flex items-center gap-1 mb-[16px]`}
+            className={`${styles.id} hover:text-[#adff00] mb-[16px] cursor-pointer`}
+            onClick={ViewProfileonLens}
+          >
+            @{character.handle}
+          </div>
+          <div
+            className={`${styles.showPromptHover} opacity-60 hover:opacity-100 text-[#fff] cursor-pointer transition flex items-center gap-1 mb-[16px] font-semibold`}
             onClick={togglePrompt}
           >
             {promtStatusIcon} {promtStatusText}

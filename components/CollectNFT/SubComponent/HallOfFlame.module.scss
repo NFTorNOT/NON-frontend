@@ -1,6 +1,6 @@
 .container {
   margin: auto;
-  width: 1104px;
+  width: 1054px;
 }
 .carouselItems {
   display: flex;
@@ -30,7 +30,7 @@
 }
 .prev {
   position: absolute;
-  left: -30px;
+  left: -25px;
   top: 50%;
   transform: translateY(-50%);
   color: #ffffff;

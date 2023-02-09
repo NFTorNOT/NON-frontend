@@ -44,42 +44,45 @@ export default function BottomTabSelector() {
     if (!isUserLoggedIn && isUserLoggedIn !== undefined) {
       return;
     }
-    try {
-      setIsLoading(true);
-      const recentUpvotedNFTSResponse = await axiosInstance.get(
-        `/recent-upvoted-nfts`
-      );
-      const recentUpvotedNFTSData = recentUpvotedNFTSResponse.data.data;
-      if (!recentUpvotedNFTSData) {
-        return;
-      }
-      const recentUpvotedLensPostIdsArr = recentUpvotedNFTSData.lens_posts_ids;
-      const recentUpvotedLensPostsMap = recentUpvotedNFTSData.lens_posts;
-      const recentUpvotedLensPostImagesMap = recentUpvotedNFTSData.images;
-      const recentUpvotedLensPostDetails = [];
+    if (isUserLoggedIn) {
+      try {
+        setIsLoading(true);
+        const recentUpvotedNFTSResponse = await axiosInstance.get(
+          `/recent-upvoted-nfts`
+        );
+        const recentUpvotedNFTSData = recentUpvotedNFTSResponse.data.data;
+        if (!recentUpvotedNFTSData) {
+          return;
+        }
+        const recentUpvotedLensPostIdsArr =
+          recentUpvotedNFTSData.lens_posts_ids;
+        const recentUpvotedLensPostsMap = recentUpvotedNFTSData.lens_posts;
+        const recentUpvotedLensPostImagesMap = recentUpvotedNFTSData.images;
+        const recentUpvotedLensPostDetails = [];
 
-      for (let cnt = 0; cnt < recentUpvotedLensPostIdsArr.length; cnt++) {
-        const lensPost =
-          recentUpvotedLensPostsMap[recentUpvotedLensPostIdsArr[cnt]];
+        for (let cnt = 0; cnt < recentUpvotedLensPostIdsArr.length; cnt++) {
+          const lensPost =
+            recentUpvotedLensPostsMap[recentUpvotedLensPostIdsArr[cnt]];
 
-        if (!lensPost) {
-          continue;
+          if (!lensPost) {
+            continue;
+          }
+
+          let imageId = lensPost.image_id;
+          let imageObj =
+            recentUpvotedLensPostImagesMap &&
+            recentUpvotedLensPostImagesMap[imageId];
+
+          recentUpvotedLensPostDetails.push({
+            url: imageObj.url,
+          });
         }
 
-        let imageId = lensPost.image_id;
-        let imageObj =
-          recentUpvotedLensPostImagesMap &&
-          recentUpvotedLensPostImagesMap[imageId];
-
-        recentUpvotedLensPostDetails.push({
-          url: imageObj.url,
-        });
+        setRecentCollectedNFTS(recentUpvotedLensPostDetails.reverse());
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
       }
-
-      setRecentCollectedNFTS(recentUpvotedLensPostDetails.reverse());
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
     }
   }
 

@@ -2,8 +2,8 @@ import * as React from "react";
 
 const FireSmallSvg = (props) => (
   <svg
-    width={24}
-    height={26}
+    width={props.width}
+    height={props.height}
     viewBox="0 0 24 26"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

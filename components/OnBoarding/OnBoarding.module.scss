@@ -125,17 +125,13 @@
 }
 
 .onBoardingHeading {
+  font-family: 'Satoshi Variable';
   margin-left: 10px;
   text-align: center;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  /* identical to box height, or 26px */
-
   font-feature-settings: "salt" on;
-
-  /* Light Green Radial */
-
   background: linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.2),
@@ -158,31 +154,27 @@
 }
 
 .heading {
+    font-family: 'Satoshi Variable';
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
   line-height: 160%;
-  /* or 32px */
-
   display: flex;
   align-items: flex-end;
   text-align: center;
   font-feature-settings: "salt" on;
-
   color: #ffffff;
 }
 
 .subHeading {
+  font-family: 'Satoshi Variable';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 160%;
-  /* identical to box height, or 26px */
-
   display: flex;
   align-items: flex-end;
   font-feature-settings: "salt" on;
-
   background: radial-gradient(
     107.14% 107.14% at 50% 80.95%,
     #fa5c00 0%,

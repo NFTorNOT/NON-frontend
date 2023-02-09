@@ -13,7 +13,7 @@ function SubmitForVoteModal({
   const infoMap = [
     {
       svgIcon: <MessageCircle />,
-      desc: "When you submit your NFT generation, a post is made on Lenster",
+      desc: "When you submit your NFT generation, a post is made on Lens",
     },
     {
       svgIcon: <Collect />,
@@ -28,6 +28,7 @@ function SubmitForVoteModal({
     return null;
   }
   return (
+    <div className="fixed inset-[-35px] z-[11]">
     <div className={styles.popup}>
       <div
         className={`${styles.submitForVoteInfo} py-[40px] px-[30px] relative`}
@@ -62,6 +63,7 @@ function SubmitForVoteModal({
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

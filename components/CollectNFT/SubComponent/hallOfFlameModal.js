@@ -8,6 +8,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Navigation } from "swiper";
 import { TRENDING_THEMES } from "../../../utils/Constants";
 import Card from "../../Card";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 function HallOfFlameModal({
   shown,
@@ -32,7 +33,7 @@ function HallOfFlameModal({
           e.stopPropagation();
         }}
       >
-        <button onClick={close} className="absolute top-0 right-0">
+        <button onClick={close} className="absolute top-[7.64%] right-[7.64%]">
           <HofCross />
         </button>
 
@@ -83,17 +84,19 @@ function HallOfFlameModal({
                               </span>
                               {index < Themes.length - 1 ? (
                                 <span
-                                  className={`${styles.dot} mx-[10px]`}
+                                  className={`${styles.dot} mx-[10px] inline-block mb-[5px]`}
                                 ></span>
                               ) : null}
                             </div>
                           );
                         })}
                     </div>
-
+                      <OutsideClickHandler
+                    onOutsideClick={() => {close();}}
+                  >
                     <div className="flex items-center justify-center">
                       <div className={`modalPrev mr-[60px] `}>
-                        <div
+                    <div
                           className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
                         >
                           <LeftArrow />
@@ -110,7 +113,6 @@ function HallOfFlameModal({
                           <RightArrow />
                         </div>
                       </div>
-                    </div>
                     {/* <div
                       className={`${styles.card} flex items-center justify-center mt-[20px]`}
                       style={{
@@ -177,8 +179,9 @@ function HallOfFlameModal({
                             </span>
                           </button>
                         )}
-                      </div>
-                    </div> */}
+                      </div>*/}
+                    </div> 
+                    </OutsideClickHandler>
                   </div>
                 </SwiperSlide>
               );
