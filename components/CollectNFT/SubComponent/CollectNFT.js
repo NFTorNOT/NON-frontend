@@ -141,7 +141,7 @@ function CollectNFT(props) {
       ) : null}
 
       {!isUserLoggedIn && !isLoading ? (
-        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center ml-[35px] mr-[35px]">
+        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px]">
             <div>Oops! It's Empty</div>
             <div className="flex items-center mt-[5px]">
@@ -161,7 +161,7 @@ function CollectNFT(props) {
       ) : null}
 
       {allData.current.length == 0 && !isLoading && isUserLoggedIn ? (
-        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center ml-[35px] mr-[35px]">
+        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px] ">
             <div>Oops! It's Empty</div>
             <div className="flex items-center">
