@@ -185,7 +185,7 @@ export default function BottomTabSelector() {
         </div>
 
         <button
-          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] text-end items-center`}
+          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] items-center`}
           onClick={handleTrueSparrowClick}
         >
           <span> Made with 🧡 by True Sparrow</span>
