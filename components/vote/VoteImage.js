@@ -404,7 +404,7 @@ export default function VoteImage() {
               </div>
             ))}
 
-          {data.length == 0 && isFirstTimeLoaded.current ? (
+          {data.length !== 0 && isFirstTimeLoaded.current ? (
             <div className={`absolute pressable  ${styles.voteCard}`}>
               {isUserLoggedIn ? (
                 <div
@@ -432,8 +432,8 @@ export default function VoteImage() {
                   <div
                     className={`flex justify-center items-center ${styles.emptyText}`}
                   >
-                    <p>
-                      To continue voting,{" "}
+                    <span>
+                      To continue voting,
                       <button
                         onClick={() => {
                           setShouldShowSignInModal(true);
@@ -442,9 +442,11 @@ export default function VoteImage() {
                       >
                         Sign in
                       </button>{" "}
-                      and get started & save your{" "}
-                    </p>
-                    <FireSmallSvg height={26} width={24} />
+                      and get started & save your
+                    </span>
+                    <span>
+                      <FireSmallSvg height={26} width={24} />
+                    </span>
                     <span>votes now.</span>
                   </div>
                 </div>
