@@ -24,8 +24,8 @@ export default function BottomTabSelector() {
   const [loading, setIsLoading] = useState(false);
   const { isUserLoggedIn } = useAuthContext();
 
-  const handlePLGClick = () => {
-    const plgURL = "https://plgworks.com/";
+  const handleTrueSparrowClick = () => {
+    const plgURL = "https://truesparrow.com/";
     window.open(plgURL, "_blank");
   };
 
@@ -185,10 +185,10 @@ export default function BottomTabSelector() {
         </div>
 
         <button
-          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] text-end items-center`}
-          onClick={handlePLGClick}
+          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] items-center`}
+          onClick={handleTrueSparrowClick}
         >
-          Made with <span className="text-[#FA5C00]">🧡</span> by PLG
+          <span> Made with 🧡 by True Sparrow</span>
         </button>
       </div>
     </>
