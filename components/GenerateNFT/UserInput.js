@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "./Generate.module.scss";
 
@@ -7,8 +7,14 @@ function UserInput({
   image,
   onSubmitToVote,
   putImageToVoteInProgress,
+  oldImageTitle,
 }) {
   const [imageTitle, setImageTitle] = useState("");
+
+  useEffect(() => {
+    setImageTitle(oldImageTitle);
+  }, [oldImageTitle]);
+
   return (
     <div className="absolute bottom-0 w-full">
       <input
@@ -18,7 +24,7 @@ function UserInput({
         onChange={(event) => {
           setImageTitle(event.target.value);
           onSubmit(event.target.value);
-        }}
+        }}  
         placeholder="Enter a title for your masterpiece..."
         className={`${styles.masterpeice} focus:outline-none`}
       />
