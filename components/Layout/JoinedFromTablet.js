@@ -1,6 +1,5 @@
 import React from "react";
 import { LensIconSvg } from "../vote/svg/LensIconSvg";
-import { NONLogoSvgSmall } from "./NONLogoSvgBig";
 import styles from "./SmallScreen.module.scss";
 import SmallScreenData from "./SmallScreenData";
 
