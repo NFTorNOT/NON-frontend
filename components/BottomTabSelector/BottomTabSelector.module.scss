@@ -246,3 +246,18 @@ $github-fill-color: #FFFFFF;
     display: none;
    }
 }
+
+@media only screen and (max-width: 700px) {
+  .background{
+    flex-direction: column;
+    gap: 10px;
+  }
+ .leftBar{
+  width: unset;
+  padding-left: 53px;
+  margin-top: unset;
+ }
+ .madeWithPLG{
+  width: unset;
+ }
+}

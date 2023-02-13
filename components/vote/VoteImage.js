@@ -402,17 +402,14 @@ export default function VoteImage() {
         >
           {data.length > 0 &&
             data.map((character, index) => (
-              <div
-                key={index}
-                className={`absolute pressable  ${styles.voteCard}`}
-              >
-                <VoteCard character={character}></VoteCard>
-                {isUserLoggedIn && (
-                  <div className={`${styles.cardCount} text-white/80 z-[10]`}>
-                    {totalCards > 30 ? "30+" : totalCards} left
-                  </div>
-                )}
-              </div>
+              <>
+                <div
+                  key={index}
+                  className={`absolute pressable  ${styles.voteCard}`}
+                >
+                  <VoteCard character={character}></VoteCard>
+                </div>
+              </>
             ))}
 
           {data.length == 0 && isFirstTimeLoaded.current ? (
@@ -453,6 +450,11 @@ export default function VoteImage() {
         </div>
         {data.length > 0 ? (
           <>
+            {isUserLoggedIn && (
+              <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+                {totalCards > 30 ? "30+" : totalCards} left
+              </div>
+            )}
             <button
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
