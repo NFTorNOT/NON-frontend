@@ -4,7 +4,6 @@ import styles from "./SubmitForVoteModal.module.scss";
 import Collect from "./svg/Collect";
 import MessageCircle from "./svg/MessageCircle";
 import Modal from 'react-modal';
-import HofCross from "../../CollectNFT/SubComponent/SVG/hofCross";
 
 function SubmitForVoteModal({
   visible,
