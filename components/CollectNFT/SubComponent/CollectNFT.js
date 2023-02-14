@@ -7,6 +7,10 @@ import { axiosInstance } from "../../../AxiosInstance";
 import { useAuthContext } from "../../../context/AuthContext";
 import { ClipLoader } from "react-spinners";
 import Card from "../../Card";
+import UserApi from "../../../graphql/UserApi";
+import { useAccount } from "wagmi";
+import CustomSignInModal from "../../CustomSignInModal";
+import EnableDispatcherModal from "../../EnableDispatcherModal";
 
 function CollectNFT(props) {
   const [modalShown, toggleModal] = useState(false);
@@ -14,6 +18,10 @@ function CollectNFT(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [modalData, setModalData] = useState();
   const [collectData, setCollectData] = useState([]);
+  const { address } = useAccount();
+  const [isDispatcherEnabled,setIsDispatcherEnabled] = useState(false);
+  const [showSignInModal,setShowSignInModal] = useState(false);
+  const [showDispatcherModal,setShowDispatcherModal] = useState(false);
   const isFirstTimeLoading = useRef(false);
   const allData = useRef([]);
   let hasNextPageIdentifier = useRef(null);
@@ -92,12 +100,25 @@ function CollectNFT(props) {
     }
   };
 
-  const showModal = (ele) => {
+  const showModal = async (ele) => {
     //removed to allow multiple collect
     // if (ele.hasCollected) {
     //   return;
     // }
     setModalData({ ...ele });
+    setShowSignInModal(!isUserLoggedIn);
+ 
+    const defaultProfileResponse = await UserApi.defaultProfile({
+      walletAddress: address,
+    });
+
+    const defaultProfile = defaultProfileResponse?.data?.defaultProfile;
+
+    if (!defaultProfile?.dispatcher?.address) {
+      setIsDispatcherEnabled(false);
+    } else setIsDispatcherEnabled(true);
+    setShowDispatcherModal(!isDispatcherEnabled);
+
     toggleModal(!modalShown);
   };
 
@@ -121,16 +142,28 @@ function CollectNFT(props) {
 
   return (
     <div className={`${styles.collectNft} mt-[40px]  min-h-0 container pl-0 pr-0`}>
-      {modalShown ? (
-        <CollectNFTModal
+      
+        {showSignInModal && !isUserLoggedIn? (
+          <CustomSignInModal
+            isOpen={showSignInModal}
+            onRequestClose={()=>setShowSignInModal(false)}
+            onSuccess={() => showModal(modalData)}
+          />) : null}
+
+          {showDispatcherModal&&isUserLoggedIn&&!isDispatcherEnabled?(
+            <EnableDispatcherModal
+                onClose={()=>setShowDispatcherModal(false)}
+                onSuccess={()=>showModal(modalData)}
+              />):null}
+
+        {modalShown&&isUserLoggedIn&&isDispatcherEnabled ?(<CollectNFTModal
           modalData={modalData}
           shown={modalShown}
           close={() => {
             toggleModal(false);
           }}
-        />
-      ) : null}
-      <div className={`text-[#ffffff] font-bold text-[20px] ml-[15px] xl:ml-[40px] leading-[32px] justify-center`}>
+        />):null}
+      <div className={`text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center`}>
         Collect NFTs
       </div>
 

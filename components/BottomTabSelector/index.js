@@ -31,7 +31,7 @@ export default function BottomTabSelector() {
 
   const handleHowItWorks = () => {
     const plgURL =
-      "https://www.notion.so/plgworks/NFT-or-Not-61e944ba261f49a2805c73468c92a43a";
+      "https://www.notion.so/truesparrow/NFT-or-Not-61e944ba261f49a2805c73468c92a43a";
     window.open(plgURL, "_blank");
   };
 
@@ -116,7 +116,7 @@ export default function BottomTabSelector() {
 
           <TwitterShareButton
             className={`${styles.twitterShare} cursor-pointer ml-[15px] flex`}
-            url={"https://plgworks.com/"}
+            url={"https://truesparrow.com/"}
             title={"Sharing text goes Here"}
           >
             <span className="z-10 pl-[5px]">
@@ -185,7 +185,7 @@ export default function BottomTabSelector() {
         </div>
 
         <button
-          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] items-center`}
+          className={`${styles.madeWithPLG}  font-medium flex justify-end text-[16px] leading-[26px] text-[#ffffff99] items-center`}
           onClick={handleTrueSparrowClick}
         >
           <span> Made with 🧡 by True Sparrow</span>
