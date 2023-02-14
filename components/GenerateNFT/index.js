@@ -134,7 +134,13 @@ export default function GenerateNFT() {
           };
           
           let x = data.prompt.search(/[^\w|\s]/g);
-          if(x<=0) x=data.prompt.length;
+          if(x<=0 || x>48){
+            if(data.prompt.length<=48) x=data.prompt.length;
+            else{
+              for(let i=48;i>=0;i--) if(data.prompt.charAt(i)==' ') {x=i; break;}
+              if(x==-1) x=48;
+            }
+          }
           data.title = data.prompt.charAt(0).toUpperCase()+data.prompt.substr(1,x-1);
 
           currentGeneratedImages.push(data);

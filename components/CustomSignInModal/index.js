@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import CustomConnectButton from "../TopBar/SignInButton/CustomConnectButton";
 import FireSmallSvg from "../vote/svg/FirstTimeUser/FireSmallSvg";
 Modal.setAppElement("*");
-const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo }) => {
+const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo,onSuccess }) => {
   const { isConnected } = useAccount();
   const [shouldCallSignInMethod, setShouldCallSignInMethopd] = useState(false);
   const isPreviouslyConnected = useRef(isConnected);
@@ -52,7 +52,7 @@ const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo }) => {
         ) : (
           <SignInButton
             showSquareLoginButton={true}
-            onSuccess={onRequestClose}
+            onSuccess={() => {onRequestClose(); if(onSuccess) onSuccess();}}
             isSignInModalOpen={isOpen}
             key={isConnected}
             isWalletConnected={shouldCallSignInMethod}

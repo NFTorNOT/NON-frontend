@@ -9,13 +9,24 @@ import "swiper/css/navigation";
 import HallOfFlameModal from "./hallOfFlameModal";
 import { axiosInstance } from "../../../AxiosInstance";
 import CollectNFTModal from "./collectNFTModal";
+import { useAuthContext } from "../../../context/AuthContext";
+import UserApi from "../../../graphql/UserApi";
+import { useAccount } from "wagmi";
+import CustomSignInModal from "../../CustomSignInModal";
+import EnableDispatcherModal from "../../EnableDispatcherModal";
 
 function HallOfFlame(props) {
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState();
   const [showCollectModal, setShowCollectModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { isUserLoggedIn } = useAuthContext();
+  const [isSubModalOpen,setIsSubModalOpen] = useState(false);
   const swiperRef = useRef();
+  const { address } = useAccount();
+  const [isDispatcherEnabled,setIsDispatcherEnabled] = useState(false);
+  const [showSignInModal,setShowSignInModal] = useState(false);
+  const [showDispatcherModal,setShowDispatcherModal] = useState(false);
 
   let hasNextPageIdentifier = useRef(null);
 
@@ -116,8 +127,23 @@ function HallOfFlame(props) {
     setShowModal(!showModal);
   };
 
-  const onCollectNowClicked = (ele) => {
+  const onCollectNowClicked = async (ele) => {
     setModalData(ele);
+    setIsSubModalOpen(true);
+
+    setShowSignInModal(!isUserLoggedIn);
+ 
+    const defaultProfileResponse = await UserApi.defaultProfile({
+      walletAddress: address,
+    });
+
+    const defaultProfile = defaultProfileResponse?.data?.defaultProfile;
+
+    if (!defaultProfile?.dispatcher?.address) {
+      setIsDispatcherEnabled(false);
+    } else setIsDispatcherEnabled(true);
+    setShowDispatcherModal(!isDispatcherEnabled);
+
     setShowCollectModal(true);
   };
 
@@ -133,13 +159,28 @@ function HallOfFlame(props) {
         onCollectNow={(modalData) => {
           onCollectNowClicked(modalData);
         }}
+        isSubModalOpen={isSubModalOpen}
       />
-      {showCollectModal ? (
+      {showSignInModal&&!isUserLoggedIn? (
+      <CustomSignInModal
+        isOpen={showSignInModal}
+        onRequestClose={()=>{setShowSignInModal(false); setIsSubModalOpen(false);}}
+        onSuccess={() => onCollectNowClicked(modalData)}
+      />) : null}
+
+      {showDispatcherModal&&isUserLoggedIn&&!isDispatcherEnabled?(
+        <EnableDispatcherModal
+            onClose={()=>{setShowDispatcherModal(false); setIsSubModalOpen(false);}}
+            onSuccess={()=>onCollectNowClicked(modalData)}
+          />):null}
+
+      {showCollectModal&&isUserLoggedIn&&isDispatcherEnabled ? (
         <CollectNFTModal
           modalData={modalData}
           shown={showCollectModal}
           close={() => {
             setShowCollectModal(false);
+            setIsSubModalOpen(false);
           }}
         />
       ) : null}

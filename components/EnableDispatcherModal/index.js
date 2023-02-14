@@ -8,7 +8,7 @@ import LensHelper from "../../utils/LensHelper";
 import CheckedCircle from "../SignInModal/CheckedCircle";
 import styles from "./EnableDispatcher.module.css";
 
-const EnableDispatcherModal = ({ onClose }) => {
+const EnableDispatcherModal = ({ onClose,onSuccess }) => {
   const [openDispatcherModal, setIsOpenDispatcherModal] = useState(true);
   const { userProfile } = useUserContext();
   const { signTypedDataAsync, isError } = useSignTypedData();
@@ -45,6 +45,7 @@ const EnableDispatcherModal = ({ onClose }) => {
       const res = await LensHelper.pollUntilIndexed({ txHash });
       if (res.indexed) {
         onClose();
+        if(onSuccess) onSuccess();
       }
     } catch (error) {
       setIsLoading(false);
@@ -76,7 +77,7 @@ const EnableDispatcherModal = ({ onClose }) => {
       <div className={`${styles.ModalContainer}`}>
         <div>
           <div
-            className={`flex justify-center box-border items-center w-[234px] h-[40px] bg-[#ABFE2C] text-[#00501E] backdrop-blur rounded-[4px]  cursor-pointer border-[1px] border-solid border-black/20`}
+            className={`flex justify-center box-border items-center w-[217px] h-[40px] bg-[#ABFE2C] text-[#00501E] backdrop-blur rounded-[4px]  cursor-pointer border-[1px] border-solid border-black/20`}
             onClick={enableDispatcher}
           >
             {isLoading ? (
