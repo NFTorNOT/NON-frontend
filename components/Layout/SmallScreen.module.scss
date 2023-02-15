@@ -1,0 +1,151 @@
+.card {
+    width: 80vw;
+    position: absolute;
+    max-width: 300px;
+    height: 300px;
+    // box-shadow: 1px 1px 6px 0px rgb(0 0 0 / 30%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    place-content: end;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.4), 0px 16px 24px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(60px);
+
+    @media screen and (min-width: 568px) {
+        margin: 0 20px;
+        max-width: 512px;
+        height: 100%;
+    }
+}
+
+.cardContainer {
+        max-width: 300px;
+        width: 90vw;
+        margin: 0 20px;
+        max-width: 512px;
+}
+
+.voteCards {
+    .voteCard {
+        &:last-child {
+            // transform: rotate(0deg) scale(1) !important;
+            transition-delay: 0.25s;
+            transition-duration: 1s;
+        }
+
+        &:nth-last-child(2) {
+            transform: rotate(5deg) scale(0.92) !important;
+            transform-origin: bottom right;
+            transition-delay: 0.25s;
+            transition-duration: 1s;
+        }
+
+        &:nth-last-child(3) {
+            transform: rotate(-5deg) scale(0.92) !important;
+            transform-origin: bottom left;
+            transition-delay: 0.25s;
+            transition-duration: 1s;
+        }
+    }
+}
+
+.smallScreenCard {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 32px;
+    gap: 24px;
+    width: 512px;
+    left: calc(50% - 512px / 2);
+    top: calc(50% - 512px / 2);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 8px 8px -8px rgba(0, 0, 0, 0.4),
+        0px 16px 24px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(60px);
+    border-radius: 16px;
+}
+.headingContainer {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 43px;
+}
+.smallScreenHeading {
+    margin-left: 10px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    /* identical to box height, or 26px */
+
+    font-feature-settings: "salt" on;
+
+    /* Light Green Radial */
+
+    background: linear-gradient(0deg,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.2)),
+        radial-gradient(107.14% 107.14% at 50% 80.95%, #adff00 0%, #7dfa00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heading {
+    font-family: 'Satoshi Variable';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 160%;
+        display: flex;
+        align-items: flex-end;
+        text-align: center;
+        font-feature-settings: 'salt' on;
+        color: #FFFFFF;
+}
+
+.subHeading1 {
+    font-family: 'Satoshi Variable';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 160%;
+        display: flex;
+        align-items: flex-end;
+        text-align: center;
+        font-feature-settings: 'salt' on;
+        color: rgba(255, 255, 255, 0.6);
+}
+
+.subHeading2 {
+font-family: 'Satoshi Variable';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 160%;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    font-feature-settings: 'salt' on;
+    color: #FFFFFF;
+}
+
+@media only screen and (max-width: 700px) {
+    .heading {
+    font-size: 16px;
+    }
+
+    .subHeading1 {
+        font-size: 14px;
+    }
+    .subHeading2 {
+        font-size: 14px;
+    }
+}
