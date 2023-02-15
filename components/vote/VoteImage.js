@@ -44,7 +44,6 @@ export default function VoteImage() {
     setShouldShowWhatIsTrendingThemeModal,
   ] = useState(false);
   const [data, setData] = useState([]);
-  const cardsLeft = 10;
   const [totalCards, setTotalCards] = useState();
   const allTrendingThemes = useRef([]);
 
