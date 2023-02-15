@@ -35,6 +35,7 @@ export default function VoteImage() {
   const maxCount = 5;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
+  const [pageInfo, setPageInfo] = useState();
   const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
   const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
 
@@ -239,6 +240,7 @@ export default function VoteImage() {
   const submitVote = (dir) => {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setPageInfo("votePage");
       setCount(maxCount);
       return;
     }
@@ -272,6 +274,7 @@ export default function VoteImage() {
     setTotalCards(totalCards - 1);
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setPageInfo("votePage");
       setCount(maxCount);
       return;
     }
@@ -388,7 +391,7 @@ export default function VoteImage() {
         <CustomSignInModal
           isOpen={shouldShowSignInModal}
           onRequestClose={() => setShouldShowSignInModal(false)}
-          pageInfo={"votePage"}
+          pageInfo={pageInfo}
         />
 
         <TrendingThemeModal
@@ -418,7 +421,7 @@ export default function VoteImage() {
                 <div
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
-                  <div className={styles.emptyText}>
+                  <div className={`flex items-end ${styles.emptyText}`}>
                     Oops, all generations are exhausted. Meanwhile, Collect hot
                     NFTs by your lens frens and show your support💰
                   </div>
@@ -435,13 +438,27 @@ export default function VoteImage() {
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-0 w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
                   <div className={styles.emptyText}>
-                    <span>Oops, all generations are exhausted.</span>
+                    <span>That's all for now folks!</span>
                   </div>
-                  <div
-                    className={`flex justify-center items-center ${styles.emptyText}`}
-                  >
-                    Sign in to save your <FireSmallSvg height={26} width={24} />{" "}
-                    votes now.
+                  <div className={`flex justify-center items-center`}>
+                    <span className={`${styles.emptyText}`}>
+                      <button
+                        onClick={() => {
+                          setShouldShowSignInModal(true);
+                          setPageInfo("");
+                        }}
+                        className="hover:text-[#adff00] underline"
+                      >
+                        Sign in
+                      </button>{" "}
+                      to get started & save your{" "}
+                      <FireSmallSvg
+                        className={"inline"}
+                        height={26}
+                        width={24}
+                      />{" "}
+                      votes now.
+                    </span>
                   </div>
                 </div>
               )}
@@ -468,6 +485,7 @@ export default function VoteImage() {
                 setCount(count - 1);
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setPageInfo("votePage");
                   setCount(maxCount);
                   return;
                 }
@@ -514,6 +532,7 @@ export default function VoteImage() {
                 setCount(count - 1);
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setPageInfo("votePage");
                   setCount(maxCount);
                   return;
                 }
