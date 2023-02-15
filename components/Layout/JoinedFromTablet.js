@@ -18,10 +18,10 @@ function JoinedFromTablet() {
               className={`absolute pressable  ${styles.voteCard}`}
             >
               <div className={`${styles.card}`}>
-                <div className={styles.onBoardingCard}>
+                <div className={styles.smallScreenCard}>
                   <div className={styles.headingContainer}>
                     <LensIconSvg />
-                    <div className={styles.onBoardingHeading}>
+                    <div className={styles.smallScreenHeading}>
                       Built on Lens, For Lens Frens
                     </div>
                   </div>
