@@ -99,10 +99,8 @@ export default function BottomTabSelector() {
       {route == "/collect" ? (
         <div className={styles.bottomContainer}></div>
       ) : null}
-      <div className={`${styles.background} flex items-center`}>
-        <div
-          className={`${styles.leftBar} flex items-center mt-[12px] md:mt-0 justify-items-start`}
-        >
+      <div className={`${styles.background} grid grid-cols-5 items-center`}>
+        <div className="flex items-center mt-[12px] md:mt-0 justify-items-start">
           <button
             className={`${styles.howItWorks} flex items-center justify-start cursor-pointer relative`}
             onClick={handleHowItWorks}
