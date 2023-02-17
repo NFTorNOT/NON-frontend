@@ -9,10 +9,10 @@ export const NONLogoSvg = (props) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       {...props}
     >
-      <rect width={132} height={33} fill="url(#pattern0)" />
+      <rect width={132} height={33} fill="url(#pattern1)" />
       <defs>
         <pattern
-          id="pattern0"
+          id="pattern1"
           patternContentUnits="objectBoundingBox"
           width={1}
           height={1}

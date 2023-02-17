@@ -32,9 +32,10 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
-  const maxCount = 6;
+  const maxCount = 5;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
+  const [pageInfo, setPageInfo] = useState();
   const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
   const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
 
@@ -43,8 +44,7 @@ export default function VoteImage() {
     setShouldShowWhatIsTrendingThemeModal,
   ] = useState(false);
   const [data, setData] = useState([]);
-  const cardsLeft = 10;
-  const [totalCards, setTotalCards] = useState(cardsLeft);
+  const [totalCards, setTotalCards] = useState();
   const allTrendingThemes = useRef([]);
 
   const { isUserLoggedIn } = useAuthContext();
@@ -67,7 +67,7 @@ export default function VoteImage() {
 
   setTimeout(() => {
     isFirstTimeLoaded.current = true;
-  }, 1000);
+  }, 5000);
 
   async function fetchLensPost() {
     const lensPostData = await axiosInstance.get(`/nfts`, {
@@ -96,6 +96,18 @@ export default function VoteImage() {
     const usersMap = lensPostResponseData.users;
     const themesMap = lensPostResponseData.themes;
     const activeThemes = lensPostResponseData.active_theme_ids;
+    const total_posts_count = lensPostResponseData.stats.total_posts_count;
+    const total_ignored = lensPostResponseData?.user_stats?.total_ignored;
+    const total_voted = lensPostResponseData?.user_stats?.total_voted;
+    const total_no_reactions =
+      lensPostResponseData?.user_stats?.total_no_reactions;
+
+    setTotalCards(
+      lensPostResponseData.user_stats
+        ? total_posts_count - total_ignored - total_voted - total_no_reactions
+        : total_posts_count
+    );
+
     const lensPostDetails = [];
 
     let trendingThemes = [];
@@ -227,6 +239,7 @@ export default function VoteImage() {
   const submitVote = (dir) => {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setPageInfo("votePage");
       setCount(maxCount);
       return;
     }
@@ -260,6 +273,7 @@ export default function VoteImage() {
     setTotalCards(totalCards - 1);
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
+      setPageInfo("votePage");
       setCount(maxCount);
       return;
     }
@@ -376,7 +390,7 @@ export default function VoteImage() {
         <CustomSignInModal
           isOpen={shouldShowSignInModal}
           onRequestClose={() => setShouldShowSignInModal(false)}
-          pageInfo={"votePage"}
+          pageInfo={pageInfo}
         />
 
         <TrendingThemeModal
@@ -390,15 +404,14 @@ export default function VoteImage() {
         >
           {data.length > 0 &&
             data.map((character, index) => (
-              <div
-                key={index}
-                className={`absolute pressable  ${styles.voteCard}`}
-              >
-                <VoteCard character={character}></VoteCard>
-                {/* <div className={`${styles.cardCount} text-white/80 z-[10]`}>
-                  {totalCards} left
-                </div> */}
-              </div>
+              <>
+                <div
+                  key={index}
+                  className={`absolute pressable  ${styles.voteCard}`}
+                >
+                  <VoteCard character={character}></VoteCard>
+                </div>
+              </>
             ))}
 
           {data.length == 0 && isFirstTimeLoaded.current ? (
@@ -407,7 +420,7 @@ export default function VoteImage() {
                 <div
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
-                  <div className={styles.emptyText}>
+                  <div className={`flex items-end ${styles.emptyText}`}>
                     Oops, all generations are exhausted. Meanwhile, Collect hot
                     NFTs by your lens frens and show your support💰
                   </div>
@@ -424,13 +437,27 @@ export default function VoteImage() {
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-0 w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
                   <div className={styles.emptyText}>
-                    <span>Oops, all generations are exhausted.</span>
+                    <span>That's all for now folks!</span>
                   </div>
-                  <div
-                    className={`flex justify-center items-center ${styles.emptyText}`}
-                  >
-                    Sign in to save your <FireSmallSvg height={26} width={24} />{" "}
-                    votes now.
+                  <div className={`flex justify-center items-center`}>
+                    <span className={`${styles.emptyText}`}>
+                      <button
+                        onClick={() => {
+                          setShouldShowSignInModal(true);
+                          setPageInfo("");
+                        }}
+                        className="hover:text-[#adff00] underline"
+                      >
+                        Sign in
+                      </button>{" "}
+                      to get started & save your{" "}
+                      <FireSmallSvg
+                        className={"inline"}
+                        height={26}
+                        width={24}
+                      />{" "}
+                      votes now.
+                    </span>
                   </div>
                 </div>
               )}
@@ -439,6 +466,11 @@ export default function VoteImage() {
         </div>
         {data.length > 0 ? (
           <>
+            {isUserLoggedIn && (
+              <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+                {totalCards > 30 ? "30+" : totalCards} left
+              </div>
+            )}
             <button
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
@@ -452,6 +484,7 @@ export default function VoteImage() {
                 setCount(count - 1);
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setPageInfo("votePage");
                   setCount(maxCount);
                   return;
                 }
@@ -498,6 +531,7 @@ export default function VoteImage() {
                 setCount(count - 1);
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
+                  setPageInfo("votePage");
                   setCount(maxCount);
                   return;
                 }

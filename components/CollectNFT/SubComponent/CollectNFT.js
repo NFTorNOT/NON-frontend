@@ -7,6 +7,10 @@ import { axiosInstance } from "../../../AxiosInstance";
 import { useAuthContext } from "../../../context/AuthContext";
 import { ClipLoader } from "react-spinners";
 import Card from "../../Card";
+import UserApi from "../../../graphql/UserApi";
+import { useAccount } from "wagmi";
+import CustomSignInModal from "../../CustomSignInModal";
+import EnableDispatcherModal from "../../EnableDispatcherModal";
 
 function CollectNFT(props) {
   const [modalShown, toggleModal] = useState(false);
@@ -14,6 +18,10 @@ function CollectNFT(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [modalData, setModalData] = useState();
   const [collectData, setCollectData] = useState([]);
+  const { address } = useAccount();
+  const [isDispatcherEnabled, setIsDispatcherEnabled] = useState(false);
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showDispatcherModal, setShowDispatcherModal] = useState(false);
   const isFirstTimeLoading = useRef(false);
   const allData = useRef([]);
   let hasNextPageIdentifier = useRef(null);
@@ -92,12 +100,25 @@ function CollectNFT(props) {
     }
   };
 
-  const showModal = (ele) => {
+  const showModal = async (ele) => {
     //removed to allow multiple collect
     // if (ele.hasCollected) {
     //   return;
     // }
     setModalData({ ...ele });
+    setShowSignInModal(!isUserLoggedIn);
+
+    const defaultProfileResponse = await UserApi.defaultProfile({
+      walletAddress: address,
+    });
+
+    const defaultProfile = defaultProfileResponse?.data?.defaultProfile;
+
+    if (!defaultProfile?.dispatcher?.address) {
+      setIsDispatcherEnabled(false);
+    } else setIsDispatcherEnabled(true);
+    setShowDispatcherModal(!isDispatcherEnabled);
+
     toggleModal(!modalShown);
   };
 
@@ -120,8 +141,25 @@ function CollectNFT(props) {
   };
 
   return (
-    <div className={`${styles.collectNft} mt-[40px]  min-h-0`}>
-      {modalShown ? (
+    <div
+      className={`${styles.collectNft} mt-[40px]  min-h-0 container pl-0 pr-0`}
+    >
+      {showSignInModal && !isUserLoggedIn ? (
+        <CustomSignInModal
+          isOpen={showSignInModal}
+          onRequestClose={() => setShowSignInModal(false)}
+          onSuccess={() => showModal(modalData)}
+        />
+      ) : null}
+
+      {showDispatcherModal && isUserLoggedIn && !isDispatcherEnabled ? (
+        <EnableDispatcherModal
+          onClose={() => setShowDispatcherModal(false)}
+          onSuccess={() => showModal(modalData)}
+        />
+      ) : null}
+
+      {modalShown && isUserLoggedIn && isDispatcherEnabled ? (
         <CollectNFTModal
           modalData={modalData}
           shown={modalShown}
@@ -130,7 +168,9 @@ function CollectNFT(props) {
           }}
         />
       ) : null}
-      <div className="text-[#ffffff] font-bold text-[20px] leading-[32px] ml-[10px] justify-center">
+      <div
+        className={`text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center`}
+      >
         Collect NFTs
       </div>
 
@@ -141,7 +181,7 @@ function CollectNFT(props) {
       ) : null}
 
       {!isUserLoggedIn && !isLoading ? (
-        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center">
+        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px]">
             <div>Oops! It's Empty</div>
             <div className="flex items-center mt-[5px]">
@@ -161,7 +201,7 @@ function CollectNFT(props) {
       ) : null}
 
       {allData.current.length == 0 && !isLoading && isUserLoggedIn ? (
-        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center">
+        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px] ">
             <div>Oops! It's Empty</div>
             <div className="flex items-center">
@@ -188,7 +228,7 @@ function CollectNFT(props) {
 
       {allData.current.length > 0 && !isLoading && (
         <div
-          className={`${styles.scroll} flex flex-wrap  gap-y-[25px] justify-center max-h-[512px] overflow-y-scroll mt-[16px]`}
+          className={`${styles.scroll} flex flex-wrap  gap-y-[25px] justify-center max-h-[512px] overflow-y-scroll mt-[16px] m-auto`}
           onScroll={handleScroll}
         >
           {allData.current.length > 0 &&
@@ -198,6 +238,7 @@ function CollectNFT(props) {
                   key={index}
                   cardDetails={ele}
                   showCollectModal={() => showModal(ele)}
+                  style={{ marginLeft: "6px", marginRight: "6px" }}
                 />
                 // <div
                 //   key={index}

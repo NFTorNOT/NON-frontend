@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
 import { useUserContext } from "../../context/UserContext";
+import { NONLogoSvgBig } from "../Layout/NONLogoSvgBig";
 import NONLogo from "../NONLogo";
 import SignInButton from "./SignInButton";
 import ToastIcon from "./ToastIcon";
@@ -38,17 +39,21 @@ export default function TopBar() {
   }, [isUserLoggedIn]);
 
   return (
-    <div className={styles.container}>
-      <NONLogo />
-      <div>
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{ duration: 4000 }}
-        />
+    <>
+    <div className={styles.newImage}>
+        <div className={`${styles.bigNonlogo} flex items-center justify-center h-[100px]`}> <NONLogoSvgBig /> </div>
       </div>
-
-      <SignInButton />
-    </div>
+      <div className={styles.container}>
+          <NONLogo />
+        <div>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{ duration: 4000 }}
+          />
+        </div>
+        <SignInButton />
+      </div>
+      </>
   );
 }

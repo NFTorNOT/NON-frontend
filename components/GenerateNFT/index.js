@@ -32,7 +32,7 @@ export default function GenerateNFT() {
     backgroundImage: `url(${image})`,
   };
   const [prompt, setPromt] = useState(router.query["prompt"] || "");
-  const [filter, setfilter] = useState(router.query["filter"] || "CINEMATIC");
+  const [filter, setfilter] = useState(router.query["filter"] || "NONE");
   const [theme, setTheme] = useState("");
   const [selectedImageData, setSelectedImageData] = useState();
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
@@ -130,7 +130,24 @@ export default function GenerateNFT() {
             prompt: prompt.trim(),
             theme: theme,
             filter: filter,
+            title: "",
           };
+
+          let x = data.prompt.search(/[^\w|\s]/g);
+          if (x <= 0 || x > 48) {
+            if (data.prompt.length <= 48) x = data.prompt.length;
+            else {
+              for (let i = 48; i >= 0; i--)
+                if (data.prompt.charAt(i) == " ") {
+                  x = i;
+                  break;
+                }
+              if (x == -1) x = 48;
+            }
+          }
+          data.title =
+            data.prompt.charAt(0).toUpperCase() + data.prompt.substr(1, x - 1);
+
           currentGeneratedImages.push(data);
         }
 
@@ -279,12 +296,22 @@ export default function GenerateNFT() {
               {trendingThemes.current.map((ele) => {
                 return (
                   <option key={ele?.id} value={ele?.name}>
-                    {ele?.name === "other" ? "None" : `#${ele?.name.charAt(0).toUpperCase()+ele?.name.substr(1)}`}
+                    {ele?.name === "other"
+                      ? "None"
+                      : `#${
+                          ele?.name.charAt(0).toUpperCase() +
+                          ele?.name.substr(1)
+                        }`}
                   </option>
                 );
               })}
             </select>
-            <div className={` ${styles.containerHeadText} mt-[24px] mb-[8px]`}>Enter Prompt</div>
+            <div className={` ${styles.containerHeadText} mt-[24px]`}>
+              Enter Prompt
+            </div>
+            <div className={` ${styles.generateText} mb-[8px]`}>
+              Try to describe the image you want to generate as best as you can
+            </div>
             <textarea
               placeholder="Dramatic sky and buildings painting"
               value={prompt}
@@ -294,7 +321,9 @@ export default function GenerateNFT() {
                 setPromt(e.target.value);
               }}
             ></textarea>
-            <div className={`${styles.containerHeadText} mt-[12px]`}>Filter</div>
+            <div className={`${styles.containerHeadText} mt-[12px]`}>
+              Filter
+            </div>
             <div className={styles.generateText}>
               Explore various stylistic filters you can apply
             </div>
@@ -324,8 +353,10 @@ export default function GenerateNFT() {
             }}
             title="Generate Images"
           >
-            <div className={`flex flex-row justify-between`}>
-              <span className={`not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]`}>Generate Images</span>
+            <div className="flex flex-row justify-between">
+              <span className="not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]">
+                Generate AI Images
+              </span>
               <div>
                 <MagicIcon />
               </div>
@@ -352,7 +383,7 @@ export default function GenerateNFT() {
             {generatedImagesRef.current.length <= 0 ? (
               <div className={styles.emptyImageContainer}>
                 <div className="text-skin-base font-semibold mb-[5px]">
-                  Your Generations
+                  Your AI generations
                 </div>
                 <div className="grid gap-5 overflow-y-auto h-full grid-cols-2">
                   <div className={styles.emptyImageCell}>
@@ -402,7 +433,7 @@ export default function GenerateNFT() {
             ) : (
               <div style={sectionStyle}>
                 <div className="text-skin-base font-semibold m-[10px]">
-                  Your Generations
+                  Your AI generations
                 </div>
                 <div
                   id="generated-image-id"
@@ -435,6 +466,7 @@ export default function GenerateNFT() {
                             onSubmit={(value) => {
                               ele.title = value;
                             }}
+                            oldImageTitle={ele.title}
                           />
                         </div>
                       </div>

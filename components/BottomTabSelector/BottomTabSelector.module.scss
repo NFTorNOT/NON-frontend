@@ -3,6 +3,13 @@ $twitter-fill-color: #1da1f2;
 @import "./svg/githubIcon.module.scss";
 $github-fill-color: #FFFFFF;
 
+.background{
+  top: calc(100vh - 140px);
+  @media only screen and (max-height: 768px) {
+top: calc(100vh - 85px);
+    }
+}
+
 .container {
   border-radius: 100px;
   gap: 8px;
@@ -45,7 +52,7 @@ $github-fill-color: #FFFFFF;
   }
 
   100% {
-    transform: translate(0%, 50%);
+    transform: translate(0%, 0%);
     margin-top: 0%;
   }
 }
@@ -215,6 +222,8 @@ $github-fill-color: #FFFFFF;
   height: 109px;
   width: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 49.99%);
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .madeWithPLG {
@@ -230,3 +239,40 @@ $github-fill-color: #FFFFFF;
 //   backdrop-filter: blur(12px);
 //   border-radius: 100px;
 // }
+
+@media only screen and (max-width: 1024px) ,
+screen and (max-height: 734px){
+  .background{
+    display: flex;
+  }
+  .leftBar{
+    width: 100%;
+  }
+  .madeWithPLG{
+    width: 100%;
+  }
+  .container {
+    display: none;
+  }
+  .collectedNfts
+  {
+    display: none;
+   }
+}
+
+@media only screen and (max-width: 700px) {
+  .background{
+    flex-direction: column;
+    gap: 10px;
+    top: calc(100vh - 99px);
+  }
+ .leftBar{
+  width: unset;
+  padding-left: 53px;
+  margin-top: unset;
+ }
+ .madeWithPLG{
+  width: unset;
+  padding-right: unset;
+ }
+}

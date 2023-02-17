@@ -24,14 +24,14 @@ export default function BottomTabSelector() {
   const [loading, setIsLoading] = useState(false);
   const { isUserLoggedIn } = useAuthContext();
 
-  const handlePLGClick = () => {
-    const plgURL = "https://plgworks.com/";
+  const handleTrueSparrowClick = () => {
+    const plgURL = "https://truesparrow.com/";
     window.open(plgURL, "_blank");
   };
 
   const handleHowItWorks = () => {
     const plgURL =
-      "https://www.notion.so/plgworks/NFT-or-Not-61e944ba261f49a2805c73468c92a43a";
+      "https://www.notion.so/truesparrow/NFT-or-Not-61e944ba261f49a2805c73468c92a43a";
     window.open(plgURL, "_blank");
   };
 
@@ -99,8 +99,12 @@ export default function BottomTabSelector() {
       {route == "/collect" ? (
         <div className={styles.bottomContainer}></div>
       ) : null}
-      <div className={`${styles.background} grid grid-cols-5 items-center`}>
-        <div className="flex items-center mt-[12px] md:mt-0 justify-items-start">
+      <div
+        className={`${styles.background} grid grid-cols-5 items-center fixed left-0 right-0`}
+      >
+        <div
+          className={`${styles.leftBar} flex items-center mt-[12px] md:mt-0 justify-items-start pl-[25px]`}
+        >
           <button
             className={`${styles.howItWorks} flex items-center justify-start cursor-pointer relative`}
             onClick={handleHowItWorks}
@@ -116,7 +120,7 @@ export default function BottomTabSelector() {
 
           <TwitterShareButton
             className={`${styles.twitterShare} cursor-pointer ml-[15px] flex`}
-            url={"https://plgworks.com/"}
+            url={"https://truesparrow.com/"}
             title={"Sharing text goes Here"}
           >
             <span className="z-10 pl-[5px]">
@@ -144,6 +148,7 @@ export default function BottomTabSelector() {
             </div>
           </button>
         </div>
+
         <div
           className={`${styles.container} w-[640px] h-[56px] m-auto grid grid-cols-3 content-center gap-[8px] p-[8px] md:rounded-[100px] col-span-3 relative z-10`}
         >
@@ -185,10 +190,10 @@ export default function BottomTabSelector() {
         </div>
 
         <button
-          className={`${styles.madeWithPLG}  font-medium text-[16px] leading-[26px] text-[#ffffff99] text-end items-center`}
-          onClick={handlePLGClick}
+          className={`${styles.madeWithPLG}  font-medium flex justify-end text-[16px] leading-[26px] text-[#ffffff99] items-center pr-[25px]`}
+          onClick={handleTrueSparrowClick}
         >
-          Made with <span className="text-[#FA5C00]">🧡</span> by PLG
+          <span> Made with 🧡 by True Sparrow</span>
         </button>
       </div>
     </>

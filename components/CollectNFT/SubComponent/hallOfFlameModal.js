@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./hallOfFlameModal.module.scss";
 import Image from "next/image";
 import LeftArrow from "./SVG/leftArrow";
@@ -16,6 +16,7 @@ function HallOfFlameModal({
   hallOfFlameData,
   initialSlide,
   onCollectNow,
+  isSubModalOpen
 }) {
   const Themes = TRENDING_THEMES;  
   return shown ? (
@@ -84,7 +85,7 @@ function HallOfFlameModal({
                               </span>
                               {index < Themes.length - 1 ? (
                                 <span
-                                  className={`${styles.dot} mx-[10px]`}
+                                  className={`${styles.dot} mx-[10px] inline-block mb-[5px]`}
                                 ></span>
                               ) : null}
                             </div>
@@ -92,7 +93,7 @@ function HallOfFlameModal({
                         })}
                     </div>
                       <OutsideClickHandler
-                    onOutsideClick={() => {close();}}
+                    onOutsideClick={() => {if(!isSubModalOpen) close()}}
                   >
                     <div className="flex items-center justify-center">
                       <div className={`modalPrev mr-[60px] `}>

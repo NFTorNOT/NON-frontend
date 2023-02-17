@@ -3,6 +3,7 @@ import { ClipLoader } from "react-spinners";
 import styles from "./SubmitForVoteModal.module.scss";
 import Collect from "./svg/Collect";
 import MessageCircle from "./svg/MessageCircle";
+import Modal from 'react-modal';
 
 function SubmitForVoteModal({
   visible,
@@ -27,17 +28,28 @@ function SubmitForVoteModal({
   if (!visible) {
     return null;
   }
+
+  const customStyles={
+    content:{
+      background:"background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)",
+      backdropFilter: "blur(60px)",
+      borderRadius: "12px",
+      borderColor: "#000000",
+      height: "fit-content",
+      width: "fit-content",
+      margin:"auto",
+      padding:"0px"
+    },
+    overlay:{
+      background: "rgba(0, 0, 0, 0.6)",
+    }
+  }
+
   return (
-    <div className={styles.popup}>
+    <Modal onRequestClose={() => setsubmitToVoteModal(false)} isOpen={visible} style={customStyles}>
       <div
         className={`${styles.submitForVoteInfo} py-[40px] px-[30px] relative`}
       >
-        <div
-          className="absolute top-[20px] right-[10px] text-[#fff] text-[16px] cursor-pointer"
-          onClick={() => setsubmitToVoteModal(false)}
-        >
-          Close
-        </div>
         <div className="text-[#fff] font-bold text-[20px] leading-[32px]">
           Submit your generations
         </div>
@@ -62,7 +74,7 @@ function SubmitForVoteModal({
           </div>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
