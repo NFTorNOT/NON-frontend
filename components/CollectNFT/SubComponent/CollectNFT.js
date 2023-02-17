@@ -181,7 +181,7 @@ function CollectNFT(props) {
       ) : null}
 
       {!isUserLoggedIn && !isLoading ? (
-        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[471px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
+        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px]">
             <div>Oops! It's Empty</div>
             <div className="flex items-center mt-[5px]">
@@ -201,7 +201,7 @@ function CollectNFT(props) {
       ) : null}
 
       {allData.current.length == 0 && !isLoading && isUserLoggedIn ? (
-        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[471px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
+        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px] ">
             <div>Oops! It's Empty</div>
             <div className="flex items-center">
@@ -228,7 +228,7 @@ function CollectNFT(props) {
 
       {allData.current.length > 0 && !isLoading && (
         <div
-          className={`${styles.scroll} flex flex-wrap  gap-y-[25px] justify-center max-h-[471px] overflow-y-scroll mt-[16px] m-auto`}
+          className={`${styles.scroll} flex flex-wrap  gap-y-[25px] justify-center max-h-[512px] overflow-y-scroll mt-[16px] m-auto`}
           onScroll={handleScroll}
         >
           {allData.current.length > 0 &&

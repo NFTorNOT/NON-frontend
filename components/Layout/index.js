@@ -35,7 +35,6 @@ export default function Layout({ children, ...props }) {
               <SmallScreenData />
             </div>
           </div>
-
           <BottomTabSelector />
         </div>
       </div>

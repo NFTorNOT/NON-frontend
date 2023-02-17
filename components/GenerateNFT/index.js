@@ -124,24 +124,29 @@ export default function GenerateNFT() {
           if (!image) {
             continue;
           }
-        
+
           let data = {
             imageUrl: image.image_url,
             prompt: prompt.trim(),
             theme: theme,
             filter: filter,
-            title:"",
+            title: "",
           };
-          
+
           let x = data.prompt.search(/[^\w|\s]/g);
-          if(x<=0 || x>48){
-            if(data.prompt.length<=48) x=data.prompt.length;
-            else{
-              for(let i=48;i>=0;i--) if(data.prompt.charAt(i)==' ') {x=i; break;}
-              if(x==-1) x=48;
+          if (x <= 0 || x > 48) {
+            if (data.prompt.length <= 48) x = data.prompt.length;
+            else {
+              for (let i = 48; i >= 0; i--)
+                if (data.prompt.charAt(i) == " ") {
+                  x = i;
+                  break;
+                }
+              if (x == -1) x = 48;
             }
           }
-          data.title = data.prompt.charAt(0).toUpperCase()+data.prompt.substr(1,x-1);
+          data.title =
+            data.prompt.charAt(0).toUpperCase() + data.prompt.substr(1, x - 1);
 
           currentGeneratedImages.push(data);
         }
@@ -291,12 +296,22 @@ export default function GenerateNFT() {
               {trendingThemes.current.map((ele) => {
                 return (
                   <option key={ele?.id} value={ele?.name}>
-                    {ele?.name === "other" ? "None" : `#${ele?.name.charAt(0).toUpperCase()+ele?.name.substr(1)}`}
+                    {ele?.name === "other"
+                      ? "None"
+                      : `#${
+                          ele?.name.charAt(0).toUpperCase() +
+                          ele?.name.substr(1)
+                        }`}
                   </option>
                 );
               })}
             </select>
-            <div className={` ${styles.containerHeadText} mt-[24px] mb-[8px]`}>Enter Prompt</div>
+            <div className={` ${styles.containerHeadText} mt-[24px]`}>
+              Enter Prompt
+            </div>
+            <div className={` ${styles.generateText} mb-[8px]`}>
+              Try to describe the image you want to generate as best as you can
+            </div>
             <textarea
               placeholder="Dramatic sky and buildings painting"
               value={prompt}
@@ -306,7 +321,9 @@ export default function GenerateNFT() {
                 setPromt(e.target.value);
               }}
             ></textarea>
-            <div className={`${styles.containerHeadText} mt-[12px]`}>Filter</div>
+            <div className={`${styles.containerHeadText} mt-[12px]`}>
+              Filter
+            </div>
             <div className={styles.generateText}>
               Explore various stylistic filters you can apply
             </div>
@@ -337,7 +354,9 @@ export default function GenerateNFT() {
             title="Generate Image"
           >
             <div className="flex flex-row justify-between">
-              <span className="not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]">Generate AI Images</span>
+              <span className="not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]">
+                Generate AI Images
+              </span>
               <div>
                 <MagicIcon />
               </div>

@@ -15,7 +15,7 @@ function SmallScreenData() {
       </div>
       <div className={styles.heading}>Welcome to NFT or Not</div>
       <div className={styles.subHeading1}>
-        A fun new take on Hot or Not, but for NFT’s. Vote NFTS’s, Collect them
+        A fun new take on Hot or Not, but for NFT’s. Vote NFT’s, Collect them
         and easily generate your own NFT’s to submit.
       </div>
       <div>
