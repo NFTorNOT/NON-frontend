@@ -99,9 +99,11 @@ export default function BottomTabSelector() {
       {route == "/collect" ? (
         <div className={styles.bottomContainer}></div>
       ) : null}
-      <div className={`${styles.background} flex items-center`}>
+      <div
+        className={`${styles.background} grid grid-cols-5 items-center fixed left-0 right-0`}
+      >
         <div
-          className={`${styles.leftBar} flex items-center mt-[12px] md:mt-0 justify-items-start`}
+          className={`${styles.leftBar} flex items-center mt-[12px] md:mt-0 justify-items-start pl-[25px]`}
         >
           <button
             className={`${styles.howItWorks} flex items-center justify-start cursor-pointer relative`}
@@ -188,7 +190,7 @@ export default function BottomTabSelector() {
         </div>
 
         <button
-          className={`${styles.madeWithPLG}  font-medium flex justify-end text-[16px] leading-[26px] text-[#ffffff99] items-center`}
+          className={`${styles.madeWithPLG}  font-medium flex justify-end text-[16px] leading-[26px] text-[#ffffff99] items-center pr-[25px]`}
           onClick={handleTrueSparrowClick}
         >
           <span> Made with 🧡 by True Sparrow</span>

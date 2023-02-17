@@ -67,7 +67,7 @@ export default function VoteImage() {
 
   setTimeout(() => {
     isFirstTimeLoaded.current = true;
-  }, 4000);
+  }, 5000);
 
   async function fetchLensPost() {
     const lensPostData = await axiosInstance.get(`/nfts`, {
