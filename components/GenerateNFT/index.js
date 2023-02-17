@@ -324,7 +324,7 @@ export default function GenerateNFT() {
             }}
             title="Generate Images"
           >
-            <div className={`${styles.GenImgBtn} flex flex-row justify-between`}>
+            <div className={`flex flex-row justify-between`}>
               <span className={`not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]`}>Generate Images</span>
               <div>
                 <MagicIcon />

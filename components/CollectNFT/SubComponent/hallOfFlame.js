@@ -9,6 +9,20 @@ import "swiper/css/navigation";
 import HallOfFlameModal from "./hallOfFlameModal";
 import { axiosInstance } from "../../../AxiosInstance";
 import CollectNFTModal from "./collectNFTModal";
+// import { element } from "@rainbow-me/rainbowkit/dist/css/reset.css";
+
+
+
+var TriggerPrev = () => {
+  document.getElementById("NextArrow").style.display = "flex";
+}
+
+var TriggerNext = () => {
+  document.getElementById("PrevArrow").style.display = "flex";
+}
+
+
+
 
 function HallOfFlame(props) {
   const [showModal, setShowModal] = useState(false);
@@ -157,7 +171,7 @@ function HallOfFlame(props) {
         </div>
       </div>
       <div className="relative">
-        <button className={`${styles.prev} prev`}>
+        <button className={`${styles.prev} prev`} id="PrevArrow" onClick={TriggerPrev}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="11"
@@ -175,7 +189,7 @@ function HallOfFlame(props) {
             />
           </svg>
         </button>
-        <button className={`${styles.next} next`}>
+        <button className={`${styles.next} next`} id="NextArrow" onClick={TriggerNext}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="11"
@@ -200,14 +214,24 @@ function HallOfFlame(props) {
           }}
         >
           <Swiper
+            onReachBeginning={() => {
+              document.getElementById("PrevArrow").style.display = "none";
+            }}
+            onReachEnd={() => {
+              document.getElementById("NextArrow").style.display = "none";
+            }}
+            onBeforeInit={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onAfterInit={(swipper) => {
+              document.getElementById("NextArrow").style.display = "flex";
+              document.getElementById("PrevArrow").style.display = "none";
+            }}
             slidesPerView={7.5}
             spaceBetween={12}
             slidesPerGroup={1}
             loopFillGroupWithBlank={true}
             modules={[Navigation]}
-            onBeforeInit={(swiper) => {
-              swiperRef.current = swiper;
-            }}
             className={styles.carouselItems}
             navigation={{
               enabled: true,

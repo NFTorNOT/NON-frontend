@@ -17,7 +17,7 @@ function HallOfFlameModal({
   initialSlide,
   onCollectNow,
 }) {
-  const Themes = TRENDING_THEMES;
+  const Themes = TRENDING_THEMES;  
   return shown ? (
     <div
       className={styles.modalBackdrop}
@@ -97,7 +97,7 @@ function HallOfFlameModal({
                     <div className="flex items-center justify-center">
                       <div className={`modalPrev mr-[60px] `}>
                     <div
-                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                          className={`${index == 0 ? "hidden" : "flex"} justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
                         >
                           <LeftArrow />
                         </div>
@@ -108,7 +108,7 @@ function HallOfFlameModal({
                       />
                       <div className={`modalNext ml-[60px]`}>
                         <div
-                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                          className={`${index == 9 ? "hidden" : "flex"} justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
                         >
                           <RightArrow />
                         </div>
