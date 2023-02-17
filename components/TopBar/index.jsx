@@ -41,7 +41,7 @@ export default function TopBar() {
   return (
     <>
     <div className={styles.newImage}>
-        <div className="flex items-center justify-center h-[100px]"> <NONLogoSvgBig /> </div>
+        <div className={`${styles.bigNonlogo} flex items-center justify-center h-[100px]`}> <NONLogoSvgBig /> </div>
       </div>
       <div className={styles.container}>
           <NONLogo />

@@ -12,6 +12,9 @@
   @media screen and (min-width: 568px) {
     padding: 30px;
   }
+    @media screen and (max-height: 768px) {
+      padding: 7px;
+    }
 }
 
 .innerContainer {
@@ -38,7 +41,7 @@
   display: none;
 }
 
-@media only screen and (max-width: 1024px),screen and (max-height: 768px)  {
+@media only screen and (max-width: 1024px),screen and (max-height: 734px)  {
   .pageWrap{
     display: none;
   }

@@ -5,7 +5,11 @@ $github-fill-color: #FFFFFF;
 
 .background{
   top: calc(100vh - 140px);
+  @media only screen and (max-height: 768px) {
+top: calc(100vh - 85px);
+    }
 }
+
 .container {
   border-radius: 100px;
   gap: 8px;
@@ -218,6 +222,8 @@ $github-fill-color: #FFFFFF;
   height: 109px;
   width: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 49.99%);
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .madeWithPLG {
@@ -235,7 +241,7 @@ $github-fill-color: #FFFFFF;
 // }
 
 @media only screen and (max-width: 1024px) ,
-screen and (max-height: 768px){
+screen and (max-height: 734px){
   .background{
     display: flex;
   }
