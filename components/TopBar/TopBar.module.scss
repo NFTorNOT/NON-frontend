@@ -37,8 +37,14 @@
   display: none;
 }
 
+@media only screen and (max-height: 734px) {
+.bigNonlogo{
+  height: 62px;
+}
+}
+
 @media only screen and (max-width: 1024px) ,
-screen and (max-height: 768px) {
+screen and (max-height: 734px) {
   .container {
     display: none;
   }
