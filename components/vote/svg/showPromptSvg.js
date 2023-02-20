@@ -2,30 +2,11 @@ import React from "react";
 
 export default function ShowPromptSvg() {
   return (
-    <div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        fill="none"
-      >
-        <path
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeOpacity=".6"
-          strokeWidth="1.5"
-          d="M10 4.375C3.75 4.375 1.25 10 1.25 10s2.5 5.625 8.75 5.625S18.75 10 18.75 10 16.25 4.375 10 4.375Z"
-        />
-        <path
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeOpacity=".6"
-          strokeWidth="1.5"
-          d="M10 13.125a3.125 3.125 0 1 0 0-6.25 3.125 3.125 0 0 0 0 6.25Z"
-        />
-      </svg>
-    </div>
+    
+<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.0117 4.375C3.76172 4.375 1.26172 10 1.26172 10C1.26172 10 3.76172 15.625 10.0117 15.625C16.2617 15.625 18.7617 10 18.7617 10C18.7617 10 16.2617 4.375 10.0117 4.375Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.0117 13.125C11.7376 13.125 13.1367 11.7259 13.1367 10C13.1367 8.27411 11.7376 6.875 10.0117 6.875C8.28583 6.875 6.88672 8.27411 6.88672 10C6.88672 11.7259 8.28583 13.125 10.0117 13.125Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
   );
 }
