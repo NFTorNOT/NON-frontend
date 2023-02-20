@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 import HallOfFlameModal from "./hallOfFlameModal";
 import { axiosInstance } from "../../../AxiosInstance";
 import CollectNFTModal from "./collectNFTModal";
-import { element } from "@rainbow-me/rainbowkit/dist/css/reset.css";
 import { useAuthContext } from "../../../context/AuthContext";
 import UserApi from "../../../graphql/UserApi";
 import { useAccount } from "wagmi";
