@@ -351,7 +351,7 @@ export default function GenerateNFT() {
             onClick={() => {
               submitForGeneration();
             }}
-            title="Generate Images"
+            title="Generate AI Images"
           >
             <div className="flex flex-row justify-between">
               <span className="not-italic font-bold text-[14px] leading-[22px] text-[#ffffff]">
