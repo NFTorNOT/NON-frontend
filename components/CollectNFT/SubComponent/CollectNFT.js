@@ -194,7 +194,7 @@ function CollectNFT(props) {
                   height="19"
                 />
               </span>
-              <span className="leading-[26px]">NFT's </span>
+              <span className="leading-[26px]">NFTs </span>
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@ function CollectNFT(props) {
                   height="19"
                 />
               </span>
-              <span className="leading-[26px]">any NFT's yet.. vote your</span>
+              <span className="leading-[26px]">any NFTs yet.. vote your</span>
             </div>
             <div className="leading-[26px]">favourites to start collecting</div>
             <button

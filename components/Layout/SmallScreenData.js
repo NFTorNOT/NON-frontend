@@ -5,24 +5,27 @@ import Image from "next/image";
 function SmallScreenData() {
   return (
     <>
+      <div className={`${styles.nonMobileSvg} `}>
+        <img
+          src={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/mobileview/mobileLogo.png`}
+          alt="NFT logo"
+        />
+      </div>
       <div className="pt-[38px]">
         <Image
-          src={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/gif/hotOrNot.gif`}
+          src={`${process.env.NEXT_PUBLIC_AWS_CDN_URL}/mobileview/smallScreenImage.png`}
           width={267}
           height={160}
-          alt="my gif"
+          alt="my image"
         />
       </div>
       <div className={styles.heading}>Welcome to NFT or Not</div>
       <div className={styles.subHeading1}>
-        A fun new take on Hot or Not, but for NFT’s. Vote NFT’s, Collect them
-        and easily generate your own NFT’s to submit.
+        Experience the 2000s craze, Hot-or-Not, revived and transformed into a
+        sensational social experiment using generative AI and Lens.
       </div>
       <div>
-        <p className={styles.subHeading2}>
-          This experience is unavailable for tablet and mobile devices, can be
-          viewed on desktop only.
-        </p>
+        <p className={styles.subHeading2}>Available only on desktop</p>
         <div className="mt-[20px] flex justify-center">
           <svg
             width="26"
