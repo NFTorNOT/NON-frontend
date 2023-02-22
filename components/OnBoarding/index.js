@@ -26,8 +26,8 @@ function OnBoarding({ setOnBoarding }) {
     {
       title:
         "Join in on a thrilling showdown of AI-generated images where you and the community cast votes!",
-      gif: hand,
-      type: "gif",
+      // gif: hand,
+      // type: "gif",
     },
     {
       title: "For each image, you vote whether it is Hot or Not!",
@@ -155,8 +155,12 @@ function OnBoarding({ setOnBoarding }) {
             <button
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
-              onMouseEnter={() => {setNotActiveToolTip(true)}}
-              onMouseLeave={() => {setNotActiveToolTip(false)}}
+              onMouseEnter={() => {
+                setNotActiveToolTip(true);
+              }}
+              onMouseLeave={() => {
+                setNotActiveToolTip(false);
+              }}
               onClick={() => {
                 swiped("left");
                 setIsNotButtonClicked(true);
@@ -170,17 +174,17 @@ function OnBoarding({ setOnBoarding }) {
               }}
             >
               <div
-                  className={`${styles.buttonClassNot} ${
-                    !isNotButtonClicked && !NotactiveToolTip? `block` : `hidden`
-                  } m-[8px]`}
-                >
-                  <Not /> 
-                </div>
+                className={`${styles.buttonClassNot} ${
+                  !isNotButtonClicked && !NotactiveToolTip ? `block` : `hidden`
+                } m-[8px]`}
+              >
+                <Not />
+              </div>
 
-                {NotactiveToolTip && !isNotButtonClicked && (
-                  <div className={`${styles.buttonClassNot} m-[8px]`}>
-                      <HoverOnNotSvg/>
-                  </div>
+              {NotactiveToolTip && !isNotButtonClicked && (
+                <div className={`${styles.buttonClassNot} m-[8px]`}>
+                  <HoverOnNotSvg />
+                </div>
               )}
 
               <div
@@ -195,8 +199,12 @@ function OnBoarding({ setOnBoarding }) {
             <button
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
-              onMouseEnter={() => {setHotActiveToolTip(true)}}
-              onMouseLeave={() => {setHotActiveToolTip(false)}}
+              onMouseEnter={() => {
+                setHotActiveToolTip(true);
+              }}
+              onMouseLeave={() => {
+                setHotActiveToolTip(false);
+              }}
               onClick={() => {
                 swiped("right");
                 setIsHotButtonClicked(true);
@@ -211,16 +219,15 @@ function OnBoarding({ setOnBoarding }) {
             >
               <div
                 className={`${styles.buttonClassHot} ${
-                  !isHotButtonClicked  && !HotactiveToolTip? `block` : `hidden`
+                  !isHotButtonClicked && !HotactiveToolTip ? `block` : `hidden`
                 } m-[8px]`}
               >
                 <HotButtonSvg />
               </div>
               {HotactiveToolTip && !isHotButtonClicked && (
-                  <div className={`${styles.buttonClassHot} m-[8px]`}>
-                      
-                      <HoverOnHotSvg/>
-                  </div>
+                <div className={`${styles.buttonClassHot} m-[8px]`}>
+                  <HoverOnHotSvg />
+                </div>
               )}
 
               <div
