@@ -22,7 +22,7 @@ function OnboardingContent(props) {
               Built on Lens, For Lens Frens
             </div>
           </div>
-          {index === 4 && (
+          {index === 2 && (
             <>
               <div className={styles.welcomeText}>Welcome to</div>
               <div>
@@ -36,40 +36,22 @@ function OnboardingContent(props) {
                 next card →
               </div>
               <div className="absolute w-[104px] h-[143px] top-[383px]">
-                {onBoardingDetailsArray.type === "gif" ? (
-                  <Image
-                    src={onBoardingDetailsArray.gif}
-                    width={155}
-                    height={210}
-                    alt="my gif"
-                    className="max-w-[150%]"
-                  />
-                ) : (
-                  onBoardingDetailsArray.gif
-                )}
+                {onBoardingDetailsArray.svg}
               </div>
             </>
           )}
 
-          {index < 4 && (
+          {index < 2 && (
             <>
-              <div className="pt-[38px]">
-                {onBoardingDetailsArray.type === "gif" ? (
-                  <Image
-                    src={onBoardingDetailsArray.gif}
-                    width={onBoardingDetailsArray.width}
-                    height={onBoardingDetailsArray.height}
-                    alt="my gif"
-                  />
-                ) : (
-                  onBoardingDetailsArray.gif
-                )}
-              </div>
+              <div className="pt-[38px]">{onBoardingDetailsArray.svg}</div>
               <div className={styles.heading}>
                 {onBoardingDetailsArray.title}
-              </div>
-              <div className={styles.subHeading}>
-                {onBoardingDetailsArray.subTitle}
+                {onBoardingDetailsArray.title2 && (
+                  <>
+                    <span className="w-full">&</span>
+                    <span>{onBoardingDetailsArray.title2}</span>
+                  </>
+                )}
               </div>
               <div className={`flex ${styles.nextCardBtnText}`}>
                 Click
