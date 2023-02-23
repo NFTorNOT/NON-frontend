@@ -4,6 +4,7 @@ import styles from "./SubmitForVoteModal.module.scss";
 import Collect from "./svg/Collect";
 import MessageCircle from "./svg/MessageCircle";
 import Modal from 'react-modal';
+import HofCross from "../../CollectNFT/SubComponent/SVG/hofCross";
 
 function SubmitForVoteModal({
   visible,
@@ -50,6 +51,12 @@ function SubmitForVoteModal({
       <div
         className={`${styles.submitForVoteInfo} py-[40px] px-[30px] relative`}
       >
+        <div
+          className="absolute top-[20px] right-[10px] text-[#fff] text-[16px] cursor-pointer scale-[0.42]"
+          onClick={() => setsubmitToVoteModal(false)}
+        >
+          <HofCross/>
+        </div>
         <div className="text-[#fff] font-bold text-[20px] leading-[32px]">
           Submit your generations
         </div>
