@@ -70,7 +70,7 @@ function TrendingThemeDefault({
                       className={`text-[30px] md:text-[48px] capitalize ${
                         selectedTheme == item.name
                           ? "text-[#fff] font-bold"
-                          : "text-[#ffffff99] font-500"
+                          : "text-[#ffffff99] font-700"
                       }`}
                     >
                       {" "}
