@@ -112,6 +112,10 @@ function CollectNFT(props) {
     setModalData({ ...ele });
     setShowSignInModal(!isUserLoggedIn);
 
+    toggleModal(!modalShown);
+  };
+
+  const dispatcherCheck = async ()=>{
     const defaultProfileResponse = await UserApi.defaultProfile({
       walletAddress: address,
     });
@@ -122,10 +126,7 @@ function CollectNFT(props) {
       setIsDispatcherEnabled(false);
     } else setIsDispatcherEnabled(true);
     setShowDispatcherModal(!isDispatcherEnabled);
-
-    toggleModal(!modalShown);
-  };
-
+  }
   useEffect(() => {
     allData.current = [];
     if (isUserLoggedIn) {
@@ -157,14 +158,13 @@ function CollectNFT(props) {
         <CustomSignInModal
           isOpen={showSignInModal}
           onRequestClose={() => setShowSignInModal(false)}
-          onSuccess={() => {showModal(modalData);}}
+          onSuccess={dispatcherCheck}
         />
       ) : null}
       
       {showDispatcherModal && isUserLoggedIn && !isDispatcherEnabled ? (
         <EnableDispatcherModal
           onClose={() => setShowDispatcherModal(false)}
-          onSuccess={() => {showModal(modalData);}}
         />
       ) : null}
 
@@ -194,11 +194,13 @@ function CollectNFT(props) {
           <div className="text-center font-medium text-[16px]">
             <div className="flex items-center mt-[5px]">
               <span className="leading-[26px]">
-              
-              Sign in 
-              
-                
-                <span className="ml-[5px]">now to view your</span></span>
+              <button
+              className={`underline hover:text-[#ADFF00]`}
+              onClick={()=>{setShowSignInModal(true);}}
+              >
+                 Sign in 
+            </button>
+            <span className="ml-[5px]">now to view your</span></span>
               <span className="mx-[5px]">
                 <Image
                   src="https://static.plgworks.com/assets/images/non/flame-icon.png"
