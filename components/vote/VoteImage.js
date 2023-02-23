@@ -23,8 +23,6 @@ import FireSmallSvg from "./svg/FirstTimeUser/FireSmallSvg";
 import HoverOnNotSvg from "./svg/HoverOnNotSvg";
 import HoverOnHotSvg from "./svg/HoverOnHotSvg";
 import HotButtonSvg from "./svg/HotButtonSvg";
-import ImageLoader from "../NONImage/ImageLoader";
-import { notify } from "../TopBar";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -223,14 +221,9 @@ export default function VoteImage() {
   }, [imageIndex, consumedData.current.length]);
 
   useEffect(() => {
-    loadMore(true);
-    showCards();
-
-    if(window.localStorage.getItem("reload")=="true"){
-      notify({ text: "You’re on the Lens Testnet",duration:10000});
-      window.localStorage.removeItem('reload');
-    }
-    
+    setTimeout(async () => {
+      await loadMore(true);
+    }, 2000);
   }, []);
 
   function showCards() {
