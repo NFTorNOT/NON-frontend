@@ -28,7 +28,6 @@ function CollectNFT(props) {
   const isFirstTimeLoading = useRef(false);
   const allData = useRef([]);
   let hasNextPageIdentifier = useRef(null);
-  const [onlySignInCall,setOnlySignInCall] = useState(true);
   const { onTabChange } = useBottomTab();
 
   const fetchCollectData = async () => {
@@ -158,14 +157,14 @@ function CollectNFT(props) {
         <CustomSignInModal
           isOpen={showSignInModal}
           onRequestClose={() => setShowSignInModal(false)}
-          onSuccess={() => {if(!onlySignInCall) showModal(modalData)}}
+          onSuccess={() => {showModal(modalData);}}
         />
       ) : null}
-
+      
       {showDispatcherModal && isUserLoggedIn && !isDispatcherEnabled ? (
         <EnableDispatcherModal
           onClose={() => setShowDispatcherModal(false)}
-          onSuccess={() => {if(!onlySignInCall) showModal(modalData)}}
+          onSuccess={() => {showModal(modalData);}}
         />
       ) : null}
 
@@ -195,12 +194,9 @@ function CollectNFT(props) {
           <div className="text-center font-medium text-[16px]">
             <div className="flex items-center mt-[5px]">
               <span className="leading-[26px]">
-              <button
-              className={`underline hover:text-[#ADFF00]`}
-              onClick={()=>{setShowSignInModal(true);setOnlySignInCall(true);}}
-              >
+              
               Sign in 
-            </button>
+              
                 
                 <span className="ml-[5px]">now to view your</span></span>
               <span className="mx-[5px]">
@@ -254,7 +250,7 @@ function CollectNFT(props) {
                 <Card
                   key={index}
                   cardDetails={ele}
-                  showCollectModal={() => {showModal(ele); setOnlySignInCall(false);}}
+                  showCollectModal={() => {showModal(ele);}}
                   style={{ marginLeft: "6px", marginRight: "6px" }}
                 />
                 // <div
