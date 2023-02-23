@@ -164,13 +164,13 @@ function HallOfFlame(props) {
       {showSignInModal&&!isUserLoggedIn? (
       <CustomSignInModal
         isOpen={showSignInModal}
-        onRequestClose={()=>{setShowSignInModal(false); setIsSubModalOpen(false);}}
+        onRequestClose={()=>{setShowSignInModal(false); setIsSubModalOpen(false);setShowCollectModal(false);}}
         onSuccess={() => onCollectNowClicked(modalData)}
       />) : null}
 
       {showDispatcherModal&&isUserLoggedIn&&!isDispatcherEnabled?(
         <EnableDispatcherModal
-            onClose={()=>{setShowDispatcherModal(false); setIsSubModalOpen(false);}}
+            onClose={()=>{setShowDispatcherModal(false); setIsSubModalOpen(false);setShowCollectModal(false);}}
             onSuccess={()=>onCollectNowClicked(modalData)}
           />):null}
 
