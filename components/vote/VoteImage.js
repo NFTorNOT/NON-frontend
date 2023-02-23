@@ -421,8 +421,10 @@ export default function VoteImage() {
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
                   <div className={`flex items-end ${styles.emptyText}`}>
-                    Oops, all generations are exhausted. Meanwhile, Collect hot
-                    NFTs by your lens frens and show your support💰
+                  <div>Generations are exhausted
+                  <div >Collect hot NFTs by your lens frens and show</div>
+                  <div>your support💰</div>
+                  </div>
                   </div>
                   <div
                     className={styles.collectButtonContainer}
