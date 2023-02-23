@@ -32,7 +32,7 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
-  const maxCount = 5;
+  var maxCount = 2;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [pageInfo, setPageInfo] = useState();
@@ -240,7 +240,6 @@ export default function VoteImage() {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
       setPageInfo("votePage");
-      setCount(maxCount);
       return;
     }
     if (isVoteInProgress.current) {
@@ -274,7 +273,6 @@ export default function VoteImage() {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
       setPageInfo("votePage");
-      setCount(maxCount);
       return;
     }
 
@@ -421,8 +419,10 @@ export default function VoteImage() {
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
                   <div className={`flex items-end ${styles.emptyText}`}>
-                    Oops, all generations are exhausted. Meanwhile, Collect hot
-                    NFTs by your lens frens and show your support💰
+                  <div>Generations are exhausted
+                  <div >Collect hot NFTs by your lens frens and show</div>
+                  <div>your support💰</div>
+                  </div>
                   </div>
                   <div
                     className={styles.collectButtonContainer}
@@ -485,7 +485,6 @@ export default function VoteImage() {
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
                   setPageInfo("votePage");
-                  setCount(maxCount);
                   return;
                 }
                 swiped("left");
@@ -532,7 +531,6 @@ export default function VoteImage() {
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
                   setPageInfo("votePage");
-                  setCount(maxCount);
                   return;
                 }
                 swiped("right");

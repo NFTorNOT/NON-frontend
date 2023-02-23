@@ -63,6 +63,7 @@
     padding: 40px 32px;
     gap: 24px;
     width: 512px;
+    height: 512px;
     left: calc(50% - 512px / 2);
     top: calc(50% - 512px / 2);
     background: rgba(0, 0, 0, 0.8);
@@ -145,4 +146,13 @@
     .subHeading2 {
         font-size: 14px;
     }
+    .nonMobileSvg {
+         display: flex;
+    }
+}
+
+@media screen and (min-width:701px) {
+    .nonMobileSvg {
+            display: none;
+        }
 }

@@ -11,6 +11,7 @@ const nextConfig = {
       "non-staging-statc-files.s3.amazonaws.com",
       "non-staging-statc-files.s3.us-east-2.amazonaws.com",
       "non-prod-static-files.s3.amazonaws.com",
+      "static.nftornot.com",
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     path: process.env.W_CDN_IMAGE_RESIZER_URL,
