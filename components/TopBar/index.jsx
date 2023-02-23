@@ -8,12 +8,12 @@ import SignInButton from "./SignInButton";
 import ToastIcon from "./ToastIcon";
 import styles from "./TopBar.module.scss";
 
-export const notify = ({ text }) =>
+export const notify = ({ text,duration }) =>
   toast.custom((t) => (
     <div
       className={`${t.visible ? "animate-enter" : "animate-leave"} ${
         styles.toastContainer
-      } max-w-md bg-white shadow-lg rounded-[16px] pointer-events-auto flex justify-center items-center ring-1 ring-black ring-opacity-5`}
+      } bg-white shadow-lg rounded-[16px] pointer-events-auto flex justify-center items-center ring-1 ring-black ring-opacity-5`}
     >
       <div className="flex-1 p-4 ">
         <div className="flex items-center justify-center">
@@ -24,7 +24,9 @@ export const notify = ({ text }) =>
         </div>
       </div>
     </div>
-  ));
+  ),{
+    duration: duration
+  });
 
 export default function TopBar() {
   const { isUserLoggedIn } = useAuthContext();
@@ -32,7 +34,7 @@ export default function TopBar() {
 
   useEffect(() => {
     if (isUserLoggedIn && Object.values(userProfile).length > 0) {
-      notify({ text: "You’re on the Lens Testnet" });
+      notify({ text: "You’re on the Lens Testnet" ,duration:10000});
     }
 
     return () => {};
@@ -49,10 +51,9 @@ export default function TopBar() {
           <Toaster
             position="top-center"
             reverseOrder={false}
-            toastOptions={{ duration: 4000 }}
           />
         </div>
-        <SignInButton />
+        <SignInButton notify={notify}/>
       </div>
       </>
   );

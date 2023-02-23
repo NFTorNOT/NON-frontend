@@ -64,6 +64,7 @@ export default function SignInButton({
   isSignInModalOpen,
   isWalletConnected,
   showSquareLoginButton,
+  notify
 }) {
   const { isUserLoggedIn } = useAuthContext();
   const [open, setOpen] = useState(false);
@@ -119,6 +120,7 @@ export default function SignInButton({
                 getDefaultProfile();
               })
               .catch((error) => {
+                notify({text:"Sorry, we are unable to conduct this transaction at the moment.",duration:4000});
                 console.log("error signing in 1: ", error);
                 setIsLoading(false);
               })
@@ -128,6 +130,7 @@ export default function SignInButton({
               });
           })
           .catch((error) => {
+            notify({text:"Transaction signing was rejected. You are not signed in.",duration:4000});
             console.log("error signing in 2: ", error);
             setIsLoading(false);
           });
@@ -206,6 +209,7 @@ export default function SignInButton({
           setShouldShowEnableDispatcherModal(true);
         }
         if (router.pathname === "/") {
+          window.localStorage.setItem('reload',true);
           router.reload();
         }
       }
