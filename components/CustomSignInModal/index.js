@@ -58,8 +58,17 @@ const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo,onSuccess }) => {
             isWalletConnected={shouldCallSignInMethod}
           />
         )}
+        <div className="flex gap-[4px]">
+            <span className="text-white opacity-60 not-italic text-[12px] font-medium">
+              on
+            </span>
+            <span className="text-white opacity-80 not-italic text-[12px] font-medium">
+              testnet
+            </span>
+          </div>
+
         {pageInfo === "votePage" && (
-          <div className="flex relative -top-[12px] justify-center gap-[4px] items-center text-[12px] leading-[160%] font-medium text-white/60">
+          <div className="flex relative mb-[13px] justify-center gap-[4px] items-center text-[12px] leading-[160%] font-medium text-white/60">
             and
             <span className="flex justify-center items-center text-[12px] leading-[160%] font-medium text-white/80 ">
               Save your <FireSmallSvg height={18} width={16} /> votes now

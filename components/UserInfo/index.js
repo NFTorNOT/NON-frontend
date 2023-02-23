@@ -107,9 +107,20 @@ export default function UserInfo() {
 
   return (
     <div className={styles.container}>
-      <span className={styles.nameContainer}>
-        {queryInProgress ? "..." : userProfile?.lens_profile_username}
-      </span>
+      <div className="flex justify-center">
+        <div>
+          <span className={styles.nameContainer}>
+            {queryInProgress ? "..." : userProfile?.lens_profile_username}
+          </span>
+          <div className="flex gap-[4px]">
+            <span className="text-white opacity-60 not-italic text-[12px] font-medium ml-[17px]">
+              on
+            </span>
+            <span className="text-white opacity-80 not-italic text-[12px] font-medium">
+              testnet
+            </span>
+          </div>
+        </div>
       <div
         className="cursor-pointer"
         onClick={() => {
@@ -117,7 +128,8 @@ export default function UserInfo() {
         }}
       >
         <img className={styles.lens} src="/lens-logo.png" alt="lens" />
-      </div>
+        </div>
+        </div>
       <LogoutModal
         shown={modalShown}
         close={() => {
