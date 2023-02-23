@@ -32,7 +32,7 @@ export default function VoteImage() {
   const [themesData, setThemesData] = useState([]);
   const [isNotButtonClicked, setIsNotButtonClicked] = useState(false);
   const [isHotButtonClicked, setIsHotButtonClicked] = useState(false);
-  const maxCount = 5;
+  var maxCount = 2;
   const [count, setCount] = useState(maxCount);
   const [shouldShowSignInModal, setShouldShowSignInModal] = useState(false);
   const [pageInfo, setPageInfo] = useState();
@@ -240,7 +240,6 @@ export default function VoteImage() {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
       setPageInfo("votePage");
-      setCount(maxCount);
       return;
     }
     if (isVoteInProgress.current) {
@@ -274,7 +273,6 @@ export default function VoteImage() {
     if (!isUserLoggedIn && count === 0) {
       setShouldShowSignInModal(true);
       setPageInfo("votePage");
-      setCount(maxCount);
       return;
     }
 
@@ -487,7 +485,6 @@ export default function VoteImage() {
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
                   setPageInfo("votePage");
-                  setCount(maxCount);
                   return;
                 }
                 swiped("left");
@@ -534,7 +531,6 @@ export default function VoteImage() {
                 if (!isUserLoggedIn && count === 0) {
                   setShouldShowSignInModal(true);
                   setPageInfo("votePage");
-                  setCount(maxCount);
                   return;
                 }
                 swiped("right");

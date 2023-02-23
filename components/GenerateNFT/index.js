@@ -239,7 +239,8 @@ export default function GenerateNFT() {
       .post(`/store-on-ipfs`, {
         image_url: selectedImageData?.imageUrl,
         title: selectedImageData?.title,
-        description: selectedImageData?.prompt.trim(),
+        description:
+          "👋 frens, I have generated this image with the help of AI. \n Generate your own and discover more on https://nftornot.com",
       })
       .then((response) => {
         const apiResponseData = response.data.data;
