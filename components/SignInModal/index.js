@@ -44,6 +44,14 @@ const SignInModal = ({
         className={`flex flex-col justify-start items-start rounded-[16px] backdrop-blur-3xl  ${styles.ModalContainer}`}
       >
         <CustomConnectButton onSignInComplete={onSignInComplete} />
+        <div className="flex gap-[4px] self-center">
+            <span className="text-white opacity-60 not-italic text-[12px] font-medium">
+              on
+            </span>
+            <span className="text-white opacity-80 not-italic text-[12px] font-medium">
+              testnet
+            </span>
+          </div>
         <div
           className={`flex justify-start flex-col gap-[12px] not-italic text-[12px] font-medium ${styles.LensInfo}`}
         >
