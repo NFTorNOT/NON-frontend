@@ -209,7 +209,7 @@ export default function SignInButton({
           setShouldShowEnableDispatcherModal(true);
         }
         if (router.pathname === "/") {
-          window.localStorage.setItem('reload',true);
+          window.localStorage.setItem('isReloadedFirstTimeAfterLogin',true);
           router.reload();
         }
       }

@@ -219,9 +219,9 @@ export default function VoteImage() {
       await loadMore(true);
     }, 2000);
 
-    if(window.localStorage.getItem("reload")=="true"){
+    if(window.localStorage.getItem("isReloadedFirstTimeAfterLogin")=="true"){
       notify({ text: "You’re on the Lens Testnet",duration:10000});
-      window.localStorage.removeItem('reload');
+      window.localStorage.removeItem('isReloadedFirstTimeAfterLogin');
     }
     
   }, []);
