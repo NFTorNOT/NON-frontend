@@ -377,7 +377,7 @@ export default function VoteImage() {
     Router.push({ pathname: "/collect" });
   };
 
-  const [onBoarding, setOnBoarding] = React.useState(true);
+  const [onBoarding, setOnBoarding] = React.useState();
   let onBoardingKey;
   React.useEffect(() => {
     if (localStorage.getItem("onBoardingKey") === "false") {

@@ -23,6 +23,7 @@ function OnBoarding({ setOnBoarding }) {
   const [isHotButtonClicked, setIsHotButtonClicked] = React.useState(false);
   const [HotactiveToolTip, setHotActiveToolTip] = React.useState(false);
   const [NotactiveToolTip, setNotActiveToolTip] = React.useState(false);
+  console.log("onboarding");
   const onBoardingDetailsArray = [
     {
       title:
