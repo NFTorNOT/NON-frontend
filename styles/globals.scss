@@ -42,3 +42,10 @@ body {
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
 }
+
+#vote-card{
+  transition: opacity 1s;
+}
+#hotOrNotButton {
+  transition: opacity 1s;
+}
