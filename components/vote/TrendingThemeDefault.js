@@ -23,13 +23,16 @@ function TrendingThemeDefault({
             className="flex items-center justify-center text-[20px] md:text-[40px] gap-[5px] cursor-pointer"
             onClick={() => showTrendingThemeModal()}
           >
-            {shouldShowThemeInBold ? (
-              <div className={`${styles.themeBoldHeading}`}>
-                Trending Themes
-              </div>
-            ) : (
-              <div className={`${styles.themeHeading}`}>Trending Themes</div>
-            )}
+            <div
+              className={`${styles.trendingThemes} ${
+                shouldShowThemeInBold
+                  ? styles.themeBoldHeading
+                  : styles.themeHeading
+              }`}
+            >
+              Trending Themes
+            </div>
+
             <TrendingThemeSvg />
           </div>
           <div className="flex items-center justify-center mt-[10px] pb-[50px]">
@@ -38,7 +41,7 @@ function TrendingThemeDefault({
                 {shouldShowThemeInBold ? (
                   <>
                     <span
-                      className={`text-[32px] md:text-[48px] six text-[#fff] capitalize font-bold font-500`}
+                      className={`text-[32px] md:text-[48px] six text-[#fff] capitalize font-bold font-500 ${styles.trendingThemes}`}
                     >
                       {" "}
                       #{item.name}
@@ -68,10 +71,13 @@ function TrendingThemeDefault({
                   <>
                     <span
                       className={`text-[30px] md:text-[48px] capitalize ${
+                        styles.trendingThemeColor
+                      } ${styles.trendingThemes} ${
                         selectedTheme == item.name
                           ? "text-[#fff] font-bold"
                           : "text-[#ffffff99] font-700"
-                      }`}
+                      }
+                      `}
                     >
                       {" "}
                       #{item.name}

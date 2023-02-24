@@ -23,6 +23,7 @@ import FireSmallSvg from "./svg/FirstTimeUser/FireSmallSvg";
 import HoverOnNotSvg from "./svg/HoverOnNotSvg";
 import HoverOnHotSvg from "./svg/HoverOnHotSvg";
 import HotButtonSvg from "./svg/HotButtonSvg";
+import ImageLoader from "../NONImage/ImageLoader";
 
 export default function VoteImage() {
   const { userProfile } = useUserContext();
@@ -38,6 +39,11 @@ export default function VoteImage() {
   const [pageInfo, setPageInfo] = useState();
   const [HotactiveToolTip, setHotActiveToolTip] = useState(false);
   const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
+  const [loading, setIsLoading] = useState(true);
+  const cardRef = useRef();
+  const hotBtnRef = useRef();
+  const notBtnRef = useRef();
+  const noOfCradRef = useRef();
 
   const [
     shouldShowWhatIsTremdingThemeModal,
@@ -75,7 +81,9 @@ export default function VoteImage() {
         pagination_identifier: hasNextPageIdentifier.current,
       },
     });
-
+    if (lensPostData) {
+      setIsLoading(false);
+    }
     const lensPostResponseData =
       lensPostData && lensPostData.data && lensPostData.data.data;
 
@@ -214,9 +222,21 @@ export default function VoteImage() {
   }, [imageIndex, consumedData.current.length]);
 
   useEffect(() => {
-    setTimeout(async () => {
-      await loadMore(true);
-    }, 2000);
+    loadMore(true);
+    setTimeout(() => {
+      if (cardRef && cardRef.current) {
+        cardRef.current.style.opacity = 1;
+      }
+      if (hotBtnRef && hotBtnRef.current) {
+        hotBtnRef.current.style.opacity = 1;
+      }
+      if (notBtnRef && notBtnRef.current) {
+        notBtnRef.current.style.opacity = 1;
+      }
+      if (noOfCradRef && noOfCradRef.current) {
+        noOfCradRef.current.style.opacity = 1;
+      }
+    }, 3000);
   }, []);
 
   function showNextImage() {
@@ -357,7 +377,7 @@ export default function VoteImage() {
     Router.push({ pathname: "/collect" });
   };
 
-  const [onBoarding, setOnBoarding] = React.useState(true);
+  const [onBoarding, setOnBoarding] = React.useState();
   let onBoardingKey;
   React.useEffect(() => {
     if (localStorage.getItem("onBoardingKey") === "false") {
@@ -367,6 +387,10 @@ export default function VoteImage() {
 
   return onBoarding ? (
     <OnBoarding setOnBoarding={setOnBoarding} />
+  ) : loading ? (
+    <div className="flex items-center justify-center">
+      <ImageLoader color={"#fff"} height={15} width={15} />
+    </div>
   ) : (
     <div className="flex items-center justify-center flex-col">
       <TrendingThemeDefault
@@ -395,10 +419,11 @@ export default function VoteImage() {
           isOpen={shouldShowWhatIsTremdingThemeModal}
           onRequestClose={() => setShouldShowWhatIsTrendingThemeModal(false)}
         />
-
         <div
           id="vote-card"
-          className={`${styles.cardContainer} flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] cursor-grab ${styles.voteCards}`}
+          ref={cardRef}
+          style={{ opacity: 0 }}
+          className={`${styles.cardContainer}  flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] cursor-grab ${styles.voteCards}`}
         >
           {data.length > 0 &&
             data.map((character, index) => (
@@ -419,10 +444,11 @@ export default function VoteImage() {
                   className={`flex flex-col justify-center items-center py-[40px] px-[32px] gap-[38px] w-[512px] h-[512px] ${styles.emptyCard}`}
                 >
                   <div className={`flex items-end ${styles.emptyText}`}>
-                  <div>Generations are exhausted
-                  <div >Collect hot NFTs by your lens frens and show</div>
-                  <div>your support💰</div>
-                  </div>
+                    <div>
+                      Generations are exhausted
+                      <div>Collect hot NFTs by your lens frens and show</div>
+                      <div>your support💰</div>
+                    </div>
                   </div>
                   <div
                     className={styles.collectButtonContainer}
@@ -467,11 +493,19 @@ export default function VoteImage() {
         {data.length > 0 ? (
           <>
             {isUserLoggedIn && (
-              <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+              <div
+                style={{ opacity: 0 }}
+                id="hotOrNot"
+                ref={noOfCradRef}
+                className={`${styles.cardCount} text-white/80 z-[10]`}
+              >
                 {totalCards > 30 ? "30+" : totalCards} left
               </div>
             )}
             <button
+              style={{ opacity: 0 }}
+              id="hotOrNot"
+              ref={notBtnRef}
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
               onMouseEnter={() => {
@@ -518,6 +552,9 @@ export default function VoteImage() {
             </button>
 
             <button
+              style={{ opacity: 0 }}
+              id="hotOrNot"
+              ref={hotBtnRef}
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
               onMouseEnter={() => {
