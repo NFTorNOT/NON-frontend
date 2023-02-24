@@ -41,6 +41,9 @@ export default function VoteImage() {
   const [NotactiveToolTip, setNotActiveToolTip] = useState(false);
   const [loading, setIsLoading] = useState(true);
   const cardRef = useRef();
+  const hotBtnRef = useRef();
+  const notBtnRef = useRef();
+  const noOfCradRef = useRef();
 
   const [
     shouldShowWhatIsTremdingThemeModal,
@@ -223,6 +226,15 @@ export default function VoteImage() {
     setTimeout(() => {
       if (cardRef && cardRef.current) {
         cardRef.current.style.opacity = 1;
+      }
+      if (hotBtnRef && hotBtnRef.current) {
+        hotBtnRef.current.style.opacity = 1;
+      }
+      if (notBtnRef && notBtnRef.current) {
+        notBtnRef.current.style.opacity = 1;
+      }
+      if (noOfCradRef && noOfCradRef.current) {
+        noOfCradRef.current.style.opacity = 1;
       }
     }, 3000);
   }, []);
@@ -481,11 +493,19 @@ export default function VoteImage() {
         {data.length > 0 ? (
           <>
             {isUserLoggedIn && (
-              <div className={`${styles.cardCount} text-white/80 z-[10]`}>
+              <div
+                style={{ opacity: 0 }}
+                id="hotOrNot"
+                ref={noOfCradRef}
+                className={`${styles.cardCount} text-white/80 z-[10]`}
+              >
                 {totalCards > 30 ? "30+" : totalCards} left
               </div>
             )}
             <button
+              style={{ opacity: 0 }}
+              id="hotOrNot"
+              ref={notBtnRef}
               className={`absolute md:relative left-0`}
               disabled={isNotButtonClicked || data.length == 0}
               onMouseEnter={() => {
@@ -532,6 +552,9 @@ export default function VoteImage() {
             </button>
 
             <button
+              style={{ opacity: 0 }}
+              id="hotOrNot"
+              ref={hotBtnRef}
               className={`absolute md:relative right-0 order-last`}
               disabled={isHotButtonClicked || data.length == 0}
               onMouseEnter={() => {
