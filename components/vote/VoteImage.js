@@ -223,8 +223,12 @@ export default function VoteImage() {
 
   useEffect(() => {
     loadMore(true);
+    showCards();
+  }, []);
+
+  function showCards() {
     setTimeout(() => {
-      if (cardRef && cardRef.current) {
+      if (cardRef.current) {
         cardRef.current.style.opacity = 1;
       }
       if (hotBtnRef && hotBtnRef.current) {
@@ -236,8 +240,9 @@ export default function VoteImage() {
       if (noOfCradRef && noOfCradRef.current) {
         noOfCradRef.current.style.opacity = 1;
       }
+      console.log(cardRef);
     }, 3000);
-  }, []);
+  }
 
   function showNextImage() {
     setImageIndex((imageIndex) => imageIndex + 1);
@@ -377,13 +382,16 @@ export default function VoteImage() {
     Router.push({ pathname: "/collect" });
   };
 
-  const [onBoarding, setOnBoarding] = React.useState();
-  let onBoardingKey;
-  React.useEffect(() => {
-    if (localStorage.getItem("onBoardingKey") === "false") {
-      setOnBoarding(false);
-    }
-  }, []);
+  const [onBoarding, setOnBoarding] = React.useState(
+    !(localStorage.getItem("onBoardingKey") === "false")
+  );
+
+  useEffect(() => {
+    if (onBoarding) return;
+    setTimeout(() => {
+      showCards();
+    }, 0);
+  }, [onBoarding]);
 
   return onBoarding ? (
     <OnBoarding setOnBoarding={setOnBoarding} />
@@ -423,7 +431,7 @@ export default function VoteImage() {
           id="vote-card"
           ref={cardRef}
           style={{ opacity: 0 }}
-          className={`${styles.cardContainer}  flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] cursor-grab ${styles.voteCards}`}
+          className={`${styles.cardContainer} flex justify-center mt-[25px] mb-[15px] order-2 aspect-[512/512] h-[520px] cursor-grab ${styles.voteCards}`}
         >
           {data.length > 0 &&
             data.map((character, index) => (
