@@ -240,7 +240,6 @@ export default function VoteImage() {
       if (noOfCradRef && noOfCradRef.current) {
         noOfCradRef.current.style.opacity = 1;
       }
-      console.log(cardRef);
     }, 3000);
   }
 
