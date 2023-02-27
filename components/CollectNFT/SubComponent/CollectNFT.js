@@ -11,6 +11,9 @@ import UserApi from "../../../graphql/UserApi";
 import { useAccount } from "wagmi";
 import CustomSignInModal from "../../CustomSignInModal";
 import EnableDispatcherModal from "../../EnableDispatcherModal";
+import {useBottomTab} from '../../../context/BottomTabContext';
+import { TabItems, TabNames } from "../../Main/TabItems";
+import Router from "next/router";
 
 function CollectNFT(props) {
   const [modalShown, toggleModal] = useState(false);
@@ -25,6 +28,7 @@ function CollectNFT(props) {
   const isFirstTimeLoading = useRef(false);
   const allData = useRef([]);
   let hasNextPageIdentifier = useRef(null);
+  const { onTabChange } = useBottomTab();
 
   const fetchCollectData = async () => {
     try {
@@ -140,6 +144,11 @@ function CollectNFT(props) {
     }
   };
 
+  const onVoteButtonClick = () => {
+    onTabChange(TabItems[TabNames.VoteImage]);
+    Router.push({ pathname: "/" });
+  };
+
   return (
     <div
       className={`${styles.collectNft} mt-[40px]  min-h-0 container pl-0 pr-0`}
@@ -148,14 +157,14 @@ function CollectNFT(props) {
         <CustomSignInModal
           isOpen={showSignInModal}
           onRequestClose={() => setShowSignInModal(false)}
-          onSuccess={() => showModal(modalData)}
+          onSuccess={() => {showModal(modalData);}}
         />
       ) : null}
-
+      
       {showDispatcherModal && isUserLoggedIn && !isDispatcherEnabled ? (
         <EnableDispatcherModal
           onClose={() => setShowDispatcherModal(false)}
-          onSuccess={() => showModal(modalData)}
+          onSuccess={() => {showModal(modalData);}}
         />
       ) : null}
 
@@ -183,9 +192,13 @@ function CollectNFT(props) {
       {!isUserLoggedIn && !isLoading ? (
         <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px]">
-            <div>Oops! It's Empty</div>
             <div className="flex items-center mt-[5px]">
-              <span className="leading-[26px]">Sign in to view your </span>
+              <span className="leading-[26px]">
+              
+              Sign in 
+              
+                
+                <span className="ml-[5px]">now to view your</span></span>
               <span className="mx-[5px]">
                 <Image
                   src="https://static.plgworks.com/assets/images/non/flame-icon.png"
@@ -194,7 +207,7 @@ function CollectNFT(props) {
                   height="19"
                 />
               </span>
-              <span className="leading-[26px]">NFT's </span>
+              <span className="leading-[26px]">NFTs </span>
             </div>
           </div>
         </div>
@@ -203,7 +216,6 @@ function CollectNFT(props) {
       {allData.current.length == 0 && !isLoading && isUserLoggedIn ? (
         <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px] ">
-            <div>Oops! It's Empty</div>
             <div className="flex items-center">
               <span className="leading-[26px]">Looks like you haven't </span>
               <span className="mx-[5px]">
@@ -214,11 +226,12 @@ function CollectNFT(props) {
                   height="19"
                 />
               </span>
-              <span className="leading-[26px]">any NFT's yet.. vote your</span>
+              <span className="leading-[26px]">any NFTs yet.. vote your</span>
             </div>
-            <div className="leading-[26px]">favourites to start collecting</div>
+            <div className="leading-[26px]">favourites</div>
             <button
               className={`${collectNFTModalStyles.collectButton} flex  justify-center py-[7px] mt-[20px]`}
+              onClick={onVoteButtonClick}
             >
               <span className="pl-[11px]">Vote Now!</span>
             </button>
@@ -237,7 +250,7 @@ function CollectNFT(props) {
                 <Card
                   key={index}
                   cardDetails={ele}
-                  showCollectModal={() => showModal(ele)}
+                  showCollectModal={() => {showModal(ele);}}
                   style={{ marginLeft: "6px", marginRight: "6px" }}
                 />
                 // <div

@@ -3,7 +3,15 @@
 @import "tailwindcss/utilities";
 @import "@rainbow-me/rainbowkit/styles.css";
 
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap");
+@font-face {
+  font-family: "Satoshi";
+  src: url(https://static.staging.whisperchain.xyz/fonts/Satoshi-Variable.woff2) format('woff2'),
+    url(https://static.staging.whisperchain.xyz/fonts/Satoshi-Variable.woff) format('woff'),
+    url(https://static.staging.whisperchain.xyz/fonts/Satoshi-Variable.ttf) format('truetype');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
 
 :root {
   --color-text-base: 255, 255, 255;
@@ -32,4 +40,12 @@ body {
   font-feature-settings: "salt" on;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
+}
+
+#vote-card {
+  transition: opacity 1s;
+}
+
+#hotOrNot{
+  transition: opacity 1s;
 }

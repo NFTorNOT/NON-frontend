@@ -52,3 +52,9 @@ screen and (max-height: 712px) {
     display: block;
   }
 }
+@media only screen and (max-width: 700px)
+ {
+  .bigNonlogo {
+    display: none;
+  }
+}
