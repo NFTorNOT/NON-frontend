@@ -4,6 +4,9 @@
   grid-column-gap: 20px;
   padding: 20px 0;
   max-height: calc(100vh - 210px);
+  @media screen and (max-height: 768px) {
+    max-height: calc(100vh - 160px);
+    }
 }
 
 .disabled {

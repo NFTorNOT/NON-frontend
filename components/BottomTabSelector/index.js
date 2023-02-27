@@ -183,7 +183,7 @@ export default function BottomTabSelector() {
                   style={{
                     backgroundImage: `url(${ele.url})`,
                   }}
-                  className="collectedNft absolute left-[24%] top-[85%] w-[200px] h-[200px] rounded-[10px]"
+                  className="collectedNft absolute left-[24%] w-[200px] h-[200px] rounded-[10px]"
                 ></div>
               );
             })}
