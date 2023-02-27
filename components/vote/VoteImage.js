@@ -228,7 +228,7 @@ export default function VoteImage() {
 
   function showCards() {
     setTimeout(() => {
-      if (cardRef.current) {
+      if (cardRef && cardRef.current) {
         cardRef.current.style.opacity = 1;
       }
       if (hotBtnRef && hotBtnRef.current) {
