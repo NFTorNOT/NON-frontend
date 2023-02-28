@@ -230,7 +230,6 @@ export default function VoteImage() {
       notify({ text: "You’re on the Lens Testnet",duration:10000});
       window.localStorage.removeItem('isReloadedFirstTimeAfterLogin');
     }
-    console.log("Hello");
   }, []);
 
   function showCards() {
