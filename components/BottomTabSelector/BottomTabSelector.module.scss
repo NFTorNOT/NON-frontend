@@ -187,7 +187,7 @@ top: calc(100vh - 85px);
 .collectedNfts {
   position: absolute;
   right: 40%;
-  top: 88%;
+  top: -15px;
   transition: transform 0.6s easeInSine;
   transition: all;
 }
@@ -203,17 +203,20 @@ top: calc(100vh - 85px);
 }
 
 .collectedNfts div:first-child {
-  transform: rotate(6deg) !important;
+  
+transform: rotate(-6deg) !important;
   transition-delay: 0.25s;
   transition-duration: 2s;
   object-fit: contain;
 }
 
 .collectedNfts div:last-child {
-  transform: rotate(-6deg) !important;
-  transition-delay: 0.25s;
-  transition-duration: 2s;
-  object-fit: contain;
+ 
+
+  transform: rotate(6deg) !important;
+    transition-delay: 0.25s;
+    transition-duration: 2s;
+    object-fit: contain;
 }
 
 .bottomContainer {
@@ -241,7 +244,7 @@ top: calc(100vh - 85px);
 // }
 
 @media only screen and (max-width: 1024px) ,
-screen and (max-height: 734px){
+screen and (max-height: 712px){
   .background{
     display: flex;
   }

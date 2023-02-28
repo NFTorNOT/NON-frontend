@@ -6,7 +6,7 @@ import styles from "./Card.module.scss";
 import Collect from "../CollectNFT/SubComponent/SVG/collect";
 import Image from "next/image";
 
-export default function Card({ cardDetails, showCollectModal,style }) {
+export default function Card({ cardDetails, showCollectModal, style }) {
   const hoverWrapperRef = useRef();
   const bioParentWrapperRef = useRef();
   const titleWrapperRef = useRef();
@@ -106,11 +106,7 @@ export default function Card({ cardDetails, showCollectModal,style }) {
 
     if (wrapperTransY === wrapHeight - titleHeight) {
       // Showing title, show handle soon.
-      setShowHandleTimeout(
-        setTimeout(() => {
-          showHandle();
-        }, 500)
-      );
+      setShowHandleTimeout(showHandle());
     }
   }, [wrapperTransY]);
 
@@ -138,7 +134,9 @@ export default function Card({ cardDetails, showCollectModal,style }) {
   return (
     <div
       className={`${styles.card}`}
-      style={Object.assign({}, style,{ backgroundImage: `url(${cardDetails.image})`})}
+      style={Object.assign({}, style, {
+        backgroundImage: `url(${cardDetails.image})`,
+      })}
       ref={hoverWrapperRef}
       onMouseEnter={cardTransHover}
       onMouseLeave={cardTransOut}

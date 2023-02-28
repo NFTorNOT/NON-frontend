@@ -94,11 +94,7 @@ export default function VoteCard(props) {
 
     if (wrapperTransY === wrapHeight - titleHeight) {
       // Showing title, show handle soon.
-      setShowHandleTimeout(
-        setTimeout(() => {
-          showHandle();
-        }, 500)
-      );
+      setShowHandleTimeout(showHandle());
     }
   }, [wrapperTransY]);
 

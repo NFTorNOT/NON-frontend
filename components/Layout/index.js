@@ -23,7 +23,11 @@ export default function Layout({ children, ...props }) {
   const getLayoutUI = () => {
     return (
       <div className={styles.container}>
-        <div className={styles.innerContainer}>
+        <div
+          className={`${styles.innerContainer} ${
+            router.pathname == "/" ? "overflow-hidden" : "overflow-visible"
+          }`}
+        >
           <TopBar />
           <div className={styles.pageWrap}>{children}</div>
           <div className={styles.tabletView}>

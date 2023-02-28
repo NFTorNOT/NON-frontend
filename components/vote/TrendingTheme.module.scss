@@ -1,7 +1,7 @@
 .themesNameAnimation {
   position: absolute;
   animation-iteration-count: 1;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-direction: alternate;
   animation-fill-mode: both;
   animation-delay: 1s;
@@ -11,6 +11,14 @@
   left: 50%;
   transform: translate(-50%, 0%) scale(50%);
   font-weight: 500;
+}
+
+.trendingThemes {
+    transition: font-weight 300ms;
+}
+
+.trendingThemeColor{
+  transition: color 300ms ;
 }
 
 .themeHeading {
