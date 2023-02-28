@@ -112,8 +112,8 @@ export default function UserInfo() {
           <span className={styles.nameContainer}>
             {queryInProgress ? "..." : userProfile?.lens_profile_username}
           </span>
-          <div className="flex gap-[4px]">
-            <span className="text-white opacity-60 not-italic text-[12px] font-medium ml-[17px]">
+          <div className="flex gap-[4px] justify-center">
+            <span className="text-white opacity-60 not-italic text-[12px] font-medium">
               on
             </span>
             <span className="text-white opacity-80 not-italic text-[12px] font-medium">
