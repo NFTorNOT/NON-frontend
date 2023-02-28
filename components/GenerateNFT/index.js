@@ -329,7 +329,7 @@ export default function GenerateNFT() {
               Explore various stylistic filters you can apply
             </div>
             <select
-              className={styles.dropdown}
+              className={`${styles.dropdown} capitalize`}
               value={filter}
               name="filters"
               id="filters"
@@ -340,7 +340,7 @@ export default function GenerateNFT() {
               {filterOptions.map((style) => {
                 return (
                   <option key={style} value={style}>
-                    {style}
+                    {style.toLowerCase()}
                   </option>
                 );
               })}
