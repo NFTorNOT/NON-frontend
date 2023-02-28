@@ -51,6 +51,7 @@ export default function TopBar() {
           <Toaster
             position="top-center"
             reverseOrder={false}
+            toastOptions={{ duration: 4000 }}
           />
         </div>
         <SignInButton notify={notify}/>
