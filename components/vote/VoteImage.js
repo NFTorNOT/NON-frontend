@@ -489,13 +489,13 @@ export default function VoteImage() {
                       >
                         Sign in
                       </button>{" "}
-                      to get started & save your{" "}
+                      to view more & save your{" "}
                       <FireSmallSvg
                         className={"inline"}
                         height={26}
                         width={24}
                       />{" "}
-                      votes now.
+                      votes
                     </span>
                   </div>
                 </div>
