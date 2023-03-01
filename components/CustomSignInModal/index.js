@@ -56,6 +56,7 @@ const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo,onSuccess }) => {
             isSignInModalOpen={isOpen}
             key={isConnected}
             isWalletConnected={shouldCallSignInMethod}
+            onRejection = {onRequestClose}
           />
         )}
         <div className="flex gap-[4px]">

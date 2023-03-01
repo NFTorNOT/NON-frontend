@@ -226,9 +226,9 @@ export default function VoteImage() {
     loadMore(true);
     showCards();
 
-    if(window.localStorage.getItem("reload")=="true"){
+    if(window.localStorage.getItem("isReloadedFirstTimeAfterLogin")=="true"){
       notify({ text: "You’re on the Lens Testnet",duration:10000});
-      window.localStorage.removeItem('reload');
+      window.localStorage.removeItem('isReloadedFirstTimeAfterLogin');
     }
   }, []);
 
@@ -489,13 +489,13 @@ export default function VoteImage() {
                       >
                         Sign in
                       </button>{" "}
-                      to get started & save your{" "}
+                      to view more & save your{" "}
                       <FireSmallSvg
                         className={"inline"}
                         height={26}
                         width={24}
                       />{" "}
-                      votes now.
+                      votes
                     </span>
                   </div>
                 </div>
