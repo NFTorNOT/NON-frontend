@@ -109,6 +109,7 @@ function CollectNFT(props) {
     // if (ele.hasCollected) {
     //   return;
     // }
+    dispatcherCheck();
     setModalData({ ...ele });
     setShowSignInModal(!isUserLoggedIn);
 
@@ -162,13 +163,13 @@ function CollectNFT(props) {
         />
       ) : null}
       
-      {showDispatcherModal && isUserLoggedIn && !isDispatcherEnabled ? (
+      {showDispatcherModal && !isDispatcherEnabled ? (
         <EnableDispatcherModal
           onClose={() => setShowDispatcherModal(false)}
         />
       ) : null}
 
-      {modalShown && isUserLoggedIn && isDispatcherEnabled ? (
+      {modalShown && isDispatcherEnabled? (
         <CollectNFTModal
           modalData={modalData}
           shown={modalShown}
