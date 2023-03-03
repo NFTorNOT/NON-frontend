@@ -226,9 +226,11 @@ export default function VoteImage() {
     loadMore(true);
     showCards();
 
-    if(window.localStorage.getItem("isReloadedFirstTimeAfterLogin")=="true"){
-      notify({ text: "You’re on the Lens Testnet",duration:10000});
-      window.localStorage.removeItem('isReloadedFirstTimeAfterLogin');
+    if (
+      window.localStorage.getItem("isReloadedFirstTimeAfterLogin") == "true"
+    ) {
+      notify({ text: "You’re on the Lens Testnet", duration: 10000 });
+      window.localStorage.removeItem("isReloadedFirstTimeAfterLogin");
     }
   }, []);
 
@@ -458,7 +460,7 @@ export default function VoteImage() {
                 >
                   <div className={`flex items-end ${styles.emptyText}`}>
                     <div>
-                      Generations are exhausted
+                      That's all for now folks!
                       <div>Collect hot NFTs by your lens frens and show</div>
                       <div>your support💰</div>
                     </div>

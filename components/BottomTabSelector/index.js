@@ -11,6 +11,7 @@ import { useCollectedNFTModalContext } from "../../context/CollectedNFTModalCont
 import { useAuthContext } from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import GithubIcon from "./svg/GithubIcon";
+import Typewriter from "typewriter-effect";
 
 export default function BottomTabSelector() {
   const { currentTab, onTabChange } = useBottomTab();
@@ -188,13 +189,27 @@ export default function BottomTabSelector() {
               );
             })}
         </div>
-
-        <button
-          className={`${styles.madeWithPLG}  font-medium flex justify-end text-[16px] leading-[26px] text-[#ffffff99] items-center pr-[25px]`}
-          onClick={handleTrueSparrowClick}
-        >
-          <span> Made with 🧡 by True Sparrow</span>
-        </button>
+        <div className={`${styles.needHelp} flex text-end ml-[80px]`}>
+          <button
+            className={`${styles.madeWithPLG} flex text-center font-medium text-[16px] leading-[26px] text-[#ffffff99] pr-[25px]`}
+            onClick={handleTrueSparrowClick}
+          >
+            <Typewriter
+              options={{
+                loop: true,
+              }}
+              onInit={(typewriter) => {
+                typewriter
+                  .typeString("Made with 🧡 by True Sparrow")
+                  .pauseFor(5000)
+                  .deleteAll()
+                  .typeString("Need help building on Lens?")
+                  .pauseFor(60000)
+                  .start();
+              }}
+            />
+          </button>
+        </div>
       </div>
     </>
   );
