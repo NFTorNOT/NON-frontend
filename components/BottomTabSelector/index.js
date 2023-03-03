@@ -201,10 +201,30 @@ export default function BottomTabSelector() {
               onInit={(typewriter) => {
                 typewriter
                   .typeString("Made with 🧡 by True Sparrow")
+                  .callFunction(() => {
+                    document.getElementsByClassName(
+                      "Typewriter__cursor"
+                    )[0].innerHTML = "";
+                  })
                   .pauseFor(5000)
+                  .callFunction(() => {
+                    document.getElementsByClassName(
+                      "Typewriter__cursor"
+                    )[0].innerHTML = "|";
+                  })
                   .deleteAll()
                   .typeString("Need help building on Lens?")
+                  .callFunction(() => {
+                    document.getElementsByClassName(
+                      "Typewriter__cursor"
+                    )[0].innerHTML = "";
+                  })
                   .pauseFor(60000)
+                  .callFunction(() => {
+                    document.getElementsByClassName(
+                      "Typewriter__cursor"
+                    )[0].innerHTML = "|";
+                  })
                   .start();
               }}
             />
