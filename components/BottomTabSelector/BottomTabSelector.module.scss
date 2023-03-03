@@ -233,6 +233,11 @@ transform: rotate(-6deg) !important;
   align-items: center;
 }
 
+.Typewriter{
+  display: flex;
+  width: 227px;
+}
+
 .madeWithPLG:hover {
   color: #fff;
 }
@@ -249,7 +254,7 @@ screen and (max-height: 712px){
     display: flex;
   }
   .leftBar{
-    width: 100%;
+    width: 50%;
   }
   .madeWithPLG{
     width: 100%;
@@ -260,6 +265,9 @@ screen and (max-height: 712px){
   .collectedNfts
   {
     display: none;
+   }
+   .needHelp{
+    margin-left: 199px;
    }
 }
 
@@ -278,5 +286,8 @@ screen and (max-height: 712px){
   width: unset;
   padding-right: unset;
   font-size: 12px;
+ }
+ .needHelp {
+   margin-left: unset;
  }
 }
