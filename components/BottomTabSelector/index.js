@@ -235,7 +235,7 @@ export default function BottomTabSelector() {
                       "Typewriter__cursor"
                     )[0].innerHTML = "";
                   })
-                  .pauseFor(5000)
+                  .pauseFor(6000)
                   .callFunction(() => {
                     document.getElementsByClassName(
                       "Typewriter__cursor"
