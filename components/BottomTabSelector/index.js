@@ -189,7 +189,7 @@ export default function BottomTabSelector() {
               );
             })}
         </div>
-        <div className={`${styles.needHelp} flex text-end ml-[80px]`}>
+        <div className={`${styles.needHelp} flex justify-end text-end`}>
           <button
             className={`${styles.madeWithPLG} flex text-center font-medium text-[16px] leading-[26px] text-[#ffffff99] pr-[25px]`}
             onClick={handleTrueSparrowClick}
@@ -200,6 +200,14 @@ export default function BottomTabSelector() {
               }}
               onInit={(typewriter) => {
                 typewriter
+                  .callFunction(() => {
+                    document.getElementsByClassName(
+                      "Typewriter"
+                    )[0].style.display = "flex";
+                    document.getElementsByClassName(
+                      "Typewriter"
+                    )[0].style.width = "228px";
+                  })
                   .typeString("Made with 🧡 by True Sparrow")
                   .callFunction(() => {
                     document.getElementsByClassName(
@@ -213,13 +221,21 @@ export default function BottomTabSelector() {
                     )[0].innerHTML = "|";
                   })
                   .deleteAll()
+                  .callFunction(() => {
+                    document.getElementsByClassName(
+                      "Typewriter"
+                    )[0].style.display = "flex";
+                    document.getElementsByClassName(
+                      "Typewriter"
+                    )[0].style.width = "211px";
+                  })
                   .typeString("Need help building on Lens?")
                   .callFunction(() => {
                     document.getElementsByClassName(
                       "Typewriter__cursor"
                     )[0].innerHTML = "";
                   })
-                  .pauseFor(60000)
+                  .pauseFor(5000)
                   .callFunction(() => {
                     document.getElementsByClassName(
                       "Typewriter__cursor"
