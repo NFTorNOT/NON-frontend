@@ -145,6 +145,16 @@
   justify-items: center;
   align-items: center;
 }
+.generateImage{
+  display: grid;
+    height: 445px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-items: center;
+    align-items: center;
+}
 
 .submitVote,
 .submitVote:focus {

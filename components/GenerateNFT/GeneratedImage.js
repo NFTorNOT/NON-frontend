@@ -4,17 +4,13 @@ import styles from "./Generate.module.scss";
 import UserInput from "./UserInput";
 import ImageLoader from "../NONImage/ImageLoader";
 
-export default function GeneratedImage({
-  ele,
-  index,
-  imageLoaded,
-  setImageLoaded,
-}) {
-  const isLoadingCompleted = () => {
+export default function GeneratedImage({ ele, index }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const onLoadCompleteHandler = () => {
     setImageLoaded(true);
   };
   return (
-    <div key={ele?.imageUrl || index} className={styles.emptyImageCell}>
+    <div className={styles.emptyImageCell}>
       {!imageLoaded && (
         <div className={`${styles.generateImage} z-[1] absolute`}>
           <ImageLoader color={"#000"} height={15} width={15} />
@@ -29,7 +25,7 @@ export default function GeneratedImage({
           alt={"nftImage"}
           width={512}
           height={512}
-          onLoadingComplete={isLoadingCompleted}
+          onLoadingComplete={onLoadCompleteHandler}
           className="h-full w-full rounded-[10px] overflow-hidden relative"
         />
         <UserInput
