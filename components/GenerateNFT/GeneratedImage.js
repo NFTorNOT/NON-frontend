@@ -13,7 +13,7 @@ export default function GeneratedImage({ ele, index }) {
     <div className={styles.emptyImageCell}>
       {!imageLoaded && (
         <div className={`${styles.generateImage} z-[1] absolute`}>
-          <ImageLoader color={"#000"} height={15} width={15} />
+          <ImageLoader color={"#fff"} height={15} width={15} />
         </div>
       )}
       <div className="h-[inherit] w-[100%] relative">
