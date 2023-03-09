@@ -3,8 +3,26 @@ import Image from "next/image";
 import styles from "./Generate.module.scss";
 import UserInput from "./UserInput";
 import ImageLoader from "../NONImage/ImageLoader";
+import { useAuthContext } from "../../context/AuthContext";
 
-export default function GeneratedImage({ ele, index }) {
+export default function GeneratedImage({
+  ele,
+  index,
+  setShouldShowSignInModal,
+  setSelectedImageData,
+  setsubmitToVoteModal,
+}) {
+  const { isUserLoggedIn } = useAuthContext();
+  async function onSubmitToVote(ele) {
+    if (!isUserLoggedIn) {
+      setShouldShowSignInModal(true);
+      return;
+    }
+    // console.log({ ele });
+    setSelectedImageData(ele);
+    setsubmitToVoteModal(true);
+  }
+
   const [imageLoaded, setImageLoaded] = useState(false);
   const onLoadCompleteHandler = () => {
     setImageLoaded(true);

@@ -457,6 +457,9 @@ export default function GenerateNFT() {
                         key={`generated-image-${ele.imageUrl}`}
                         ele={ele}
                         index={index}
+                        setShouldShowSignInModal={setShouldShowSignInModal}
+                        setSelectedImageData={setSelectedImageData}
+                        setsubmitToVoteModal={setsubmitToVoteModal}
                       />
                     ))}
                 </div>
