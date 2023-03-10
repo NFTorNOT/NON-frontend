@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./Generate.module.scss";
 import UserInput from "./UserInput";
@@ -18,7 +18,6 @@ export default function GeneratedImage({
       setShouldShowSignInModal(true);
       return;
     }
-    // console.log({ ele });
     setSelectedImageData(ele);
     setsubmitToVoteModal(true);
   }
@@ -57,24 +56,6 @@ export default function GeneratedImage({
           oldImageTitle={ele.title}
         />
       </div>
-
-      {/* <div
-                          style={{
-                            backgroundImage: `url(${ele.imageUrl})`,
-                          }}
-                          className="h-full w-full rounded-[10px] overflow-hidden relative"
-                        >
-                          <UserInput
-                            key={index}
-                            image={ele.imageUrl}
-                            onSubmitToVote={() => onSubmitToVote(ele)}
-                            style={styles.masterpeice}
-                            onSubmit={(value) => {
-                              ele.title = value;
-                            }}
-                            oldImageTitle={ele.title}
-                          />
-                        </div> */}
     </div>
   );
 }
