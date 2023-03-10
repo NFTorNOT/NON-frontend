@@ -20,6 +20,7 @@ import MagicIcon from "./MagicIcon";
 import { useRouter } from "next/router";
 import CustomSignInModal from "../CustomSignInModal";
 import { toast, Toaster } from "react-hot-toast";
+import GeneratedImage from "./GeneratedImage";
 
 export default function GenerateNFT() {
   const [image, setImage] = useState("");
@@ -432,8 +433,8 @@ export default function GenerateNFT() {
                 </div>
               </div>
             ) : (
-              <div style={sectionStyle}>
-                <div className="text-skin-base font-semibold m-[10px]">
+              <div className={styles.sectionStyle}>
+                <div className="text-skin-base font-semibold mb-[10px]">
                   Your AI generations
                 </div>
                 <div
@@ -452,45 +453,14 @@ export default function GenerateNFT() {
                   ) : null}
                   {generatedImagesRef.current.length > 0 &&
                     generatedImagesRef.current.map((ele, index) => (
-                      <div className={styles.emptyImageCell}>
-                        <div
-                          style={{
-                            backgroundImage: `url(${ele.imageUrl})`,
-                          }}
-                          className="h-full w-full rounded-[10px] overflow-hidden relative"
-                        >
-                          <UserInput
-                            key={index}
-                            image={ele.imageUrl}
-                            onSubmitToVote={() => onSubmitToVote(ele)}
-                            style={styles.masterpeice}
-                            onSubmit={(value) => {
-                              ele.title = value;
-                            }}
-                            oldImageTitle={ele.title}
-                          />
-                        </div>
-                      </div>
-                      // <div className={`${styles.bottom} relative`} key={index}>
-                      //   <div
-                      //     style={{
-                      //       backgroundImage: `url(${ele.imageUrl})`,
-                      //     }}
-                      //     className="h-[412px] rounded-[16px]"
-                      //   ></div>
-
-                      //   <div className="absolute w-full">
-                      //     <UserInput
-                      //       key={index}
-                      //       image={ele.imageUrl}
-                      //       onSubmitToVote={() => onSubmitToVote(ele)}
-                      //       style={styles.masterpeice}
-                      //       onSubmit={(value) => {
-                      //         ele.title = value;
-                      //       }}
-                      //     />
-                      //   </div>
-                      // </div>
+                      <GeneratedImage
+                        key={`generated-image-${ele.imageUrl}`}
+                        ele={ele}
+                        index={index}
+                        setShouldShowSignInModal={setShouldShowSignInModal}
+                        setSelectedImageData={setSelectedImageData}
+                        setsubmitToVoteModal={setsubmitToVoteModal}
+                      />
                     ))}
                 </div>
               </div>

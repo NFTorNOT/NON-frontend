@@ -27,7 +27,7 @@ const OpenClaimedHandleModal = ({ onRequestClose, isOpen }) => {
         <div>
           <p className={styles.header}>Unable to sign-in</p>
           <p className={`${styles.claimText}`}>
-            You do not have a lenster account. Claim your handle on lens to log
+            You do not have a lenster account. Claim your handle on Lens to log
             into NFTorNot.
           </p>
           <div

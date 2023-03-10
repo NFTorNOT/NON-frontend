@@ -145,6 +145,16 @@
   justify-items: center;
   align-items: center;
 }
+.generateImage{
+  display: grid;
+    height: 445px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-items: center;
+    align-items: center;
+}
 
 .submitVote,
 .submitVote:focus {
@@ -172,6 +182,7 @@
   overflow-y: scroll;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .secondTab::-webkit-scrollbar {
   display: none;

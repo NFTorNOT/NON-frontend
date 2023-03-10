@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import CustomConnectButton from "../TopBar/SignInButton/CustomConnectButton";
 import FireSmallSvg from "../vote/svg/FirstTimeUser/FireSmallSvg";
 Modal.setAppElement("*");
-const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo,onSuccess }) => {
+const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo, onSuccess }) => {
   const { isConnected } = useAccount();
   const [shouldCallSignInMethod, setShouldCallSignInMethopd] = useState(false);
   const isPreviouslyConnected = useRef(isConnected);
@@ -52,27 +52,30 @@ const CustomSignInModal = ({ onRequestClose, isOpen, pageInfo,onSuccess }) => {
         ) : (
           <SignInButton
             showSquareLoginButton={true}
-            onSuccess={() => {onRequestClose(); if(onSuccess) onSuccess();}}
+            onSuccess={() => {
+              onRequestClose();
+              if (onSuccess) onSuccess();
+            }}
             isSignInModalOpen={isOpen}
             key={isConnected}
             isWalletConnected={shouldCallSignInMethod}
-            onRejection = {onRequestClose}
+            onRejection={onRequestClose}
           />
         )}
         <div className="flex gap-[4px]">
-            <span className="text-white opacity-60 not-italic text-[12px] font-medium">
-              on
-            </span>
-            <span className="text-white opacity-80 not-italic text-[12px] font-medium">
-              testnet
-            </span>
-          </div>
+          <span className="text-white opacity-60 not-italic text-[12px] font-medium">
+            on
+          </span>
+          <span className="text-white opacity-80 not-italic text-[12px] font-medium">
+            testnet
+          </span>
+        </div>
 
         {pageInfo === "votePage" && (
           <div className="flex relative mb-[13px] justify-center gap-[4px] items-center text-[12px] leading-[160%] font-medium text-white/60">
             and
             <span className="flex justify-center items-center text-[12px] leading-[160%] font-medium text-white/80 ">
-              Save your <FireSmallSvg height={18} width={16} /> votes now
+              save your <FireSmallSvg height={18} width={16} /> votes now
             </span>
           </div>
         )}

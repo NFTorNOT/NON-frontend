@@ -19,7 +19,7 @@ function OnboardingContent(props) {
           <div className={styles.headingContainer}>
             <LensIconSvg />
             <div className={styles.onBoardingHeading}>
-              Built on Lens, For Lens Frens
+              Built on Lens, for Lens Frens
             </div>
           </div>
           {index === 2 && (
@@ -33,7 +33,7 @@ function OnboardingContent(props) {
               </div>
               <div className={styles.subHeading}>
                 Click <FireSmallSvg height={26} width={24} /> to move to the
-                next card 
+                next card
               </div>
               <div className="absolute w-[104px] h-[143px] top-[383px]">
                 {onBoardingDetailsArray.svg}
