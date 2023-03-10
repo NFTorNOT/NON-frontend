@@ -22,7 +22,7 @@ function JoinedFromTablet() {
                   <div className={styles.headingContainer}>
                     <LensIconSvg />
                     <div className={styles.smallScreenHeading}>
-                      Built on Lens, For Lens Frens
+                      Built on Lens, for Lens Frens
                     </div>
                   </div>
                   <SmallScreenData />

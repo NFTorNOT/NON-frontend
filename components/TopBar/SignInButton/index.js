@@ -44,7 +44,7 @@ export const SignIn = ({ onSignIn, isLoading, showSquareLoginButton }) => {
       {isLoading ? (
         <div className="flex flex-row justify-between">
           <ImageLoader color={"#01501E"} height={15} width={15} />
-          Sign in with lens
+          Sign in with Lens
         </div>
       ) : (
         <>
@@ -54,7 +54,7 @@ export const SignIn = ({ onSignIn, isLoading, showSquareLoginButton }) => {
             width="20"
             height="20"
           />
-          <button onClick={onSignIn}>Sign in with lens</button>
+          <button onClick={onSignIn}>Sign in with Lens</button>
         </>
       )}
     </div>
@@ -121,8 +121,11 @@ export default function SignInButton({
                 getDefaultProfile();
               })
               .catch((error) => {
-                if(onRejection) onRejection();
-                notify({text:"Sorry, we are unable to conduct this transaction at the moment.",duration:4000});
+                if (onRejection) onRejection();
+                notify({
+                  text: "Sorry, we are unable to conduct this transaction at the moment.",
+                  duration: 4000,
+                });
                 console.log("error signing in 1: ", error);
                 setIsLoading(false);
               })
@@ -132,14 +135,17 @@ export default function SignInButton({
               });
           })
           .catch((error) => {
-            if(onRejection) onRejection();
-            notify({text:"Transaction signing was rejected. You are not signed in.",duration:4000});
+            if (onRejection) onRejection();
+            notify({
+              text: "Transaction signing was rejected. You are not signed in.",
+              duration: 4000,
+            });
             console.log("error signing in 2: ", error);
             setIsLoading(false);
           });
       })
       .catch((error) => {
-        if(onRejection) onRejection();
+        if (onRejection) onRejection();
         console.log("error signing in 3: ", error);
         setIsLoading(false);
       });
@@ -213,7 +219,7 @@ export default function SignInButton({
           setShouldShowEnableDispatcherModal(true);
         }
         if (router.pathname === "/") {
-          window.localStorage.setItem('isReloadedFirstTimeAfterLogin',true);
+          window.localStorage.setItem("isReloadedFirstTimeAfterLogin", true);
           router.reload();
         }
       }

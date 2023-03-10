@@ -50,7 +50,7 @@ export default function WalletConnect({
                       height="20"
                     />
                     <span className="ml-2 hidden text-skin-green md:block">
-                      Sign in with lens
+                      Sign in with Lens
                     </span>
                   </button>
                 );
