@@ -227,7 +227,7 @@ export default function BottomTabSelector() {
                     )[0].style.display = "flex";
                     document.getElementsByClassName(
                       "Typewriter"
-                    )[0].style.width = "211px";
+                    )[0].style.width = "213px";
                   })
                   .typeString("Need help building on Lens?")
                   .callFunction(() => {
