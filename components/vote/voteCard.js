@@ -7,6 +7,8 @@ import RemixSvg from "./svg/remixSvg";
 import { useBottomTab } from "../../context/BottomTabContext";
 import { TabItems, TabNames } from "../Main/TabItems";
 import Router from "next/router";
+import Image from "next/image";
+import ImageLoader from "../NONImage/ImageLoader";
 
 export default function VoteCard(props) {
   const character = props.character;
@@ -138,19 +140,42 @@ export default function VoteCard(props) {
     }
   }, [showPrompt]);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const onLoadCompleteHandler = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <div
-      className={`${styles.card}`}
-      style={{ backgroundImage: `url(${character.url})` }}
-      ref={hoverWrapperRef}
+      className={`relative overflow-hidden rounded-b-[16px] ${
+        !imageLoaded ? styles.loader_container : ""
+      }`}
       onMouseEnter={cardTransHover}
       onMouseLeave={cardTransOut}
-      {...props}
+      ref={hoverWrapperRef}
     >
+      {!imageLoaded && (
+        <div className={`${styles.card_loader} z-[1] absolute`}>
+          <ImageLoader color={"#fff"} height={15} width={15} />
+        </div>
+      )}
+      <Image
+        className={`${styles.card}`}
+        height={512}
+        width={512}
+        src={character.url}
+        alt={"votePage-image"}
+        onLoadingComplete={onLoadCompleteHandler}
+        style={{ opacity: imageLoaded ? 1 : 0 }}
+        {...props}
+      ></Image>
       <div
         className={`${styles.card_title_overlay}`}
         ref={bioParentWrapperRef}
-        style={{ transform: `translateY(${wrapperTransY}px)` }}
+        style={{
+          transform: `translateY(${wrapperTransY}px)`,
+          opacity: imageLoaded ? 1 : 0,
+        }}
       >
         <div
           className={`${styles.card_title} flex justify-between items-center`}
