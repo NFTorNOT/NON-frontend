@@ -118,11 +118,23 @@
   position: relative;
   overflow: hidden;
   @media screen and (min-width: 568px) {
-    margin: 0 20px;
     max-width: 512px;
     height: 512px;
   }
 }
+
+.loader_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 512px;
+  width: 512px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(60px);
+}
+
 .card_title_overlay {
   width: 100%;
   background: linear-gradient(

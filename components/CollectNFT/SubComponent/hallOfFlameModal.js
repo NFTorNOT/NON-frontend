@@ -8,7 +8,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import { Navigation } from "swiper";
 import { TRENDING_THEMES } from "../../../utils/Constants";
 import Card from "../../Card";
-import OutsideClickHandler from 'react-outside-click-handler';
+import OutsideClickHandler from "react-outside-click-handler";
 
 function HallOfFlameModal({
   shown,
@@ -16,7 +16,7 @@ function HallOfFlameModal({
   hallOfFlameData,
   initialSlide,
   onCollectNow,
-  isSubModalOpen
+  isSubModalOpen,
 }) {
   const Themes = TRENDING_THEMES;
   return shown ? (
@@ -92,96 +92,31 @@ function HallOfFlameModal({
                           );
                         })}
                     </div>
-                      <OutsideClickHandler
-                    onOutsideClick={() => {if(!isSubModalOpen) close()}}
-                  >
-                    <div className="flex items-center justify-center">
-                      <div className={`modalPrev mr-[60px] `}>
-                    <div
-                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
-                        >
-                          <LeftArrow />
-                        </div>
-                      </div>
-                      <Card
-                        cardDetails={ele}
-                        showCollectModal={() => onCollectNow(ele)}
-                      />
-                      <div className={`modalNext ml-[60px]`}>
-                        <div
-                          className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
-                        >
-                          <RightArrow />
-                        </div>
-                      </div>
-                    {/* <div
-                      className={`${styles.card} flex items-center justify-center mt-[20px]`}
-                      style={{
-                        backgroundImage: `url(${ele.image})`,
+                    <OutsideClickHandler
+                      onOutsideClick={() => {
+                        if (!isSubModalOpen) close();
                       }}
                     >
-                      <div
-                        className={`${styles.upvoteCount} flex items-center justify-center`}
-                      >
-                        <span className="pr-[10px]">
-                          <Image
-                            src="https://static.plgworks.com/assets/images/non/flame-icon.png"
-                            alt="Lens Icon"
-                            width="23"
-                            height="27"
-                          />
-                        </span>
-                        <span>{ele.totalVotes}</span>
+                      <div className="flex items-center justify-center">
+                        <div className={`modalPrev mr-[60px] `}>
+                          <div
+                            className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                          >
+                            <LeftArrow />
+                          </div>
+                        </div>
+                        <Card
+                          cardDetails={ele}
+                          showCollectModal={() => onCollectNow(ele)}
+                        />
+                        <div className={`modalNext ml-[60px]`}>
+                          <div
+                            className={`flex justify-center items-center cursor-pointer w-[72px] h-[72px] bg-black/60 rounded-[100px] ${styles.swiperArrow}`}
+                          >
+                            <RightArrow />
+                          </div>
+                        </div>
                       </div>
-                      <div className={`${styles.nftDetails} p-[15px]`}>
-                        <div className="flex items-start justify-between">
-                          <div className={styles.nftTitle}>{ele.title}</div>
-                          <div>
-                            <Image
-                              src="https://static.plgworks.com/assets/images/non/vote/lens-icon.png"
-                              alt="Lens icon"
-                              width="20"
-                              height="20"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-between items-center mt-[14px] mb-[22px]">
-                          <div className="flex items-center font-medium text-[#ffffff99] text-[16px] leading-[26px]">
-                            <span>{ele.handle}</span>
-                            <span>.</span>
-                            <span>Follow</span>
-                          </div>
-                          <div className="flex items-center font-medium text-[#ffffff99] text-[16px] leading-[26px]">
-                            <span></span>
-                            <span>Show Prompt</span>
-                          </div>
-                        </div>
-                        {ele.hasCollected ? (
-                          <button
-                            className={`${styles.collectButton} flex items-center justify-center py-[7px]`}
-                          >
-                            <span>
-                              <Collect />
-                            </span>
-                            <span className="font-bold text-[16px] leading-[26px] ml-[8px]">
-                              You have already collected this
-                            </span>
-                          </button>
-                        ) : (
-                          <button
-                            className={`${styles.collectButton} flex items-center justify-center py-[7px]`}
-                            onClick={() => onCollectNow(ele)}
-                          >
-                            <span>
-                              <Collect />
-                            </span>
-                            <span className="font-bold text-[16px] leading-[26px] ml-[8px]">
-                              Collect Now
-                            </span>
-                          </button>
-                        )}
-                      </div>*/}
-                    </div> 
                     </OutsideClickHandler>
                   </div>
                 </SwiperSlide>
