@@ -5,8 +5,9 @@ import HidePromptSvg from "../vote/svg/hidePromptSvg";
 import styles from "./Card.module.scss";
 import Collect from "../CollectNFT/SubComponent/SVG/collect";
 import Image from "next/image";
+import ImageLoader from "../NONImage/ImageLoader";
 
-export default function Card({ cardDetails, showCollectModal, style }) {
+export default function Card({ cardDetails, showCollectModal }) {
   const hoverWrapperRef = useRef();
   const bioParentWrapperRef = useRef();
   const titleWrapperRef = useRef();
@@ -131,20 +132,42 @@ export default function Card({ cardDetails, showCollectModal, style }) {
     }
   }, [showPrompt]);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const onLoadCompleteHandler = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <div
-      className={`${styles.card}`}
-      style={Object.assign({}, style, {
-        backgroundImage: `url(${cardDetails.image})`,
-      })}
+      className={`relative overflow-hidden w-[512px] ml-[20px] rounded-[16px] ${
+        !imageLoaded ? styles.loader_container : ""
+      }`}
       ref={hoverWrapperRef}
       onMouseEnter={cardTransHover}
       onMouseLeave={cardTransOut}
     >
+      {!imageLoaded && (
+        <div className={`${styles.card_loader} z-[1] absolute`}>
+          <ImageLoader color={"#fff"} height={15} width={15} />
+        </div>
+      )}
+      <Image
+        src={cardDetails.image}
+        alt={"collectPage-image"}
+        className={`${styles.card}`}
+        style={{ opacity: imageLoaded ? 1 : 0 }}
+        onLoadingComplete={onLoadCompleteHandler}
+        height={512}
+        width={512}
+        priority={true}
+      ></Image>
       <div
         className={`${styles.card_title_overlay}`}
         ref={bioParentWrapperRef}
-        style={{ transform: `translateY(${wrapperTransY}px)` }}
+        style={{
+          transform: `translateY(${wrapperTransY}px)`,
+          opacity: imageLoaded ? 1 : 0,
+        }}
       >
         <div
           className={`${styles.card_title} flex justify-between items-center`}
@@ -171,7 +194,7 @@ export default function Card({ cardDetails, showCollectModal, style }) {
             @{cardDetails.handle}
           </div>
           <div
-            className="text-white text-opacity-60 cursor-pointer transition flex items-center gap-1"
+            className="text-white opacity-60 hover:opacity-100 cursor-pointer transition flex items-center gap-1"
             onClick={togglePrompt}
           >
             {promtStatusIcon} {promtStatusText}
@@ -204,6 +227,7 @@ export default function Card({ cardDetails, showCollectModal, style }) {
       </div>
       <div
         className={` absolute top-[16px] rounded-[4px] right-[16px] bg-black/60 px-[8px] py-[6px] flex gap-[5px] items-center`}
+        style={{ opacity: imageLoaded ? 1 : 0 }}
       >
         <span>
           <Image

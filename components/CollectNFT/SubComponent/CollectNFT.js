@@ -11,7 +11,7 @@ import UserApi from "../../../graphql/UserApi";
 import { useAccount } from "wagmi";
 import CustomSignInModal from "../../CustomSignInModal";
 import EnableDispatcherModal from "../../EnableDispatcherModal";
-import {useBottomTab} from '../../../context/BottomTabContext';
+import { useBottomTab } from "../../../context/BottomTabContext";
 import { TabItems, TabNames } from "../../Main/TabItems";
 import Router from "next/router";
 
@@ -116,7 +116,7 @@ function CollectNFT(props) {
     toggleModal(!modalShown);
   };
 
-  const dispatcherCheck = async ()=>{
+  const dispatcherCheck = async () => {
     const defaultProfileResponse = await UserApi.defaultProfile({
       walletAddress: address,
     });
@@ -127,7 +127,7 @@ function CollectNFT(props) {
       setIsDispatcherEnabled(false);
     } else setIsDispatcherEnabled(true);
     setShowDispatcherModal(!isDispatcherEnabled);
-  }
+  };
   useEffect(() => {
     allData.current = [];
     if (isUserLoggedIn) {
@@ -162,14 +162,12 @@ function CollectNFT(props) {
           onSuccess={dispatcherCheck}
         />
       ) : null}
-      
+
       {showDispatcherModal && !isDispatcherEnabled ? (
-        <EnableDispatcherModal
-          onClose={() => setShowDispatcherModal(false)}
-        />
+        <EnableDispatcherModal onClose={() => setShowDispatcherModal(false)} />
       ) : null}
 
-      {modalShown && isDispatcherEnabled? (
+      {modalShown && isDispatcherEnabled ? (
         <CollectNFTModal
           modalData={modalData}
           shown={modalShown}
@@ -195,13 +193,16 @@ function CollectNFT(props) {
           <div className="text-center font-medium text-[16px]">
             <div className="flex items-center mt-[5px]">
               <span className="leading-[26px]">
-              <button
-              className={`underline hover:text-[#ADFF00]`}
-              onClick={()=>{setShowSignInModal(true);}}
-              >
-                 Sign in 
-            </button>
-            <span className="ml-[5px]">now to view your</span></span>
+                <button
+                  className={`underline hover:text-[#ADFF00]`}
+                  onClick={() => {
+                    setShowSignInModal(true);
+                  }}
+                >
+                  Sign in
+                </button>
+                <span className="ml-[5px]">now to view your</span>
+              </span>
               <span className="mx-[5px]">
                 <Image
                   src="https://static.plgworks.com/assets/images/non/flame-icon.png"
@@ -253,73 +254,12 @@ function CollectNFT(props) {
                 <Card
                   key={index}
                   cardDetails={ele}
-                  showCollectModal={() => {showModal(ele);}}
-                  style={{ marginLeft: "6px", marginRight: "6px" }}
+                  showCollectModal={() => {
+                    showModal(ele);
+                  }}
                 />
-                // <div
-                //   key={index}
-                //   className=" h-[512px] rounded-[16px] relative overflow-hidden"
-                // >
-                //   <img
-                //     className="w-full rounded-[16px]"
-                //     src={ele.image}
-                //     alt="Lens Icon"
-                //   />
-                //   <div className={`${styles.nftDetails} p-[15px]`}>
-                //     <div className="flex items-start justify-between">
-                //       <span className={`${styles.nftTitle}`}>{ele?.title}</span>
-                //       <span>
-                //         <Image
-                //           src="https://static.plgworks.com/assets/images/non/vote/lens-icon.png"
-                //           alt="Lens icon"
-                //           width="20"
-                //           height="20"
-                //         />
-                //       </span>
-                //     </div>
-                //     <div className="flex justify-between items-center mt-[14px] mb-[22px]">
-                //       <div className="flex items-center font-medium text-[#ffffff99] text-[16px] leading-[26px]">
-                //         <span>{ele?.handle}</span>
-                //         {/* <span>.</span>
-                //         <span>Follow</span> */}
-                //       </div>
-                //       <div className="flex items-center font-medium text-[#ffffff99] text-[16px] leading-[26px]">
-                //         <span></span>
-                //         <span>Show Prompt</span>
-                //       </div>
-                //     </div>
-                //     <button
-                //       className={`${
-                //         ele.hasCollected
-                //           ? styles.alreadyCollectedButton
-                //           : styles.collectButton
-                //       } flex items-center justify-center py-[7px]`}
-                //       onClick={() => {
-                //         showModal(ele);
-                //       }}
-                //     >
-                //       <span>
-                //         <Collect />
-                //       </span>
-                //       <span className="font-bold text-[16px] leading-[26px] ml-[8px]">
-                //         {ele.hasCollected
-                //           ? "You have already collected this"
-                //           : "Collect Now"}
-                //       </span>
-                //     </button>
-                //   </div>
-                // </div>
               );
             })}
-
-          {/* <div className={styles.emptyImageCell}>
-          <Image
-            src="https://static.plgworks.com/assets/images/non/generate-default.png"
-            alt="Lens Icon"
-            width="60"
-            height="60"
-          />
-        </div> */}
         </div>
       )}
     </div>
