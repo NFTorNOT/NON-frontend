@@ -139,7 +139,7 @@ export default function Card({ cardDetails, showCollectModal }) {
 
   return (
     <div
-      className={`relative overflow-hidden w-[512px] ml-[20px] rounded-b-[16px] ${
+      className={`relative overflow-hidden w-[512px] ml-[20px] rounded-[16px] ${
         !imageLoaded ? styles.loader_container : ""
       }`}
       ref={hoverWrapperRef}
