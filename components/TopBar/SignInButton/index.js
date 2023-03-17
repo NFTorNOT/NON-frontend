@@ -38,25 +38,35 @@ export const SignIn = ({ onSignIn, isLoading, showSquareLoginButton }) => {
       </div>
     </div>
   ) : (
-    <div
-      className={`${styles.btnContainer} btn btn-green px-[10px] md:px-[20px] transition`}
-    >
-      {isLoading ? (
-        <div className="flex flex-row justify-between">
-          <ImageLoader color={"#01501E"} height={15} width={15} />
-          Sign in with Lens
-        </div>
-      ) : (
-        <>
-          <Image
-            src="https://static.plgworks.com/assets/images/non/lens-icon.png"
-            alt="Lens Icon"
-            width="20"
-            height="20"
-          />
-          <button onClick={onSignIn}>Sign in with Lens</button>
-        </>
-      )}
+    <div className="flex flex-col justify-center items-center gap-[4px]">
+      <div
+        className={`${styles.btnContainer} btn btn-green px-[10px] md:px-[20px] transition`}
+      >
+        {isLoading ? (
+          <div className="flex flex-row justify-between">
+            <ImageLoader color={"#01501E"} height={15} width={15} />
+            Sign in with Lens
+          </div>
+        ) : (
+          <>
+            <Image
+              src="https://static.plgworks.com/assets/images/non/lens-icon.png"
+              alt="Lens Icon"
+              width="20"
+              height="20"
+            />
+            <button onClick={onSignIn}>Sign in with Lens</button>
+          </>
+        )}
+      </div>
+      <div className="flex gap-[4px] self-center">
+        <span className="text-white opacity-60 not-italic text-[12px] font-medium">
+          on
+        </span>
+        <span className="text-white opacity-80 not-italic text-[12px] font-medium">
+          testnet
+        </span>
+      </div>
     </div>
   );
 };
