@@ -6,7 +6,7 @@ import CollectNFT from "./SubComponent/CollectNFT";
 export default function NFTOfTheDay() {
   return (
     <>
-      <div className={`container ${styles.collectionsContainer} `}>
+      <div className={` ${styles.collectionsContainer} `}>
         <HallOfFlame />
         <CollectNFT />
       </div>

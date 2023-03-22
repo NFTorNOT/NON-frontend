@@ -152,9 +152,7 @@ function CollectNFT(props) {
   };
 
   return (
-    <div
-      className={`${styles.collectNft} mt-[40px]  min-h-0 container pl-0 pr-0`}
-    >
+    <div className={`${styles.collectNft} mt-[40px]  min-h-0  pl-0 pr-0`}>
       {showSignInModal && !isUserLoggedIn ? (
         <CustomSignInModal
           isOpen={showSignInModal}
@@ -177,7 +175,7 @@ function CollectNFT(props) {
         />
       ) : null}
       <div
-        className={`text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center`}
+        className={`${styles.collectnftText} text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center`}
       >
         Collect NFTs
       </div>
