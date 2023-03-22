@@ -12,9 +12,12 @@
   align-items: center;
 }
 .collectNft {
-  margin: 30px auto 0;
   // width: calc(100% - 100px);
-  width: 1104px;
+  width: -webkit-fill-available;
+}
+.collectnftText {
+  margin: 30px auto 0;
+  width: 1024px;
 }
 .nftDetails {
   position: absolute;
@@ -40,7 +43,7 @@
   backdrop-filter: blur(8px);
   border-radius: 4px;
 }
-.scroll::-webkit-scrollbar {
+.scrollContainer::-webkit-scrollbar {
   display: none;
 }
 .alreadyCollectedButton {
