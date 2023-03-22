@@ -156,7 +156,6 @@ function CollectNFT(props) {
       className={`${styles.collectNft} ${
         !isUserLoggedIn ? "flex flex-col justify-center items-center" : ""
       } 
-     
       mt-[40px] min-h-0  pl-0 pr-0`}
     >
       {showSignInModal && !isUserLoggedIn ? (
@@ -193,7 +192,7 @@ function CollectNFT(props) {
       ) : null}
 
       {!isUserLoggedIn && !isLoading ? (
-        <div className="bg-[#00000099] w-[1034px] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
+        <div className="bg-[#00000099] w-[946px] xl:w-[1034px] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px]">
             <div className="flex items-center mt-[5px]">
               <span className="leading-[26px]">
@@ -223,7 +222,7 @@ function CollectNFT(props) {
 
       {allData.current.length == 0 && !isLoading && isUserLoggedIn ? (
         <div className="flex flex-col items-center">
-          <div className="bg-[#00000099] w-[1034px] text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
+          <div className="bg-[#00000099] w-[946px] xl:w-[1034px] text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
             <div className="text-center font-medium text-[16px] ">
               <div className="flex items-center">
                 <span className="leading-[26px]">Looks like you haven't </span>
