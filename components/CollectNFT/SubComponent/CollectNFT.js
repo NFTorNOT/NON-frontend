@@ -152,7 +152,13 @@ function CollectNFT(props) {
   };
 
   return (
-    <div className={`${styles.collectNft} mt-[40px]  min-h-0  pl-0 pr-0`}>
+    <div
+      className={`${styles.collectNft} ${
+        !isUserLoggedIn ? "flex flex-col justify-center items-center" : ""
+      } 
+     
+      mt-[40px] min-h-0  pl-0 pr-0`}
+    >
       {showSignInModal && !isUserLoggedIn ? (
         <CustomSignInModal
           isOpen={showSignInModal}
@@ -175,7 +181,7 @@ function CollectNFT(props) {
         />
       ) : null}
       <div
-        className={`${styles.collectnftText} text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center`}
+        className={`${styles.collectnftText} text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center mb-[15px]`}
       >
         Collect NFTs
       </div>
@@ -187,7 +193,7 @@ function CollectNFT(props) {
       ) : null}
 
       {!isUserLoggedIn && !isLoading ? (
-        <div className="bg-[#00000099] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
+        <div className="bg-[#00000099] w-[1034px] text-[#ffffff] text-[20px] rounded-[16px]  mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
           <div className="text-center font-medium text-[16px]">
             <div className="flex items-center mt-[5px]">
               <span className="leading-[26px]">
@@ -216,48 +222,54 @@ function CollectNFT(props) {
       ) : null}
 
       {allData.current.length == 0 && !isLoading && isUserLoggedIn ? (
-        <div className="bg-[#00000099]  text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
-          <div className="text-center font-medium text-[16px] ">
-            <div className="flex items-center">
-              <span className="leading-[26px]">Looks like you haven't </span>
-              <span className="mx-[5px]">
-                <Image
-                  src="https://static.plgworks.com/assets/images/non/flame-icon.png"
-                  alt="Lens Icon"
-                  width="19"
-                  height="19"
-                />
-              </span>
-              <span className="leading-[26px]">any NFTs yet.. vote your</span>
+        <div className="flex flex-col items-center">
+          <div className="bg-[#00000099] w-[1034px] text-[#ffffff] text-[20px] rounded-[16px] mt-[16px] h-[512px] flex items-center justify-center xl:ml-[35px] xl:mr-[35px] ml-[15px] mr-[15px]">
+            <div className="text-center font-medium text-[16px] ">
+              <div className="flex items-center">
+                <span className="leading-[26px]">Looks like you haven't </span>
+                <span className="mx-[5px]">
+                  <Image
+                    src="https://static.plgworks.com/assets/images/non/flame-icon.png"
+                    alt="Lens Icon"
+                    width="19"
+                    height="19"
+                  />
+                </span>
+                <span className="leading-[26px]">any NFTs yet.. vote your</span>
+              </div>
+              <div className="leading-[26px]">favourites</div>
+              <button
+                className={`${collectNFTModalStyles.collectButton} flex  justify-center py-[7px] mt-[20px]`}
+                onClick={onVoteButtonClick}
+              >
+                <span className="pl-[11px]">Vote Now!</span>
+              </button>
             </div>
-            <div className="leading-[26px]">favourites</div>
-            <button
-              className={`${collectNFTModalStyles.collectButton} flex  justify-center py-[7px] mt-[20px]`}
-              onClick={onVoteButtonClick}
-            >
-              <span className="pl-[11px]">Vote Now!</span>
-            </button>
           </div>
         </div>
       ) : null}
 
       {allData.current.length > 0 && !isLoading && (
         <div
-          className={`${styles.scroll} flex flex-wrap  gap-y-[25px] justify-center max-h-[512px] overflow-y-scroll mt-[16px] m-auto`}
+          className={`${styles.scrollContainer} overflow-y-scroll`}
           onScroll={handleScroll}
         >
-          {allData.current.length > 0 &&
-            allData.current.map((ele, index) => {
-              return (
-                <Card
-                  key={index}
-                  cardDetails={ele}
-                  showCollectModal={() => {
-                    showModal(ele);
-                  }}
-                />
-              );
-            })}
+          <div
+            className={`${styles.scroll} grid grid-cols-2 w-fit gap-y-[25px] justify-center max-h-[512px] mt-[16px] m-auto`}
+          >
+            {allData.current.length > 0 &&
+              allData.current.map((ele, index) => {
+                return (
+                  <Card
+                    key={index}
+                    cardDetails={ele}
+                    showCollectModal={() => {
+                      showModal(ele);
+                    }}
+                  />
+                );
+              })}
+          </div>
         </div>
       )}
     </div>
