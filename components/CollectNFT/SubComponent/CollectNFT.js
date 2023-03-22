@@ -180,7 +180,7 @@ function CollectNFT(props) {
         />
       ) : null}
       <div
-        className={`${styles.collectnftText} text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center mb-[15px]`}
+        className={`${styles.collectnftText} text-[#ffffff] font-bold text-[20px] ml-[15px] lg2:ml-[40px] xl:ml-[40px] leading-[32px] justify-center`}
       >
         Collect NFTs
       </div>
@@ -250,7 +250,7 @@ function CollectNFT(props) {
 
       {allData.current.length > 0 && !isLoading && (
         <div
-          className={`${styles.scrollContainer} overflow-y-scroll`}
+          className={`${styles.scrollContainer} overflow-y-scroll mt-[9px]`}
           onScroll={handleScroll}
         >
           <div
