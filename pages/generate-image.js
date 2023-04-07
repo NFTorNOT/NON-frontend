@@ -10,12 +10,12 @@ export default function Home() {
   );
 }
 
-export async function getServerSideProps() {
-  // imageUrl : props.query.i || null,
-  const data = {
-    title: "Share title",
-    imageUrl: null,
-    id: "render props",
-  };
-  return { props: { data } };
-}
+// export async function getServerSideProps() {
+//   // imageUrl : props.query.i || null,
+//   const data = {
+//     title: "Share title",
+//     imageUrl: null,
+//     id: "render props",
+//   };
+//   return { props: { data } };
+// }
