@@ -3,6 +3,7 @@ const path = require("path");
 const securityHeaders = require("./headers");
 
 const nextConfig = {
+  unoptimized: true,
   images: {
     domains: [
       "static.plgworks.com",
