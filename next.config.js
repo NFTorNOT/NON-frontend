@@ -4,6 +4,7 @@ const securityHeaders = require("./headers");
 
 const nextConfig = {
   images: {
+    unoptimized: true,
     domains: [
       "static.plgworks.com",
       "nftornot-assests.s3.amazonaws.com",
