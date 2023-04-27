@@ -1,81 +1,66 @@
-name: Deploy to Staging
+name: Deploy to Staging on GCP
 
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Enter github branch name to be deployed"
+        description: 'Enter github branch name to be deployed'
         required: true
-        default: "master"
+        default: 'master'
       description:
-        description: "Enter description about deployment"
+        description: 'Enter description about deployment'
         required: true
-        default: "New feature release"
+        default: 'New feature release'
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GAR_LOCATION: us-west1 
+  GKE_CLUSTER: plg
+  GKE_ZONE: us-west1
 
 jobs:
-  deploy:
-    name: Deploy
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
+    environment: production
+
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch }}
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.inputs.branch }}
+
+    - uses: actions/checkout@v2
+      with:
+        repository: "NFTorNOT/dev.secrets"
+        ref: "master"
+        token: ${{ secrets.PAT }}
+        path: "secrets"
+        
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+    
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
       
-      - uses: actions/checkout@v2
-        with:
-          repository: "NFTorNOT/dev.secrets"
-          ref: "master"
-          token: ${{ secrets.PAT }}
-          path: "secrets"
+    - name: Build and generate static page
+      run: |-
+        mv secrets/nft-or-not-fe/frontend.staging.env .env
+        rm -rf secrets
+        cat .env
+        sudo apt install -y curl
+        curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        sudo apt install -y nodejs
+        npm install
+        npx next build
+        npx next export
+        cd out
+        gsutil -h "Cache-Control:public, max-age=0" rsync -r ./ gs://staging.nftornot.com/
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.THURSDAY_STAGING_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.THURSDAY_STAGING_SECRET_KEY }}
-          aws-region: us-east-2
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Create a ECR repo
-        shell: bash
-        run: |
-          aws ecr describe-repositories --repository-names ${{ github.event.repository.name }} || ( aws ecr create-repository --repository-name ${{ github.event.repository.name }}  && aws ecr put-lifecycle-policy --repository-name ${{ github.event.repository.name }} --lifecycle-policy-text "{\"rules\":[{\"rulePriority\":1,\"description\":\"Keep last 5 images\",\"selection\":{\"tagStatus\":\"any\",\"countType\":\"imageCountMoreThan\",\"countNumber\":5},\"action\":{\"type\":\"expire\"}}]}"  )
-
-      - name: Build, tag, and push image to Amazon ECR
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.repository.name }}
-          IMAGE_TAG: ${{ github.run_id }}-${{ github.run_attempt }}
-          ENV: "staging"
-        run: |
-          mv secrets/frontend.staging.env staging.env 
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG  --build-arg ENV="$ENV" .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
-      - uses: azure/setup-kubectl@v2.0
-        with:
-          version: "v1.23.6"
-        id: install
-
-      - name: "Deploy to EKS"
-        id: deploy-eks
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.repository.name }}
-          IMAGE_TAG: ${{ github.run_id }}-${{ github.run_attempt }}
-          AWS_REGION: us-east-2
-          AWS_EKS_CLUSTER_NAME: thursday-staging
- 
-        run: |-
-          aws eks update-kubeconfig --name ${AWS_EKS_CLUSTER_NAME} --region ${AWS_REGION}
-          helm upgrade --install \
-          --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY \
-          --set image.tag=${IMAGE_TAG} \
-          --namespace non \
-          --values ./kubernetes-values/staging.yaml \
-          nftornot-frontend ./helm
+    - name: Purge cache
+      uses: jakejarvis/cloudflare-purge-action@master
+      env:
+        # Zone is required by both authentication methods
+        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
