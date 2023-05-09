@@ -54,7 +54,6 @@ jobs:
         sudo apt install -y nodejs
         npm install
         npx next build
-        npx next export
         cd out
         gsutil -h "Cache-Control:public, max-age=0" rsync -r ./ gs://staging.nftornot.com/
 
