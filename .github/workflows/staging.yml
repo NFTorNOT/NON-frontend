@@ -1,4 +1,4 @@
-name: Deploy to Staging on GCP
+name: Deploy to Staging
 
 on:
   workflow_dispatch:
@@ -31,7 +31,7 @@ jobs:
 
     - uses: actions/checkout@v2
       with:
-        repository: "NFTorNOT/dev.secrets"
+        repository: "TrueSparrowSystems/dev.secrets"
         ref: "master"
         token: ${{ secrets.PAT }}
         path: "secrets"
@@ -54,7 +54,6 @@ jobs:
         sudo apt install -y nodejs
         npm install
         npx next build
-        npx next export
         cd out
         gsutil -h "Cache-Control:public, max-age=0" rsync -r ./ gs://staging.nftornot.com/
 
