@@ -46,7 +46,7 @@ jobs:
       
     - name: Build and generate static page
       run: |-
-        mv secrets/nft-or-not-fe/frontend.production.env .env
+        mv secrets/nft-or-not-fe/frontend.prod.env .env
         rm -rf secrets
         cat .env
         sudo apt install -y curl
