@@ -1,25 +1,22 @@
-name: Deploy to Production
+name: Deploy to Prod
 
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: "Enter github branch name to be deployed"
+        description: 'Enter github branch name to be deployed'
         required: true
-        default: "master"
+        default: 'master'
       description:
-        description: "Enter description about deployment"
+        description: 'Enter description about deployment'
         required: true
-        default: "New feature release"
+        default: 'New feature release'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GAR_LOCATION: us-west1 
   GKE_CLUSTER: plg
   GKE_ZONE: us-west1
-  DEPLOYMENT_NAME: non-frontend  
-  REPOSITORY: plg-web3
-  IMAGE: non-frontend
 
 jobs:
   setup-build-publish-deploy:
@@ -31,14 +28,14 @@ jobs:
     - uses: actions/checkout@v3
       with:
         ref: ${{ github.event.inputs.branch }}
-    
+
     - uses: actions/checkout@v2
       with:
         repository: "TrueSparrowSystems/dev.secrets"
         ref: "master"
         token: ${{ secrets.PAT }}
         path: "secrets"
-
+        
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
@@ -46,41 +43,24 @@ jobs:
     
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
-
-    - run: |-
-        gcloud auth list
-        gcloud artifacts locations list
-
-
-    
-    - name: Build and push image
-      env:
-        ENV: "prod"
-        URL: "us-west1-docker.pkg.dev/plg-web3/nftornot/non-frontend"
-        TAG: ${{ github.run_id }}-${{ github.run_attempt }}
+      
+    - name: Build and generate static page
       run: |-
-        mv secrets/nft-or-not-fe/frontend.prod.env prod.env
+        mv secrets/nft-or-not-fe/frontend.prod.env .env
         rm -rf secrets
-        docker build --tag "$URL:$TAG" --build-arg ENV="$ENV" .
-        gcloud auth configure-docker us-west1-docker.pkg.dev --quiet --project plg-web3
-        docker push "$URL:$TAG"
+        cat .env
+        sudo apt install -y curl
+        curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+        sudo apt install -y nodejs
+        npm install
+        npx next build
+        npx next export
+        cd out
+        gsutil -h "Cache-Control:public, max-age=0" rsync -r ./ gs://nftornot.com/
 
-    - name: Set up GKE credentials
-      run: |-
-        gcloud components install gke-gcloud-auth-plugin --quiet
-        gcloud container clusters get-credentials plg --region us-west1 --project plg-web3
-    
-    - name: "Deploy to Kubernetes"
-      id: deploy-eks
-      env:         
-        URL: "us-west1-docker.pkg.dev/plg-web3/nftornot/non-frontend"
-        TAG: ${{ github.run_id }}-${{ github.run_attempt }}
-      run: |-
-        helm upgrade --install \
-        --set image.repository=${URL} \
-        --set image.tag=${TAG} \
-        --values ./kubernetes-values/production.yaml \
-        nftornot-frontend ./helm
-
-
-
+    - name: Purge cache
+      uses: jakejarvis/cloudflare-purge-action@master
+      env:
+        # Zone is required by both authentication methods
+        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
