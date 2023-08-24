@@ -3,7 +3,7 @@ const path = require("path");
 const securityHeaders = require("./headers");
 
 const nextConfig = {
-  output: 'export',
+  output: "export",
   trailingSlash: true,
   images: {
     unoptimized: true,
@@ -24,6 +24,15 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
     exportPathMap: [],
+  },
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+    ];
   },
 };
 
