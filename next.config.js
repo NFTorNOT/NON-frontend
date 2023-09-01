@@ -3,7 +3,6 @@ const path = require("path");
 const securityHeaders = require("./headers");
 
 const nextConfig = {
-  output: "export",
   trailingSlash: true,
   images: {
     unoptimized: true,
